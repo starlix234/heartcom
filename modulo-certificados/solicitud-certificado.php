@@ -1,5 +1,4 @@
 <?php
-session_start(); // Iniciar la sesión
 require("lib/leer-tipo-certificado.php"); 
 
 // Asegúrate de que la sesión tiene el ID del usuario

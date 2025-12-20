@@ -6,7 +6,7 @@ $rut   = $_POST['rut']   ?? '';
 $clave = $_POST['clave'] ?? '';
 
 if ($rut === '' || $clave === '') {
-    header("Location: login.php?error=" . urlencode("Debes ingresar RUT y contraseña."));
+    header("Location: ../login.php?error=" . urlencode("Debes ingresar RUT y contraseña."));
     exit;
 }
 
@@ -14,13 +14,13 @@ if ($rut === '' || $clave === '') {
 $usuario = obtenerUsuarioPorRut($rut);
 
 if (!$usuario) {
-    header("Location: login.php?error=" . urlencode("RUT o contraseña incorrectos."));
+    header("Location: ../login.php?error=" . urlencode("RUT o contraseña incorrectos."));
     exit;
 }
 
 // 2) Verificar si el correo está validado
 if ($usuario['email_verificado'] == 0) {
-    header("Location: login.php?error=" . urlencode("Debes verificar tu correo antes de iniciar sesión."));
+    header("Location: ../login.php?error=" . urlencode("Debes verificar tu correo antes de iniciar sesión."));
     exit;
 }
 
@@ -29,7 +29,7 @@ $claveBd = $usuario['clave'];
 $ok = password_verify($clave, $claveBd) || ($clave === $claveBd && strlen($claveBd) <= 50);
 
 if (!$ok) {
-    header("Location: login.php?error=" . urlencode("RUT o contraseña incorrectos."));
+    header("Location: ../login.php?error=" . urlencode("RUT o contraseña incorrectos."));
     exit;
 }
 

@@ -8,6 +8,7 @@
 
 </head>
 <body>
+<?php include("modulo-certificados/administrar-certificados.php")?>
 
 <?php include("modulo-certificados/solicitud-certificado.php")?>
 
