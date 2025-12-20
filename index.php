@@ -8,7 +8,7 @@
 <body>
 
 
-
+<a href="panel.php">Ir a Panel </a>
 
 
 

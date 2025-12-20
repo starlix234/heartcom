@@ -28,8 +28,8 @@ if ($stmt->fetch()) {
     exit;
 }
 
-// Hash seguro
-$clave_hash = password_hash($clave, PASSWORD_BCRYPT);
+
+
 
 // Crear token verificación correo
 $token = bin2hex(random_bytes(32));
@@ -51,7 +51,7 @@ INSERT INTO usuarios (
 $stmt->execute([
     $p_nombre, $s_nombre, $ap_paterno, $ap_materno, $fecha_nac,
     $rut, $telefono, $correo, $token, $expira,
-    $direccion, $clave_hash
+    $direccion, $clave
 ]);
 
 // Enviar correo de verificación
