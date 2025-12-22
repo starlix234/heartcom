@@ -11,11 +11,12 @@
 <h2>Solicitudes de Certificados</h2>
 
 <table border="1">
-<tr>
+<tr> 
     <th>Vecino</th>
     <th>RUT</th>
     <th>Asunto</th>
     <th>Mensaje</th>
+    <th>Estado</th>
     <th>Acción</th>
 </tr>
 
@@ -25,8 +26,10 @@
     <td><?= $s['rut'] ?></td>
     <td><?= $s['asunto'] ?></td>
     <td><?= $s['mensaje'] ?></td>
+    <td><?=$s['estado']?></td>
+    
     <td>
-        <form method="POST" action="lib/gestionar_solicitud.php">
+        <form method="POST" action="lib/gestionar-solicitud.php">
             <input type="hidden" name="id_certificado" value="<?= $s['id_certificado'] ?>">
             <button name="accion" value="aprobar">Aprobar</button>
             <button name="accion" value="rechazar">Rechazar</button>

@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>Registro de Vecino</title>
 </head>
+
 <body>
 
 <h2>Registro de Miembro</h2>
@@ -13,7 +14,7 @@
     <p style="color:red;"><?= htmlspecialchars($_GET['error']); ?></p>
 <?php endif; ?>
 
-<form action="lib/procesar_registro.php" method="POST">
+<form action="lib/procesar_registro.php" method="POST" onsubmit="return validarFormulario();">
 
     <label>Primer Nombre:</label>
     <input type="text" name="p_nombre" required><br>
@@ -37,7 +38,8 @@
     <input type="text" name="telefono" required><br>
 
     <label>Correo electrónico:</label>
-    <input type="email" name="correo" required><br>
+    <input type="email" name="correo" id="correo" required>
+    <small id="errorCorreo" style="color:red;"></small><br>
 
     <label>Dirección:</label>
     <input type="text" name="direccion" required><br>
@@ -47,6 +49,24 @@
 
     <button type="submit">Registrarme</button>
 </form>
+    <script src="assets/js/verificar-formato-correo.js"></script>
 
+<!-- 2️⃣ Función que llama a la externa -->
+<script>
+function validarFormulario() {
+  const correo = document.getElementById("correo").value;
+  const errorCorreo = document.getElementById("errorCorreo");
+
+  if (!verificarFormatoCorreo(correo)) {
+    errorCorreo.textContent =
+      "Solo se permiten correos @gmail.com o @hotmail.com";
+    return false; // ❌ bloquea envío
+  }
+
+  errorCorreo.textContent = "";
+  return true; // ✅ permite envío
+}
+</script>
 </body>
+
 </html>

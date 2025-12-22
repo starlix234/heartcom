@@ -2,13 +2,25 @@
 require_once "conexion.php";
 session_start();
 
-/* Validar rol */
+/* Validar rol (solo directiva / admin) 
+if (!isset($_SESSION['id_rol']) || $_SESSION['id_rol'] != 1) {
+    header("Location: ../login.php");
+    exit;
+}
+    */
 
-$sql = "
-SELECT sc.id_certificado, tp.nombre_certificado, sc.asunto, sc.mensaje, sc.created_at, CONCAT_WS(' ', u.p_nombre, u.s_nombre) AS nombre, CONCAT_WS(' ',u.ap_paterno,u.ap_materno) as apellido, u.rut FROM solicitud_certificado sc JOIN usuarios u ON sc.id_usuario = u.id_usuario JOIN tipos_certificados tp on tp.id_certi=sc.id_certi WHERE sc.id_estado = 1 ORDER BY sc.created_at DESC;
-";
+/*
+Estados:
+1 = pendiente
+2 = aprobado
+3 = rechazado
+*/
+
+$sql = "SELECT * FROM `listar_certificado` where estado='solicitado'";
+
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
+
 $solicitudes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
