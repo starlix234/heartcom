@@ -11,10 +11,16 @@
 <h2>Registro de Miembro</h2>
 
 <?php if (isset($_GET['error'])): ?>
-    <p style="color:red;"><?= htmlspecialchars($_GET['error']); ?></p>
+    <p style="color:red;">
+        <?= htmlspecialchars($_GET['error']) ?>
+    </p>
 <?php endif; ?>
 
-<form action="lib/procesar_registro.php" method="POST" onsubmit="return validarFormulario();">
+<form 
+    action="lib/procesar_registro.php" 
+    method="POST" 
+    onsubmit="return validarFormulario();"
+>
 
     <label>Primer Nombre:</label>
     <input type="text" name="p_nombre" required><br>
@@ -29,7 +35,7 @@
     <input type="text" name="ap_materno" required><br>
 
     <label>Fecha de Nacimiento:</label>
-    <input type="date" name="fecha_nac" required><br>
+    <input type="date" name="fecha_nac" id="fecha_nac" required><br>
 
     <label>RUT:</label>
     <input type="text" name="rut" required><br>
@@ -49,24 +55,26 @@
 
     <button type="submit">Registrarme</button>
 </form>
-    <script src="assets/js/verificar-formato-correo.js"></script>
 
-<!-- 2️⃣ Función que llama a la externa -->
+<!-- JS externo -->
+<script src="assets/js/verificar-formato-correo.js"></script>
+
+<!-- Validación correo -->
 <script>
 function validarFormulario() {
-  const correo = document.getElementById("correo").value;
-  const errorCorreo = document.getElementById("errorCorreo");
+    const correo = document.getElementById("correo").value;
+    const errorCorreo = document.getElementById("errorCorreo");
 
-  if (!verificarFormatoCorreo(correo)) {
-    errorCorreo.textContent =
-      "Solo se permiten correos @gmail.com o @hotmail.com";
-    return false; // ❌ bloquea envío
-  }
+    if (!verificarFormatoCorreo(correo)) {
+        errorCorreo.textContent =
+            "Solo se permiten correos @gmail.com o @hotmail.com";
+        return false;
+    }
 
-  errorCorreo.textContent = "";
-  return true; // ✅ permite envío
+    errorCorreo.textContent = "";
+    return true;
 }
 </script>
-</body>
 
+</body>
 </html>

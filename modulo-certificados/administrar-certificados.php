@@ -31,6 +31,8 @@
     <td>
         <form method="POST" action="lib/gestionar-solicitud.php">
             <input type="hidden" name="id_certificado" value="<?= $s['id_certificado'] ?>">
+            <input type="text" name="correo" value="<?= $s['correo'] ?>">
+            <input type="text" name="nombre" value="<?= $s['nombre'] ?>">
             <button name="accion" value="aprobar">Aprobar</button>
             <button name="accion" value="rechazar">Rechazar</button>
         </form>

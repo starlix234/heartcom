@@ -16,7 +16,7 @@ Estados:
 3 = rechazado
 */
 
-$sql = "SELECT * FROM `listar_certificado` where estado='solicitado'";
+$sql = "SELECT * FROM `solicitud` where estado='solicitado'";
 
 
 $stmt = $pdo->prepare($sql);
