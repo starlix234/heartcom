@@ -11,6 +11,7 @@
 <?php include("modulo-certificados/administrar-certificados.php")?>
 
 <?php include("modulo-certificados/solicitud-certificado.php")?>
+<a href="modulo-certificados/solicitud-cliente.php">Ir a panel</a>
 
 
 
