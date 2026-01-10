@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-01-2026 a las 06:39:21
+-- Tiempo de generación: 10-01-2026 a las 21:29:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -51,7 +51,8 @@ INSERT INTO `codigos_mfa` (`id_codigo_mfa`, `id_usuario`, `codigo`, `tipo`, `exp
 (13, 8, '771971', 'LOGIN', '2025-12-22 23:06:11', 1, '2025-12-22 18:56:11'),
 (14, 8, '976033', 'LOGIN', '2025-12-24 00:15:17', 1, '2025-12-23 20:05:17'),
 (15, 8, '890535', 'LOGIN', '2025-12-24 00:20:26', 1, '2025-12-23 20:10:26'),
-(16, 8, '320537', 'LOGIN', '2026-01-10 05:42:47', 1, '2026-01-10 01:32:47');
+(16, 8, '320537', 'LOGIN', '2026-01-10 05:42:47', 1, '2026-01-10 01:32:47'),
+(17, 8, '845257', 'LOGIN', '2026-01-10 18:55:04', 1, '2026-01-10 14:45:04');
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,8 @@ CREATE TABLE `pagos_residencia` (
 --
 
 INSERT INTO `pagos_residencia` (`id_pago`, `id_certificado`, `id_estado`, `monto`, `fecha_pago`) VALUES
-(1, 5, 2, 2000, NULL);
+(1, 5, 1, 2000, '2026-01-10 16:42:50'),
+(2, 4, 1, 2000, '2026-01-10 16:52:40');
 
 -- --------------------------------------------------------
 
@@ -179,7 +181,7 @@ INSERT INTO `solicitud_certificado` (`id_certificado`, `id_certi`, `id_usuario`,
 (1, 2, 8, 3, 'sadasdasdasd', 'zsddasdasdsadas', '2025-12-20 17:56:42'),
 (2, 1, 8, 3, 'cambio de casa ', 'por motivos de narcotrafico me cambio de casa y necesito el certificado de residencia para estos tramites con el motivo de seguir vendiendo drogra', '2025-12-23 20:51:07'),
 (3, 1, 8, 3, 'Cambio de casa ', 'quiero mudarme a otra ciudad por motivos de trabajo y necesito esto para actualizar mi direccion', '2026-01-10 01:34:11'),
-(4, 1, 8, 1, 'Cambio de casa ', 'dsdasdasdas', '2026-01-10 01:55:07'),
+(4, 1, 8, 3, 'Cambio de casa ', 'dsdasdasdas', '2026-01-10 01:55:07'),
 (5, 1, 8, 3, 'Cambio de casa ', 'asdasdasdasdasdasdasdasdasdsadas', '2026-01-10 02:25:28');
 
 -- --------------------------------------------------------
@@ -203,6 +205,40 @@ INSERT INTO `tipos_certificados` (`id_certi`, `nombre_certificado`) VALUES
 (3, 'Certificado de participación en proyectos comunitarios'),
 (4, 'Certificado de buena conducta vecinal'),
 (5, 'Certificado de voluntariado barrial');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `transacciones_webpay`
+--
+
+CREATE TABLE `transacciones_webpay` (
+  `id_transaccion` int(11) NOT NULL,
+  `id_certificado` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `monto` int(11) NOT NULL,
+  `token_ws` varchar(255) DEFAULT NULL,
+  `orden_compra` varchar(50) DEFAULT NULL,
+  `session_id` varchar(100) DEFAULT NULL,
+  `codigo_autorizacion` varchar(20) DEFAULT NULL,
+  `medio_pago` varchar(50) DEFAULT NULL,
+  `numero_cuotas` tinyint(3) DEFAULT NULL,
+  `tipo_cuotas` varchar(50) DEFAULT NULL,
+  `estado_transaccion` enum('INICIADA','AUTORIZADA','RECHAZADA','ANULADA','ERROR') NOT NULL DEFAULT 'INICIADA',
+  `fecha_transaccion` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_actualizacion` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `last4_tarjeta` char(4) DEFAULT NULL,
+  `respuesta_json` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `transacciones_webpay`
+--
+
+INSERT INTO `transacciones_webpay` (`id_transaccion`, `id_certificado`, `id_usuario`, `monto`, `token_ws`, `orden_compra`, `session_id`, `codigo_autorizacion`, `medio_pago`, `numero_cuotas`, `tipo_cuotas`, `estado_transaccion`, `fecha_transaccion`, `fecha_actualizacion`, `last4_tarjeta`, `respuesta_json`) VALUES
+(1, 5, 8, 2000, '01abb2527fa51bb5e5acdf43f239b1dd4cea197bcbc572e50a36b6dfae8678e4', 'CERT-5-1768070890', 'USR-8-88von07126cctkvh9gg8c9i3aq', NULL, NULL, NULL, NULL, 'INICIADA', '2026-01-10 15:48:10', NULL, NULL, NULL),
+(2, 5, 8, 2000, '01ab8d001b23742c1ddc7efd55e65e4e11eb02c88dbaa31a731bc6f503828597', 'CERT-5-1768074071', 'USR-8-88von07126cctkvh9gg8c9i3aq', '1213', 'VN', 0, NULL, 'AUTORIZADA', '2026-01-10 16:41:12', '2026-01-10 16:42:05', '6623', '{\"vci\":\"TSY\",\"amount\":2000,\"status\":\"AUTHORIZED\",\"buy_order\":\"CERT-5-1768074071\",\"session_id\":\"USR-8-88von07126cctkvh9gg8c9i3aq\",\"card_detail\":{\"card_number\":\"6623\"},\"accounting_date\":\"0110\",\"transaction_date\":\"2026-01-10T19:41:12.033Z\",\"authorization_code\":\"1213\",\"payment_type_code\":\"VN\",\"response_code\":0,\"installments_number\":0}'),
+(3, 4, 8, 2000, '01abd6013cd2c6d40312fa71249595193b16ee5412a4d405b78d6454d445b481', 'CERT-4-1768074709', 'USR-8-88von07126cctkvh9gg8c9i3aq', '1213', 'VN', 0, NULL, 'AUTORIZADA', '2026-01-10 16:51:50', '2026-01-10 16:52:40', '6623', '{\"vci\":\"TSY\",\"amount\":2000,\"status\":\"AUTHORIZED\",\"buy_order\":\"CERT-4-1768074709\",\"session_id\":\"USR-8-88von07126cctkvh9gg8c9i3aq\",\"card_detail\":{\"card_number\":\"6623\"},\"accounting_date\":\"0110\",\"transaction_date\":\"2026-01-10T19:51:49.759Z\",\"authorization_code\":\"1213\",\"payment_type_code\":\"VN\",\"response_code\":0,\"installments_number\":0}');
 
 -- --------------------------------------------------------
 
@@ -298,6 +334,14 @@ ALTER TABLE `tipos_certificados`
   ADD PRIMARY KEY (`id_certi`);
 
 --
+-- Indices de la tabla `transacciones_webpay`
+--
+ALTER TABLE `transacciones_webpay`
+  ADD PRIMARY KEY (`id_transaccion`),
+  ADD KEY `idx_trans_certificado` (`id_certificado`),
+  ADD KEY `idx_trans_usuario` (`id_usuario`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -313,7 +357,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `codigos_mfa`
 --
 ALTER TABLE `codigos_mfa`
-  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -331,7 +375,7 @@ ALTER TABLE `estados_certificado`
 -- AUTO_INCREMENT de la tabla `pagos_residencia`
 --
 ALTER TABLE `pagos_residencia`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -350,6 +394,12 @@ ALTER TABLE `solicitud_certificado`
 --
 ALTER TABLE `tipos_certificados`
   MODIFY `id_certi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `transacciones_webpay`
+--
+ALTER TABLE `transacciones_webpay`
+  MODIFY `id_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -379,6 +429,13 @@ ALTER TABLE `pagos_residencia`
 --
 ALTER TABLE `solicitud_certificado`
   ADD CONSTRAINT `fk_solicitud_estado` FOREIGN KEY (`id_estado`) REFERENCES `estados_certificado` (`id_estados_certificado`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `transacciones_webpay`
+--
+ALTER TABLE `transacciones_webpay`
+  ADD CONSTRAINT `fk_trans_certificado` FOREIGN KEY (`id_certificado`) REFERENCES `solicitud_certificado` (`id_certificado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_trans_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`
