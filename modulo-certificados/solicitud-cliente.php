@@ -23,19 +23,41 @@
                     <p><strong>Monto:</strong> <?= htmlspecialchars($sol['monto']) ?></p>
                 <?php endif; ?>
 
-                <?php if ((int)$sol['puede_pagar'] === 1): ?>
-                    <form action="pagar.php" method="post">
-                        <input type="hidden" name="id_certificado" value="<?= (int)$sol['id_certificado'] ?>">
-                        <button type="submit">Pagar</button>
-                    </form>
+                <?php
+                    $esResidencia   = ((int)$sol['id_certi'] === 1);
+                    $estaPagado     = ($sol['estado_pago'] ?? '') === 'pagado';
+                    $puedePagar     = (int)$sol['puede_pagar'] === 1;
+                    $estaAprobada   = ($sol['estado_solicitud'] ?? '') === 'aprobado';
+                ?>
+
+                <?php if ($esResidencia): ?>
+
+                    <?php if ($estaPagado): ?>
+                        <!-- Residencia pagada: descarga PDF especial -->
+                        <a href="../lib/descargar-certificado-residencia.php?id_certificado=<?= (int)$sol['id_certificado'] ?>">
+                            Descargar certificado
+                        </a>
+                    <?php elseif ($puedePagar): ?>
+                        <!-- Residencia no pagada pero puede pagar -->
+                        <form action="../lib/iniciar-pago.php" method="post">
+                            <input type="hidden" name="id_certificado" value="<?= (int)$sol['id_certificado'] ?>">
+                            <button type="submit">Pagar</button>
+                        </form>
+                    <?php endif; ?>
+
+                <?php else: ?>
+                    <?php if ($estaAprobada): ?>
+                        <!-- Otros certificados aprobados: descarga genérica -->
+                        <a href="../lib/descargar-certificado.php?id_certificado=<?= (int)$sol['id_certificado'] ?>">
+                            Descargar certificado
+                        </a>
+                    <?php endif; ?>
                 <?php endif; ?>
+
             </div>
             <hr>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
-
-
-    
 </body>
 </html>
