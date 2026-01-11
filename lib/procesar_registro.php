@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once 'conexion.php';
 
@@ -8,11 +9,14 @@ $s_nombre    = trim($_POST['s_nombre'] ?? '');
 $ap_paterno  = trim($_POST['ap_paterno'] ?? '');
 $ap_materno  = trim($_POST['ap_materno'] ?? '');
 $fecha_nac   = $_POST['fecha_nac'] ?? '';
-$rut         = trim($_POST['rut'] ?? '');
+$rut_limpio  = trim(strtoupper(preg_replace('/[^0-9kK]/', '', $_POST['rut']) ?? ''));
 $telefono    = trim($_POST['telefono'] ?? '');
 $correo      = trim($_POST['correo'] ?? '');
 $direccion   = trim($_POST['direccion'] ?? '');
 $clave       = $_POST['clave'] ?? '';
+
+
+
 
 // 2️⃣ Validación de campos obligatorios
 if (
@@ -48,6 +52,9 @@ if ($edad < 18) {
     header("Location: ../registro.php?error=" . urlencode("Debe ser mayor de edad."));
     exit;
 }
+
+
+
 
 // 5️⃣ Validar RUT o correo duplicado
 $stmt = $pdo->prepare("

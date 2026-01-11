@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>Registro de Vecino</title>
 </head>
-
+<script src="assets/js/verificar-formato-rut.js"></script>
 <body>
 
 <h2>Registro de Miembro</h2>
@@ -38,7 +38,7 @@
     <input type="date" name="fecha_nac" id="fecha_nac" required><br>
 
     <label>RUT:</label>
-    <input type="text" name="rut" required><br>
+    <input type="text" name="rut" oninput="formatearRUT(this)" placeholder="Ej: 12.345.678-9" required><br>
 
     <label>Teléfono:</label>
     <input type="text" name="telefono" required><br>
@@ -58,7 +58,6 @@
 
 <!-- JS externo -->
 <script src="assets/js/verificar-formato-correo.js"></script>
-
 <!-- Validación correo -->
 <script>
 function validarFormulario() {
