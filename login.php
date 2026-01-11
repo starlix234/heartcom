@@ -33,6 +33,7 @@ if (isset($_SESSION['id_usuario'])) {
 
         <button type="submit">Ingresar</button>
     </form>
+    <a href="registro.php">Registrarse</a>
 </div>
 
 </body>
