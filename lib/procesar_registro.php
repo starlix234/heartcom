@@ -2,6 +2,7 @@
 
 session_start();
 require_once 'conexion.php';
+$_SESSION['old'] = $_POST;
 
 // 1️⃣ Captura y limpieza de datos
 $p_nombre    = trim($_POST['p_nombre'] ?? '');
@@ -9,13 +10,11 @@ $s_nombre    = trim($_POST['s_nombre'] ?? '');
 $ap_paterno  = trim($_POST['ap_paterno'] ?? '');
 $ap_materno  = trim($_POST['ap_materno'] ?? '');
 $fecha_nac   = $_POST['fecha_nac'] ?? '';
-$rut_limpio  = trim(strtoupper(preg_replace('/[^0-9kK]/', '', $_POST['rut']) ?? ''));
+$rut        = trim(strtoupper($_POST['rut']) ?? '');
 $telefono    = trim($_POST['telefono'] ?? '');
 $correo      = trim($_POST['correo'] ?? '');
 $direccion   = trim($_POST['direccion'] ?? '');
 $clave       = $_POST['clave'] ?? '';
-
-
 
 
 // 2️⃣ Validación de campos obligatorios
@@ -27,12 +26,20 @@ if (
     exit;
 }
 
+//validar contraseña de 
+
+$mensajePassword = "La contraseña debe tener entre 5 y 15 caracteres, incluir mayúscula, minúscula y número.";
+
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,15}$/', $clave)) {
+    header("Location: ../registro.php?error=" . urlencode($mensajePassword));
+    exit;
+}
+
 // 3️⃣ Validar formato de correo (gmail / hotmail)
 $correo = strtolower($correo);
-
 if (!preg_match('/^[a-z0-9._%+-]+@(gmail\.com|hotmail\.com)$/', $correo)) {
     header("Location: ../registro.php?error=" . urlencode(
-        "Solo se permiten correos Gmail o Hotmail."
+        "Solo se permiten correos con dominio Gmail.com o Hotmail.com ."
     ));
     exit;
 }

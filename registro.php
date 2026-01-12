@@ -6,6 +6,8 @@
 <title>Registro de Vecino</title>
 </head>
 <script src="assets/js/verificar-formato-rut.js"></script>
+<script src="assets/js/validar-contrasena.js"></script>
+<script src="assets/js/verificar-formato-correo.js"></script>
 <body>
 
 <h2>Registro de Miembro</h2>
@@ -23,7 +25,7 @@
 >
 
     <label>Primer Nombre:</label>
-    <input type="text" name="p_nombre" required><br>
+    <input type="text" name="p_nombre" required ><br>
 
     <label>Segundo Nombre:</label>
     <input type="text" name="s_nombre" required><br>
@@ -51,29 +53,59 @@
     <input type="text" name="direccion" required><br>
 
     <label>Contraseña:</label>
-    <input type="password" name="clave" required><br>
+    <input type="password" name="clave" required>
+    <small id="errorPassword" style="color:red;"></small><br>
 
     <button type="submit">Registrarme</button>
 </form>
+    <!--Script de validación de formulario -->
+    <script>
+    function validarFormulario() {
+        // Validar formato de correo
+        const correo = document.getElementById("correo").value;
+        const errorCorreo = document.getElementById("errorCorreo");
 
-<!-- JS externo -->
-<script src="assets/js/verificar-formato-correo.js"></script>
-<!-- Validación correo -->
-<script>
-function validarFormulario() {
-    const correo = document.getElementById("correo").value;
-    const errorCorreo = document.getElementById("errorCorreo");
+        if (!verificarFormatoCorreo(correo)) {
+            errorCorreo.textContent =
+                "Solo se permiten correos con dominio @gmail.com o @hotmail.com";
+            return false;
+        }
 
-    if (!verificarFormatoCorreo(correo)) {
-        errorCorreo.textContent =
-            "Solo se permiten correos @gmail.com o @hotmail.com";
-        return false;
+        errorCorreo.textContent = "";
+
+        // Validar formato de contraseña
+        const password = document.querySelector("input[name='clave']").value;
+        const errorPassword = document.getElementById("errorPassword");
+
+        if (!validarPassword(password)) {
+            errorPassword.textContent =
+                "La contraseña debe tener entre 5 y 15 caracteres, incluir mayúscula, minúscula y número.";
+            return false;
+        } else {
+            errorPassword.textContent = "";
+        }
+        
+        // Validar mayoría de edad
+        const fechaNac = document.getElementById("fecha_nac").value;
+
+        if (fechaNac) {
+            const hoy = new Date();
+            const nacimiento = new Date(fechaNac);
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            const m = hoy.getMonth() - nacimiento.getMonth();
+
+            if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) {
+                edad--;
+            }
+            if (edad < 18) {
+                alert("Debes ser mayor de 18 años");
+                return false;
+            }
+        }
+        return true;
     }
 
-    errorCorreo.textContent = "";
-    return true;
-}
-</script>
+    </script>
 
 </body>
 </html>

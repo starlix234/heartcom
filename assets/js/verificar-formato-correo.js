@@ -5,4 +5,3 @@ function verificarFormatoCorreo(correo) {
   const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com)$/;
   return regex.test(correo);
 }
-
