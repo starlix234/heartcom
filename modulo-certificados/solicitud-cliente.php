@@ -1,4 +1,4 @@
-<?php include ("../lib/lista-solicitud-usuario.php")?>
+<?php /*include ("../lib/lista-solicitud-usuario.php")*/?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

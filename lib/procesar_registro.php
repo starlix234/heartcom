@@ -10,7 +10,11 @@ $s_nombre    = trim($_POST['s_nombre'] ?? '');
 $ap_paterno  = trim($_POST['ap_paterno'] ?? '');
 $ap_materno  = trim($_POST['ap_materno'] ?? '');
 $fecha_nac   = $_POST['fecha_nac'] ?? '';
+<<<<<<< HEAD
 $rut        = trim(strtoupper($_POST['rut']) ?? '');
+=======
+$rut  = $_POST['rut'];
+>>>>>>> bbd230b94ab77f3deb2a2a438e89f9e7125b44e7
 $telefono    = trim($_POST['telefono'] ?? '');
 $correo      = trim($_POST['correo'] ?? '');
 $direccion   = trim($_POST['direccion'] ?? '');
@@ -79,7 +83,7 @@ if ($stmt->fetch()) {
 }
 
 // 6️⃣ Hash de contraseña
-$clave_hash = password_hash($clave, PASSWORD_DEFAULT);
+//$clave_hash = password_hash($clave, PASSWORD_DEFAULT);
 
 // 7️⃣ Token de verificación
 $token  = bin2hex(random_bytes(32));
@@ -112,11 +116,11 @@ $stmt->execute([
     $token,
     $expira,
     $direccion,
-    $clave_hash
+    $clave
 ]);
 
 // 9️⃣ Enviar correo de verificación
-$enlace = "http://localhost/barrio3/lib/verificar_correo.php?token=$token";
+$enlace = "http://localhost/HEARTCOM/lib/verificar_correo.php?token=$token";
 
 $asunto = "Verifica tu cuenta - Junta de Vecinos";
 $mensaje = "Hola $p_nombre,

@@ -30,7 +30,13 @@ try {
         $mensaje
     ]);
 
-    echo "Solicitud registrada correctamente";
+header("Location: ../panel.php");
+
+
+
+
+
+
 
 } catch (PDOException $e) {
     echo "Error al registrar la solicitud";
