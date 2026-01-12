@@ -1,6 +1,6 @@
 <?php
 require_once "conexion.php";
-session_start();
+//session_start();
 
 /* Validar rol (solo directiva / admin) 
 if (!isset($_SESSION['id_rol']) || $_SESSION['id_rol'] != 1) {

@@ -1,3 +1,6 @@
+<?php include("lib/roles.php")?>
+<?php include("lib/lista-solicitud-usuario.php")?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +11,22 @@
 
 </head>
 <body>
-<?php include("modulo-certificados/administrar-certificados.php")?>
 
 <?php include("modulo-certificados/solicitud-certificado.php")?>
-<a href="modulo-certificados/solicitud-cliente.php">Ir a panel</a>
+
+<?php if ($rol === 1): ?>
+<?php include("modulo-certificados/administrar-certificados.php")?>
+
+
+<?php elseif ($rol === 2): ?>
+   
+<?php elseif ($rol === 3): ?>
+<?php include("modulo-certificados/solicitud-cliente.php")?>
+<?php else: ?>
+
+<?php endif; ?>
+
+
 
 
 

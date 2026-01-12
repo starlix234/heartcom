@@ -71,6 +71,9 @@ if ($stmt->fetch()) {
     exit;
 }
 
+// 6️⃣ Hash de contraseña
+//$clave_hash = password_hash($clave, PASSWORD_DEFAULT);
+
 // 7️⃣ Token de verificación
 $token  = bin2hex(random_bytes(32));
 $expira = (new DateTime('+1 day'))->format('Y-m-d H:i:s');
