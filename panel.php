@@ -1,5 +1,4 @@
 <?php include("lib/roles.php")?>
-<?php include("lib/lista-solicitud-usuario.php")?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +17,7 @@
 <?php include("modulo-certificados/administrar-certificados.php")?>
 <?php elseif ($rol === 3): ?>
 <a href="modulo-certificados/solicitud-cliente.php">Ir a Mis Solicitudes</a>
+<a href="index.php">Volver</a>
 <?php else: ?>
 <?php endif; ?>
 
