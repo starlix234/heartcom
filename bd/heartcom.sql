@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-01-2026 a las 21:29:55
+-- Tiempo de generación: 13-01-2026 a las 23:40:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -52,7 +52,24 @@ INSERT INTO `codigos_mfa` (`id_codigo_mfa`, `id_usuario`, `codigo`, `tipo`, `exp
 (14, 8, '976033', 'LOGIN', '2025-12-24 00:15:17', 1, '2025-12-23 20:05:17'),
 (15, 8, '890535', 'LOGIN', '2025-12-24 00:20:26', 1, '2025-12-23 20:10:26'),
 (16, 8, '320537', 'LOGIN', '2026-01-10 05:42:47', 1, '2026-01-10 01:32:47'),
-(17, 8, '845257', 'LOGIN', '2026-01-10 18:55:04', 1, '2026-01-10 14:45:04');
+(17, 8, '845257', 'LOGIN', '2026-01-10 18:55:04', 1, '2026-01-10 14:45:04'),
+(18, 17, '637449', 'LOGIN', '2026-01-11 02:39:49', 1, '2026-01-10 22:29:49'),
+(19, 8, '560531', 'LOGIN', '2026-01-12 22:42:15', 1, '2026-01-12 18:32:15'),
+(20, 8, '119511', 'LOGIN', '2026-01-12 22:54:41', 1, '2026-01-12 18:44:41'),
+(21, 18, '445065', 'LOGIN', '2026-01-12 23:32:20', 0, '2026-01-12 19:22:20'),
+(22, 18, '576142', 'LOGIN', '2026-01-12 23:33:10', 0, '2026-01-12 19:23:10'),
+(23, 18, '204524', 'LOGIN', '2026-01-12 23:33:13', 0, '2026-01-12 19:23:13'),
+(24, 18, '244370', 'LOGIN', '2026-01-12 23:34:23', 1, '2026-01-12 19:24:23'),
+(25, 18, '740635', 'LOGIN', '2026-01-12 23:35:17', 0, '2026-01-12 19:25:17'),
+(26, 8, '437325', 'LOGIN', '2026-01-13 18:42:28', 0, '2026-01-13 14:32:28'),
+(27, 8, '362818', 'LOGIN', '2026-01-13 18:43:37', 0, '2026-01-13 14:33:37'),
+(28, 8, '193855', 'LOGIN', '2026-01-13 18:43:55', 0, '2026-01-13 14:33:55'),
+(29, 8, '263663', 'LOGIN', '2026-01-13 18:44:41', 1, '2026-01-13 14:34:41'),
+(30, 18, '654063', 'LOGIN', '2026-01-13 18:47:45', 1, '2026-01-13 14:37:45'),
+(31, 18, '377503', 'LOGIN', '2026-01-13 22:19:55', 1, '2026-01-13 18:09:55'),
+(32, 17, '744256', 'LOGIN', '2026-01-13 22:35:37', 1, '2026-01-13 18:25:37'),
+(33, 8, '139406', 'LOGIN', '2026-01-13 22:58:49', 1, '2026-01-13 18:48:49'),
+(34, 21, '183551', 'LOGIN', '2026-01-13 23:47:14', 1, '2026-01-13 19:37:14');
 
 -- --------------------------------------------------------
 
@@ -99,6 +116,26 @@ INSERT INTO `estados_certificado` (`id_estados_certificado`, `nombre_estado`, `d
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `estado_reserva`
+--
+
+CREATE TABLE `estado_reserva` (
+  `id_estado_reserva` int(11) NOT NULL,
+  `estado` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `estado_reserva`
+--
+
+INSERT INTO `estado_reserva` (`id_estado_reserva`, `estado`) VALUES
+(1, 'en proceso'),
+(2, 'aprobado'),
+(3, 'rechazado');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pagos_residencia`
 --
 
@@ -116,7 +153,35 @@ CREATE TABLE `pagos_residencia` (
 
 INSERT INTO `pagos_residencia` (`id_pago`, `id_certificado`, `id_estado`, `monto`, `fecha_pago`) VALUES
 (1, 5, 1, 2000, '2026-01-10 16:42:50'),
-(2, 4, 1, 2000, '2026-01-10 16:52:40');
+(2, 4, 1, 2000, '2026-01-10 16:52:40'),
+(3, 6, 1, 2000, '2026-01-10 22:31:42'),
+(4, 9, 1, 2000, '2026-01-13 14:40:23');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reservas`
+--
+
+CREATE TABLE `reservas` (
+  `id_reserva` int(11) NOT NULL,
+  `id_estado_reserva` int(11) NOT NULL,
+  `id_tipo` int(11) NOT NULL,
+  `Fecha_ini` date DEFAULT NULL,
+  `Fecha_fin` date DEFAULT NULL,
+  `asunto` varchar(50) DEFAULT NULL,
+  `motivo` varchar(200) DEFAULT NULL,
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`id_reserva`, `id_estado_reserva`, `id_tipo`, `Fecha_ini`, `Fecha_fin`, `asunto`, `motivo`, `id_usuario`) VALUES
+(1, 1, 1, '2026-01-06', '2026-01-10', 'adsdasd', 'sadasdasdasd', 8),
+(2, 1, 1, '2026-01-06', '2026-01-10', 'adsdasd', 'sadasdasdasd', 8),
+(3, 1, 3, '2026-01-14', '2026-01-15', 'actividad vecinal', 'actividad para----- ', 17);
 
 -- --------------------------------------------------------
 
@@ -182,7 +247,11 @@ INSERT INTO `solicitud_certificado` (`id_certificado`, `id_certi`, `id_usuario`,
 (2, 1, 8, 3, 'cambio de casa ', 'por motivos de narcotrafico me cambio de casa y necesito el certificado de residencia para estos tramites con el motivo de seguir vendiendo drogra', '2025-12-23 20:51:07'),
 (3, 1, 8, 3, 'Cambio de casa ', 'quiero mudarme a otra ciudad por motivos de trabajo y necesito esto para actualizar mi direccion', '2026-01-10 01:34:11'),
 (4, 1, 8, 3, 'Cambio de casa ', 'dsdasdasdas', '2026-01-10 01:55:07'),
-(5, 1, 8, 3, 'Cambio de casa ', 'asdasdasdasdasdasdasdasdasdsadas', '2026-01-10 02:25:28');
+(5, 1, 8, 3, 'Cambio de casa ', 'asdasdasdasdasdasdasdasdasdsadas', '2026-01-10 02:25:28'),
+(6, 1, 17, 3, 'Cambio de casa ', 'por droga', '2026-01-10 22:30:33'),
+(7, 1, 8, 1, 'Cambio de casa ', 'adasdasdasdasdasdasd', '2026-01-12 19:14:54'),
+(8, 2, 8, 1, 'Cambio de casa ', 'adasdasdasdasdasdasdasdasdasdas', '2026-01-12 19:18:49'),
+(9, 1, 18, 3, 'Cambio de casa ', 'sadasdasdas', '2026-01-12 19:30:12');
 
 -- --------------------------------------------------------
 
@@ -205,6 +274,29 @@ INSERT INTO `tipos_certificados` (`id_certi`, `nombre_certificado`) VALUES
 (3, 'Certificado de participación en proyectos comunitarios'),
 (4, 'Certificado de buena conducta vecinal'),
 (5, 'Certificado de voluntariado barrial');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_reserva`
+--
+
+CREATE TABLE `tipo_reserva` (
+  `id_tipo` int(11) NOT NULL,
+  `tipo` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_reserva`
+--
+
+INSERT INTO `tipo_reserva` (`id_tipo`, `tipo`) VALUES
+(1, 'cancha'),
+(2, 'Salas de Reuniones '),
+(3, 'piscinas '),
+(4, 'Areas Verdes'),
+(5, 'Plazas de la comunidad'),
+(6, 'sedes');
 
 -- --------------------------------------------------------
 
@@ -238,7 +330,10 @@ CREATE TABLE `transacciones_webpay` (
 INSERT INTO `transacciones_webpay` (`id_transaccion`, `id_certificado`, `id_usuario`, `monto`, `token_ws`, `orden_compra`, `session_id`, `codigo_autorizacion`, `medio_pago`, `numero_cuotas`, `tipo_cuotas`, `estado_transaccion`, `fecha_transaccion`, `fecha_actualizacion`, `last4_tarjeta`, `respuesta_json`) VALUES
 (1, 5, 8, 2000, '01abb2527fa51bb5e5acdf43f239b1dd4cea197bcbc572e50a36b6dfae8678e4', 'CERT-5-1768070890', 'USR-8-88von07126cctkvh9gg8c9i3aq', NULL, NULL, NULL, NULL, 'INICIADA', '2026-01-10 15:48:10', NULL, NULL, NULL),
 (2, 5, 8, 2000, '01ab8d001b23742c1ddc7efd55e65e4e11eb02c88dbaa31a731bc6f503828597', 'CERT-5-1768074071', 'USR-8-88von07126cctkvh9gg8c9i3aq', '1213', 'VN', 0, NULL, 'AUTORIZADA', '2026-01-10 16:41:12', '2026-01-10 16:42:05', '6623', '{\"vci\":\"TSY\",\"amount\":2000,\"status\":\"AUTHORIZED\",\"buy_order\":\"CERT-5-1768074071\",\"session_id\":\"USR-8-88von07126cctkvh9gg8c9i3aq\",\"card_detail\":{\"card_number\":\"6623\"},\"accounting_date\":\"0110\",\"transaction_date\":\"2026-01-10T19:41:12.033Z\",\"authorization_code\":\"1213\",\"payment_type_code\":\"VN\",\"response_code\":0,\"installments_number\":0}'),
-(3, 4, 8, 2000, '01abd6013cd2c6d40312fa71249595193b16ee5412a4d405b78d6454d445b481', 'CERT-4-1768074709', 'USR-8-88von07126cctkvh9gg8c9i3aq', '1213', 'VN', 0, NULL, 'AUTORIZADA', '2026-01-10 16:51:50', '2026-01-10 16:52:40', '6623', '{\"vci\":\"TSY\",\"amount\":2000,\"status\":\"AUTHORIZED\",\"buy_order\":\"CERT-4-1768074709\",\"session_id\":\"USR-8-88von07126cctkvh9gg8c9i3aq\",\"card_detail\":{\"card_number\":\"6623\"},\"accounting_date\":\"0110\",\"transaction_date\":\"2026-01-10T19:51:49.759Z\",\"authorization_code\":\"1213\",\"payment_type_code\":\"VN\",\"response_code\":0,\"installments_number\":0}');
+(3, 4, 8, 2000, '01abd6013cd2c6d40312fa71249595193b16ee5412a4d405b78d6454d445b481', 'CERT-4-1768074709', 'USR-8-88von07126cctkvh9gg8c9i3aq', '1213', 'VN', 0, NULL, 'AUTORIZADA', '2026-01-10 16:51:50', '2026-01-10 16:52:40', '6623', '{\"vci\":\"TSY\",\"amount\":2000,\"status\":\"AUTHORIZED\",\"buy_order\":\"CERT-4-1768074709\",\"session_id\":\"USR-8-88von07126cctkvh9gg8c9i3aq\",\"card_detail\":{\"card_number\":\"6623\"},\"accounting_date\":\"0110\",\"transaction_date\":\"2026-01-10T19:51:49.759Z\",\"authorization_code\":\"1213\",\"payment_type_code\":\"VN\",\"response_code\":0,\"installments_number\":0}'),
+(4, 6, 17, 2000, '01abab0cb7e1a116d996dfbd2a1a23a134a17f8f1d223a72e8cc9474a0dd862a', 'CERT-6-1768095058', 'USR-17-tipgf2jgrcm1gnqjtfdt3rfnad', '1617', 'VN', 0, NULL, 'AUTORIZADA', '2026-01-10 22:30:58', '2026-01-10 22:31:41', '2032', '{\"vci\":\"TSY\",\"amount\":2000,\"status\":\"AUTHORIZED\",\"buy_order\":\"CERT-6-1768095058\",\"session_id\":\"USR-17-tipgf2jgrcm1gnqjtfdt3rfnad\",\"card_detail\":{\"card_number\":\"2032\"},\"accounting_date\":\"0110\",\"transaction_date\":\"2026-01-11T01:30:58.603Z\",\"authorization_code\":\"1617\",\"payment_type_code\":\"VN\",\"response_code\":0,\"installments_number\":0}'),
+(5, 9, 18, 2000, '01ab2a64432501e3d560af8740b45bce0001d274b82242b351f48032519ee4b8', 'CERT-9-1768325947', 'USR-18-p03ngka6amajvn4nrkb7od3026', NULL, NULL, NULL, NULL, 'INICIADA', '2026-01-13 14:39:07', NULL, NULL, NULL),
+(6, 9, 18, 2000, '01ab26529fcd8992e86c33c10724ee6a51ad27efbfeb760f81fe2ad1f9b3abee', 'CERT-9-1768325954', 'USR-18-p03ngka6amajvn4nrkb7od3026', '1213', 'VN', 0, NULL, 'AUTORIZADA', '2026-01-13 14:39:14', '2026-01-13 14:40:23', '6623', '{\"vci\":\"TSY\",\"amount\":2000,\"status\":\"AUTHORIZED\",\"buy_order\":\"CERT-9-1768325954\",\"session_id\":\"USR-18-p03ngka6amajvn4nrkb7od3026\",\"card_detail\":{\"card_number\":\"6623\"},\"accounting_date\":\"0113\",\"transaction_date\":\"2026-01-13T17:39:14.641Z\",\"authorization_code\":\"1213\",\"payment_type_code\":\"VN\",\"response_code\":0,\"installments_number\":0}');
 
 -- --------------------------------------------------------
 
@@ -253,7 +348,6 @@ CREATE TABLE `usuarios` (
   `ap_paterno` varchar(50) NOT NULL,
   `ap_materno` varchar(50) NOT NULL,
   `fecha_nac` date NOT NULL,
-  `estado_civil` varchar(10) DEFAULT NULL,
   `rut` varchar(18) DEFAULT NULL,
   `telefono` varchar(10) NOT NULL,
   `correo` varchar(150) NOT NULL,
@@ -269,9 +363,12 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `p_nombre`, `s_nombre`, `ap_paterno`, `ap_materno`, `fecha_nac`, `estado_civil`, `rut`, `telefono`, `correo`, `email_verificado`, `email_token`, `email_token_expira`, `direccion`, `clave`, `id_rol`) VALUES
-(8, 'Javier ', 'Jannet', 'Smith', 'vera', '1991-12-13', 'soltera', '18.608.676-2', '6789020', 'con.leiva@duocuc.cl', 1, NULL, NULL, 'pajaritos', '12345', 1),
-(14, 'Fabian', 'mateo', 'Villablanca', 'Smit', '2015-01-22', NULL, '18.608.677-4', '922203145', 'fabianirribarra667@gmail.com', 0, 'f86a3aa3a27f21c9f3029c49b424677a2b77ca39395fb2a5f0b3892e0c9eec27', '2025-12-25 00:29:22', 'lo blanco 0824', '$2y$10$2MZY280lACZ0B4W5Ye1UxOlQvN9KmU4M0/v0CQMrOCJ.WF6j6LGe6', 3);
+INSERT INTO `usuarios` (`id_usuario`, `p_nombre`, `s_nombre`, `ap_paterno`, `ap_materno`, `fecha_nac`, `rut`, `telefono`, `correo`, `email_verificado`, `email_token`, `email_token_expira`, `direccion`, `clave`, `id_rol`) VALUES
+(8, 'Javier ', 'Jannet', 'Smith', 'vera', '1991-12-13', '18.608.676-2', '6789020', 'con.leiva@duocuc.cl', 1, NULL, NULL, 'pajaritos', '$2y$10$fgTF.SEFfhNzR.NVEbyvp.GPO622GKVORUqCR4M0NN6VgmBgHl4y.', 1),
+(14, 'Fabian', 'mateo', 'Villablanca', 'Smit', '2015-01-22', '18.608.677-4', '922203145', 'fabianirribarra667@gmail.com', 0, 'f86a3aa3a27f21c9f3029c49b424677a2b77ca39395fb2a5f0b3892e0c9eec27', '2025-12-25 00:29:22', 'lo blanco 0824', '1234', 3),
+(17, 'Juancho', 'Peres', 'Villacasa', 'Torres3', '1999-01-08', '22.302.080-5', '5678954', 'gerina.leiva@gmail.com', 1, NULL, NULL, 'los sapos casiques', '12345', 3),
+(18, 'Pedro', 'Peres', 'Villacasa', 'Torres', '1999-01-08', '20.608.676-7', '5678954', 'cleivavera94@gmail.com', 1, NULL, NULL, 'los sapos casiques', '1234', 3),
+(21, 'Pedro', 'Se vendio en la calle', 'no tengo papa', 'se fue por cigarro', '2002-01-08', '11.111.111-1', '9873628', 'starlix234.leiva@gmail.com', 1, NULL, NULL, 'los sapos casiques 2', '$2y$10$k1yKAevP7ubKNlWltUo3a.NtYiM6cCgOXV6TlHQJvLWfJeudZz0Cu', 3);
 
 -- --------------------------------------------------------
 
@@ -306,12 +403,27 @@ ALTER TABLE `estados_certificado`
   ADD PRIMARY KEY (`id_estados_certificado`);
 
 --
+-- Indices de la tabla `estado_reserva`
+--
+ALTER TABLE `estado_reserva`
+  ADD PRIMARY KEY (`id_estado_reserva`);
+
+--
 -- Indices de la tabla `pagos_residencia`
 --
 ALTER TABLE `pagos_residencia`
   ADD PRIMARY KEY (`id_pago`),
   ADD KEY `fk_pago_certificado` (`id_certificado`),
   ADD KEY `fk_pago_estado` (`id_estado`);
+
+--
+-- Indices de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  ADD PRIMARY KEY (`id_reserva`),
+  ADD KEY `fk_reserva_estado` (`id_estado_reserva`),
+  ADD KEY `fk_reserva_tipo` (`id_tipo`),
+  ADD KEY `fk_reserva_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `roles`
@@ -332,6 +444,12 @@ ALTER TABLE `solicitud_certificado`
 --
 ALTER TABLE `tipos_certificados`
   ADD PRIMARY KEY (`id_certi`);
+
+--
+-- Indices de la tabla `tipo_reserva`
+--
+ALTER TABLE `tipo_reserva`
+  ADD PRIMARY KEY (`id_tipo`);
 
 --
 -- Indices de la tabla `transacciones_webpay`
@@ -357,7 +475,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `codigos_mfa`
 --
 ALTER TABLE `codigos_mfa`
-  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -372,10 +490,22 @@ ALTER TABLE `estados_certificado`
   MODIFY `id_estados_certificado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `estado_reserva`
+--
+ALTER TABLE `estado_reserva`
+  MODIFY `id_estado_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `pagos_residencia`
 --
 ALTER TABLE `pagos_residencia`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -387,7 +517,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `solicitud_certificado`
 --
 ALTER TABLE `solicitud_certificado`
-  MODIFY `id_certificado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_certificado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_certificados`
@@ -396,16 +526,22 @@ ALTER TABLE `tipos_certificados`
   MODIFY `id_certi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `tipo_reserva`
+--
+ALTER TABLE `tipo_reserva`
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `transacciones_webpay`
 --
 ALTER TABLE `transacciones_webpay`
-  MODIFY `id_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas
@@ -423,6 +559,14 @@ ALTER TABLE `codigos_mfa`
 ALTER TABLE `pagos_residencia`
   ADD CONSTRAINT `fk_pago_certificado` FOREIGN KEY (`id_certificado`) REFERENCES `solicitud_certificado` (`id_certificado`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_pago_estado` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`);
+
+--
+-- Filtros para la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  ADD CONSTRAINT `fk_reserva_estado` FOREIGN KEY (`id_estado_reserva`) REFERENCES `estado_reserva` (`id_estado_reserva`),
+  ADD CONSTRAINT `fk_reserva_tipo` FOREIGN KEY (`id_tipo`) REFERENCES `tipo_reserva` (`id_tipo`),
+  ADD CONSTRAINT `fk_reserva_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
 -- Filtros para la tabla `solicitud_certificado`
