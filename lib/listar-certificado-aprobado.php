@@ -1,0 +1,1 @@
+select * from usuarios u INNER JOIN solicitud_certificado s on u.id_usuario=s.id_usuario INNER JOIN tipos_certificados t on t.id_certi=s.id_certi inner join estados_certificado e on e.id_estados_certificado=s.id_estado;
