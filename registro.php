@@ -2,110 +2,168 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Registro de Vecino</title>
+    <meta charset="UTF-8">
+    <title>Registro de Miembro</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="estilos.css">
+
+    <!-- Scripts de validación -->
+    <script src="assets/js/verificar-formato-rut.js"></script>
+    <script src="assets/js/validar-contrasena.js"></script>
+    <script src="assets/js/verificar-formato-correo.js"></script>
 </head>
-<script src="assets/js/verificar-formato-rut.js"></script>
-<script src="assets/js/validar-contrasena.js"></script>
-<script src="assets/js/verificar-formato-correo.js"></script>
 <body>
 
-<h2>Registro de Miembro</h2>
+<!-- TÍTULO -->
+<header class="text-center">
+    <h1 class="titulo">Formulario de nuevo miembro</h1>
+</header>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card registro-card shadow-lg" >
+        <div class="card-body">
 
-<?php if (isset($_GET['error'])): ?>
-    <p style="color:red;">
-        <?= htmlspecialchars($_GET['error']) ?>
-    </p>
-<?php endif; ?>
+            <h3 class="text-center mb-4">Formulario de Registro</h3>
 
-<form 
-    action="lib/procesar_registro.php" 
-    method="POST" 
-    onsubmit="return validarFormulario();"
->
+            <!-- MENSAJE DE ERROR -->
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger text-center">
+                    <?= htmlspecialchars($_GET['error']) ?>
+                </div>
+            <?php endif; ?>
 
-    <label>Primer Nombre:</label>
-    <input type="text" name="p_nombre" required ><br>
+            <form 
+                action="lib/procesar_registro.php" 
+                method="POST"
+                onsubmit="return validarFormulario();"
+            >
 
-    <label>Segundo Nombre:</label>
-    <input type="text" name="s_nombre" required><br>
+                <!-- NOMBRES -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Primer Nombre</label>
+                        <input type="text" name="p_nombre" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Segundo Nombre</label>
+                        <input type="text" name="s_nombre" class="form-control" required>
+                    </div>
+                </div>
 
-    <label>Apellido Paterno:</label>
-    <input type="text" name="ap_paterno" required><br>
+                <!-- APELLIDOS -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Apellido Paterno</label>
+                        <input type="text" name="ap_paterno" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Apellido Materno</label>
+                        <input type="text" name="ap_materno" class="form-control" required>
+                    </div>
+                </div>
+                <!-- FECHA Y RUT -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" name="fecha_nac" id="fecha_nac" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">RUT</label>
+                        <input type="text" name="rut" class="form-control"
+                               oninput="formatearRUT(this)"
+                               placeholder="12.345.678-9" required>
+                    </div>
+                </div>
 
-    <label>Apellido Materno:</label>
-    <input type="text" name="ap_materno" required><br>
+                <!-- TELÉFONO Y CORREO -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Teléfono</label>
+                        <input type="text" name="telefono" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" name="correo" id="correo" class="form-control" required>
+                        <small id="errorCorreo" class="text-danger"></small>
+                    </div>
+                </div>
 
-    <label>Fecha de Nacimiento:</label>
-    <input type="date" name="fecha_nac" id="fecha_nac" required><br>
+                <!-- DIRECCIÓN -->
+                <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" name="direccion" class="form-control" required>
+                </div>
 
-    <label>RUT:</label>
-    <input type="text" name="rut" oninput="formatearRUT(this)" placeholder="Ej: 12.345.678-9" required><br>
+                <!-- CONTRASEÑA -->
+                <div class="mb-4">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" name="clave" class="form-control" required>
+                    <small id="errorPassword" class="text-danger"></small>
+                </div>
 
-    <label>Teléfono:</label>
-    <input type="text" name="telefono" required><br>
+                <!-- BOTÓN -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark btn-lg">
+                        Registrarse
+                    </button>
+                </div>
 
-    <label>Correo electrónico:</label>
-    <input type="email" name="correo" id="correo" required>
-    <small id="errorCorreo" style="color:red;"></small><br>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <label>Dirección:</label>
-    <input type="text" name="direccion" required><br>
+<!-- VALIDACIONES -->
+<script>
+function validarFormulario() {
 
-    <label>Contraseña:</label>
-    <input type="password" name="clave" required>
-    <small id="errorPassword" style="color:red;"></small><br>
+    // Correo
+    const correo = document.getElementById("correo").value;
+    const errorCorreo = document.getElementById("errorCorreo");
 
-    <button type="submit">Registrarme</button>
-</form>
-    <!--Script de validación de formulario -->
-    <script>
-    function validarFormulario() {
-        // Validar formato de correo
-        const correo = document.getElementById("correo").value;
-        const errorCorreo = document.getElementById("errorCorreo");
-
-        if (!verificarFormatoCorreo(correo)) {
-            errorCorreo.textContent =
-                "Solo se permiten correos con dominio @gmail.com o @hotmail.com";
-            return false;
-        }
-
-        errorCorreo.textContent = "";
-
-        // Validar formato de contraseña
-        const password = document.querySelector("input[name='clave']").value;
-        const errorPassword = document.getElementById("errorPassword");
-
-        if (!validarPassword(password)) {
-            errorPassword.textContent =
-                "La contraseña debe tener entre 5 y 15 caracteres, incluir mayúscula, minúscula y número.";
-            return false;
-        } else {
-            errorPassword.textContent = "";
-        }
-        
-        // Validar mayoría de edad
-        const fechaNac = document.getElementById("fecha_nac").value;
-
-        if (fechaNac) {
-            const hoy = new Date();
-            const nacimiento = new Date(fechaNac);
-            let edad = hoy.getFullYear() - nacimiento.getFullYear();
-            const m = hoy.getMonth() - nacimiento.getMonth();
-
-            if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) {
-                edad--;
-            }
-            if (edad < 18) {
-                alert("Debes ser mayor de 18 años");
-                return false;
-            }
-        }
-        return true;
+    if (!verificarFormatoCorreo(correo)) {
+        errorCorreo.textContent =
+            "Solo se permiten correos @gmail.com o @hotmail.com";
+        return false;
     }
+    errorCorreo.textContent = "";
 
-    </script>
+    // Contraseña
+    const password = document.querySelector("input[name='clave']").value;
+    const errorPassword = document.getElementById("errorPassword");
 
+    if (!validarPassword(password)) {
+        errorPassword.textContent =
+            "Debe tener 5–15 caracteres, mayúscula, minúscula y número.";
+        return false;
+    }
+    errorPassword.textContent = "";
+
+    // Edad
+    const fechaNac = document.getElementById("fecha_nac").value;
+    if (fechaNac) {
+        const hoy = new Date();
+        const nacimiento = new Date(fechaNac);
+        let edad = hoy.getFullYear() - nacimiento.getFullYear();
+        const m = hoy.getMonth() - nacimiento.getMonth();
+
+        if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) {
+            edad--;
+        }
+
+        if (edad < 18) {
+            alert("Debes ser mayor de 18 años");
+            return false;
+        }
+    }
+    return true;
+}
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
