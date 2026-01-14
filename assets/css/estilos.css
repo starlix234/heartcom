@@ -1,57 +1,47 @@
-   body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+/* Fondo general */
+.body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
 
-        .login-card {
-            background: #fff;
-            padding: 25px;
-            width: 350px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
+/* Clase para el fondo con imagen */
+.bg-fondo {
+    background-image: url("../img/plaza.jpg"); /* ajusta la ruta si es distinta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
-        .login-card h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #444;
-        }
+/* Centrar vertical y horizontalmente el contenido del main */
+.centrar {
+    min-height: 100vh;              /* ocupa toda la altura de la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        label {
-            display: block;
-            margin-top: 10px;
-        }
+/* Tarjeta de login */
+.login-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
 
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 4px;
-            border: 1px solid #aaa;
-            border-radius: 4px;
-        }
+/* Ajuste interno de la tarjeta */
+.login-card .card-body {
+    padding: 25px;
+}
 
-        button {
-            width: 100%;
-            margin-top: 18px;
-            padding: 12px;
-            background: #0073ff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+/* Título del login */
+.login-card h3 {
+    color: #444;
+}
 
-        button:hover {
-            background: #005fd3;
-        }
+/* Si quieres estilo al enlace de registro */
+.registro a {
+    color: #0073ff;
+}
 
-        .error {
-            color: red;
-            margin-top: 8px;
-            text-align: center;
-        }
+.registro a:hover {
+    text-decoration: underline;
+}

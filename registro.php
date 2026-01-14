@@ -18,12 +18,8 @@
 </head>
 <body>
 
-<!-- TÍTULO -->
-<header class="text-center">
-    <h1 class="titulo">Formulario de nuevo miembro</h1>
-</header>
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card registro-card shadow-lg" >
+<div class="container d-flex justify-content-center align-items-center min-vh-100 p-4">
+    <div class="card registro-card shadow-lg pd-2" >
         <div class="card-body">
 
             <h3 class="text-center mb-4">Formulario de Registro</h3>
