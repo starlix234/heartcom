@@ -9,5 +9,6 @@
 <?php include('crear-espacio-reserva.php')?>
 <?php include('mostrar-reserva.php')?>
 
+<?php include('administrar-reservas.php') ?>
 </body>
 </html>
