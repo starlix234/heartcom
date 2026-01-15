@@ -1,0 +1,61 @@
+
+
+.bg-fondo {
+    background-image: url("../img/plaza.jpg"); /* ajusta la ruta si es distinta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+body {
+    background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("https://media.istockphoto.com/id/481846822/es/foto/streetpark-en-berl%C3%ADn.jpg?s=612x612&w=0&k=20&c=qfh97yQkrqdu5w4xyvVkhgXfbjL2ZXj1Uscn5e_C7dU=");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body {
+    background: linear-gradient(to right, #f5f5f5, #ffffff);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+
+
+
+.registro-card {
+    max-width: 520px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+h3 {
+    font-weight: 600;
+    color: #333;
+}
+
+label {
+    font-weight: 500;
+    color: #444;
+}
+
+.form-control {
+    border-radius: 6px;
+}
+
+.form-control:focus {
+    border-color: #212529;
+    box-shadow: 0 0 0 0.1rem rgba(33, 37, 41, 0.25);
+}
+
+button {
+    letter-spacing: 0.5px;
+}
