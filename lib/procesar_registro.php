@@ -10,11 +10,7 @@ $s_nombre    = trim($_POST['s_nombre'] ?? '');
 $ap_paterno  = trim($_POST['ap_paterno'] ?? '');
 $ap_materno  = trim($_POST['ap_materno'] ?? '');
 $fecha_nac   = $_POST['fecha_nac'] ?? '';
-<<<<<<< HEAD
-$rut        = trim(strtoupper($_POST['rut']) ?? '');
-=======
-$rut  = $_POST['rut'];
->>>>>>> bbd230b94ab77f3deb2a2a438e89f9e7125b44e7
+$rut         = trim(strtoupper($_POST['rut']) ?? '');
 $telefono    = trim($_POST['telefono'] ?? '');
 $correo      = trim($_POST['correo'] ?? '');
 $direccion   = trim($_POST['direccion'] ?? '');
@@ -45,7 +41,7 @@ if (!preg_match('/^[a-z0-9._%+-]+@(gmail\.com|hotmail\.com)$/', $correo)) {
     header("Location: ../registro.php?error=" . urlencode(
         "Solo se permiten correos con dominio Gmail.com o Hotmail.com ."
     ));
-    exit;
+    //exit;
 }
 
 // 4️⃣ Validar edad (>= 18)
@@ -55,13 +51,13 @@ $hoy = new DateTime('today');
 if (!$fechaNacimiento) {
     header("Location: ../registro.php?error=" . urlencode("Fecha de nacimiento inválida."));
     exit;
-}
+} 
 
 $edad = $hoy->diff($fechaNacimiento)->y;
 
 if ($edad < 18) {
     header("Location: ../registro.php?error=" . urlencode("Debe ser mayor de edad."));
-    exit;
+    //exit;
 }
 
 

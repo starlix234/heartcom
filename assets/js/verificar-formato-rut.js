@@ -4,7 +4,11 @@ function limpiarRut(rut) {
 
 function formatearRUT(input) {
     let rut = input.value.replace(/[^0-9kK]/g, '').toUpperCase();
-
+    
+    if (rut.length > 9) {
+        rut = rut.slice(0, 9);
+    }
+    
     if (rut.length < 2) {
         input.value = rut;
         return;
