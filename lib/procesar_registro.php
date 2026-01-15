@@ -1,7 +1,7 @@
 <?php
-
 session_start();
 require_once 'conexion.php';
+
 $_SESSION['old'] = $_POST;
 
 // 1️⃣ Captura y limpieza de datos
@@ -10,12 +10,11 @@ $s_nombre    = trim($_POST['s_nombre'] ?? '');
 $ap_paterno  = trim($_POST['ap_paterno'] ?? '');
 $ap_materno  = trim($_POST['ap_materno'] ?? '');
 $fecha_nac   = $_POST['fecha_nac'] ?? '';
-$rut         = trim(strtoupper($_POST['rut']) ?? '');
+$rut         = trim(strtoupper($_POST['rut'] ?? ''));
 $telefono    = trim($_POST['telefono'] ?? '');
 $correo      = trim($_POST['correo'] ?? '');
 $direccion   = trim($_POST['direccion'] ?? '');
 $clave       = $_POST['clave'] ?? '';
-
 
 // 2️⃣ Validación de campos obligatorios
 if (
@@ -26,8 +25,7 @@ if (
     exit;
 }
 
-//validar contraseña de 
-
+// 3️⃣ Validar contraseña
 $mensajePassword = "La contraseña debe tener entre 5 y 15 caracteres, incluir mayúscula, minúscula y número.";
 
 if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,15}$/', $clave)) {
@@ -35,7 +33,7 @@ if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,15}$/', $clave)) {
     exit;
 }
 
-// 3️⃣ Validar formato de correo (gmail / hotmail)
+// 4️⃣ Validar formato de correo (solo Gmail / Hotmail)
 $correo = strtolower($correo);
 if (!preg_match('/^[a-z0-9._%+-]+@(gmail\.com|hotmail\.com)$/', $correo)) {
     header("Location: ../registro.php?error=" . urlencode(
@@ -44,7 +42,7 @@ if (!preg_match('/^[a-z0-9._%+-]+@(gmail\.com|hotmail\.com)$/', $correo)) {
     //exit;
 }
 
-// 4️⃣ Validar edad (>= 18)
+// 5️⃣ Validar edad (>= 18)
 $fechaNacimiento = DateTime::createFromFormat('Y-m-d', $fecha_nac);
 $hoy = new DateTime('today');
 
@@ -60,10 +58,7 @@ if ($edad < 18) {
     //exit;
 }
 
-
-
-
-// 5️⃣ Validar RUT o correo duplicado
+// 6️⃣ Validar RUT o correo duplicado
 $stmt = $pdo->prepare("
     SELECT id_usuario
     FROM usuarios
@@ -78,14 +73,14 @@ if ($stmt->fetch()) {
     exit;
 }
 
-// 6️⃣ Hash de contraseña
-//$clave_hash = password_hash($clave, PASSWORD_DEFAULT);
+// 7️⃣ Hash de contraseña
+$clave_hash = password_hash($clave, PASSWORD_DEFAULT);
 
-// 7️⃣ Token de verificación
+// 8️⃣ Token de verificación
 $token  = bin2hex(random_bytes(32));
 $expira = (new DateTime('+1 day'))->format('Y-m-d H:i:s');
 
-// 8️⃣ Insertar usuario
+// 9️⃣ Insertar usuario con HASH (no guardas la contraseña en claro)
 $stmt = $pdo->prepare("
     INSERT INTO usuarios (
         p_nombre, s_nombre, ap_paterno, ap_materno, fecha_nac,
@@ -112,10 +107,10 @@ $stmt->execute([
     $token,
     $expira,
     $direccion,
-    $clave
+    $clave_hash   // 👈 AQUÍ va el HASH, listo para guardarse
 ]);
 
-// 9️⃣ Enviar correo de verificación
+// 🔟 Enviar correo de verificación
 $enlace = "http://localhost/HEARTCOM/lib/verificar_correo.php?token=$token";
 
 $asunto = "Verifica tu cuenta - Junta de Vecinos";
@@ -130,10 +125,9 @@ Este enlace expira en 24 horas.
 $headers  = "From: Junta de Vecinos <no-reply@barrio3.local>\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-// El @ evita warnings en local (opcional)
 @mail($correo, $asunto, $mensaje, $headers);
 
-// 🔟 Redirección final
+// 🔁 Redirección final
 header("Location: ../login.php?msg=" . urlencode(
     "Registro exitoso. Revisa tu correo para verificar la cuenta."
 ));

@@ -6,35 +6,106 @@ if (isset($_SESSION['id_usuario'])) {
     header("Location: panel.php");
     exit;
 }
-?>
 
+// Capturamos posible mensaje de error por GET
+$mensajeError = isset($_GET['error']) ? $_GET['error'] : '';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Iniciar Sesión - HeartCom</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Tu CSS -->
     <link rel="stylesheet" href="assets/css/estilos.css">
 </head>
-<body>
+<body class="body bg-fondo">
 
-<div class="login-card">
-    <h2>Iniciar Sesión</h2>
+    <!-- MAIN -->
+    <main class="centrar">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
 
-    <?php if (isset($_GET['error'])) : ?>
-        <div class="error"><?= htmlspecialchars($_GET['error']); ?></div>
-    <?php endif; ?>
+                    <div class="login-wrapper my-5">
+                        <div class="card login-card shadow-lg">
+                            <div class="card-body p-4">
+                                <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
-    <form action="lib/procesar_login.php" method="POST">
-        <label>RUT</label>
-        <input type="text" name="rut" placeholder="Ej: 12.345.678-9" required>
+                                <?php if ($mensajeError): ?>
+                                    <div class="alert alert-danger py-2">
+                                        <?= htmlspecialchars($mensajeError); ?>
+                                    </div>
+                                <?php endif; ?>
 
-        <label>Contraseña</label>
-        <input type="password" name="clave" placeholder="Tu clave" required>
+                                <form action="lib/procesar_login.php" method="POST" novalidate>
+                                    <div class="mb-3">
+                                        <label for="rut" class="form-label">RUT</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="rut"
+                                            name="rut"
+                                            placeholder="Ej: 12.345.678-9"
+                                            required
+                                        >
+                                    </div>
 
-        <button type="submit">Ingresar</button>
-    </form>
-    <a href="registro.php">Registrarse</a>
-</div>
+                                    <div class="mb-4">
+                                        <label for="clave" class="form-label">Contraseña</label>
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            id="clave"
+                                            name="clave"
+                                            placeholder="Tu clave"
+                                            required
+                                        >
+                                    </div>
 
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        Ingresar
+                                    </button>
+
+                                    <div class="registro text-center mt-3">
+                                        <a href="registro.php" class="text-decoration-none fw-semibold">
+                                            Registrarse
+                                        </a>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Si quieres, puedes dejar contenido extra acá -->
+            <!--
+            <section class="mt-4">
+                secciones adicionales
+            </section>
+            <article class="mt-3">
+                artículos o noticias
+            </article>
+            -->
+        </div>
+    </main>
+
+   
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
 </body>
 </html>

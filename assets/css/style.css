@@ -1,0 +1,58 @@
+.titulo{
+    color:blue;
+    font-size:2rem;
+    
+}
+
+body {
+    background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("https://media.istockphoto.com/id/481846822/es/foto/streetpark-en-berl%C3%ADn.jpg?s=612x612&w=0&k=20&c=qfh97yQkrqdu5w4xyvVkhgXfbjL2ZXj1Uscn5e_C7dU=");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 16px;
+  border: none;
+}
+
+.login-card h3 {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-control {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.btn-primary {
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.registro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+}
+
+.link-rojo:hover {
+  color: darkred;
+}

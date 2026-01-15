@@ -16,6 +16,7 @@
     <script src="assets/js/validar-contrasena.js"></script>
     <script src="assets/js/verificar-formato-correo.js"></script>
     <script src="assets/js/validar-largo-texto.js"></script>
+    <script src="assets/js/validar-rut.js"></script>
 </head>
 <body>
 
@@ -61,12 +62,14 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Apellido Paterno</label>
-                        <input type="text" id="ap_paterno" name="ap_paterno" class="form-control" oninput="validarLargoTexto('ap_paterno', 2, 12, 'error_ap_paterno')" required>
+                        <input type="text" id="ap_paterno" name="ap_paterno" class="form-control" 
+                        oninput="validarLargoTexto('ap_paterno', 2, 12, 'error_ap_paterno')" required>
                         <small id="error_ap_paterno" style="color:red;"></small>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Apellido Materno</label>
-                        <input type="text" id="ap_materno" name="ap_materno" class="form-control" oninput="validarLargoTexto('ap_materno', 2, 12, 'error_ap_materno')" required>
+                        <input type="text" id="ap_materno" name="ap_materno" class="form-control" 
+                        oninput="validarLargoTexto('ap_materno', 2, 12, 'error_ap_materno')" required>
                         <small id="error_ap_materno" style="color:red;"></small>
                     </div>
                 </div>
@@ -79,9 +82,9 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">RUT</label>
-                        <input type="text" name="rut" class="form-control" maxlength="12"
-                               oninput="formatearRUT(this)"
+                        <input type="text" name="rut" id="rut" class="form-control" maxlength="12"
                                placeholder="12.345.678-9" required>
+                               <small id="errorRut" class="text-danger"></small>
                     </div>
                 </div>
 
@@ -177,6 +180,7 @@ function validarFormulario() {
 
         return false;
     }
+    errorCorreo.textContent = "";
 
     //validar teléfono (solo números)
     const valor = document.getElementById('telefono').value;
@@ -185,8 +189,19 @@ function validarFormulario() {
         alert('Solo se permiten números y máximo 9 caracteres');
         return false;
     }
+    // RUT
+    const rut = document.getElementById("rut").value;
+    const errorRut = document.getElementById("errorRut");
+
+    if (!validarRut(limpiarRut(rut))) {
+        errorRut.textContent = "RUT chileno inválido";
+        return false;
+    }
+    errorRut.textContent = "";                
+
     return true;
 }
+
 </script>
 
 <!-- Bootstrap JS -->

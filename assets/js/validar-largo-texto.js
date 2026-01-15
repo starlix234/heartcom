@@ -20,10 +20,10 @@ function validarLargoTexto(idInput, min, max, idError) {
 // Función para validar que solo se ingresen números en un campo
 function validarNumeros(input) {
     // Elimina todo lo que no sea número
-    input.value = input.value.replace(/[^0-9]/g, '');
+    input.value = input.value.replace(/[^0-9kK]/g, '').toUpperCase();;
 
-    // Limita a 8 caracteres por seguridad
-    if (input.value.length > 8) {
-        input.value = input.value.slice(0, 8);
+    // Limita a 9 caracteres por seguridad
+    if (input.value.length > 9) {
+        input.value = input.value.slice(0, 9);
     }
 }
