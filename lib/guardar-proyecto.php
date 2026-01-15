@@ -15,7 +15,7 @@ $fecha_creacion=$_POST['fecha_creacion'];
 $fecha_actualizacion['fecha_actualizacion'];
 $cupos_maximo['cupos_maximo'];
 
-$sql="INSERT INTO proyectos_barrio (
+$sql=$pdo=prepare("INSERT INTO proyectos_barrio (
     nombre_proyecto,
     descripcion,
     fecha_inicio,
@@ -27,6 +27,23 @@ $sql="INSERT INTO proyectos_barrio (
     presupuesto_utilizado,
     direccion_proyecto,
     cupo_maximo
-) VALUES (?,?,?,?,?,?,?,?,?,?,?);"
+) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+
+
+$stmt->execute([$nombre_proyecto,
+    $descripcion,
+    $fecha_ini,
+    $fecha_fin,
+    $id_estadp_pr,
+    $id_tipo_pr,
+    $responsable,
+    $presupuesto_estimado,
+    $presupuesto_utilizado,
+    $fecha_creacion,
+    $fecha_actualizacion,
+    $cupos_maximo
+]); 
+
+
 
 ?>
