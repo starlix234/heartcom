@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- CSS Personalizado -->
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="assets/css/estilos.css">
 
     <!-- Scripts de validación -->
     <script src="assets/js/verificar-formato-rut.js"></script>
@@ -18,7 +18,7 @@
     <script src="assets/js/validar-largo-texto.js"></script>
     <script src="assets/js/validar-rut.js"></script>
 </head>
-<body>
+<body class="body bg-fondo">
 
 <!-- TÍTULO -->
 <header class="text-center mt-4">
@@ -115,10 +115,15 @@
                 </div>
 
                 <!-- BOTÓN -->
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-dark btn-lg">
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">
                         Registrarse
                     </button>
+
+                    <button onclick="history.back()" type="submit" class="btn btn-danger btn-lg">
+                        Regresar
+                    </button>
+                    
                 </div>
 
             </form>

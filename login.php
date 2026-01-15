@@ -70,14 +70,21 @@ $mensajeError = isset($_GET['error']) ? $_GET['error'] : '';
                                             required
                                         >
                                     </div>
-
-                                    <button type="submit" class="btn btn-primary w-100">
+                                    
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary w-100">
                                         Ingresar
                                     </button>
 
-                                    <div class="registro text-center mt-3">
-                                        <a href="registro.php" class="text-decoration-none fw-semibold">
+                                    <a href="registro.php" class="btn btn-primary w-100">
                                             Registrarse
+                                        </a>
+
+                                    </div>
+                                    <div class="registro text-center mt-3">
+                                        <a href=""
+                                            class="text-decoration-none fw-semibold text-danger">
+                                                Olvidé mi contraseña
                                         </a>
                                     </div>
                                 </form>
