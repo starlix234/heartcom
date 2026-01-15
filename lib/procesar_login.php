@@ -38,11 +38,12 @@ $id_usuario = (int)$usuario['id_usuario'];
 $codigo     = crearCodigoMFA($id_usuario);
 
 // Enviar código al correo del usuario
-$correo = $usuario['correo'] ?? '';
-if (!empty($correo)) {
+try {
+    $correo = $usuario['correo'];
     enviarCorreoCodigo($correo, $codigo);
+} catch (Exception $e) {
+    // Si falla el envío (común en localhost), no hacemos nada y dejamos pasar
 }
-
 // 5) Guardar estado pendiente de MFA en sesión
 $_SESSION['pending_mfa_user'] = $id_usuario;
 

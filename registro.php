@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">RUT</label>
-                        <input type="text" name="rut" id="rut" class="form-control" maxlength="12"
+                        <input type="text" name="rut" id="rut" class="form-control" oninput="formatearRUT(this)" maxlength="12"
                                placeholder="12.345.678-9" required>
                                <small id="errorRut" class="text-danger"></small>
                     </div>

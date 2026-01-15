@@ -37,6 +37,8 @@ CREATE TABLE `codigos_mfa` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
 -- --------------------------------------------------------
 
 --

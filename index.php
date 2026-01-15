@@ -15,9 +15,10 @@
         <a href="lib/cerrar-sesion.php">Salir</a>
     </div>
 
+    <a href="modulo-usuarios/administrar-rol-usuarios.php">Ir a Adminstrar usuarios</a>
+
 <a href="lib/cerrar-sesion.php">Salir</a>
 
-    
 
 
 
