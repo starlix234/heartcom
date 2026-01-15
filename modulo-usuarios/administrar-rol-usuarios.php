@@ -1,5 +1,5 @@
 <?php include("../lib/mostrar-usuario.php")?>
-
+<?php include("../lib/permisos-admin.php")?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
