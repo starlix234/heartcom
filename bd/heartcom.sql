@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-01-2026 a las 20:20:04
+-- Tiempo de generación: 16-01-2026 a las 01:38:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -36,6 +36,14 @@ CREATE TABLE `codigos_mfa` (
   `usado` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `codigos_mfa`
+--
+
+INSERT INTO `codigos_mfa` (`id_codigo_mfa`, `id_usuario`, `codigo`, `tipo`, `expira_at`, `usado`, `created_at`) VALUES
+(1, 1, '271134', 'LOGIN', '2026-01-15 23:37:35', 0, '2026-01-15 19:27:35'),
+(2, 1, '360754', 'LOGIN', '2026-01-15 23:38:51', 1, '2026-01-15 19:28:51');
 
 -- --------------------------------------------------------
 
@@ -99,7 +107,28 @@ INSERT INTO `estados_proyecto` (`id_estado_proyecto`, `nombre_estado`, `descripc
 (1, 'Planificado', 'Proyecto creado, aún no iniciado'),
 (2, 'En ejecución', 'Proyecto actualmente en desarrollo'),
 (3, 'Completado', 'Proyecto finalizado'),
-(4, 'Cancelado', 'Proyecto cancelado');
+(4, 'Cancelado', 'Proyecto cancelado'),
+(5, 'Rechazado', 'El proyecto fue rechazado');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado_postulacion`
+--
+
+CREATE TABLE `estado_postulacion` (
+  `id_estado_postulacion` int(11) NOT NULL,
+  `nombre_estado` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `estado_postulacion`
+--
+
+INSERT INTO `estado_postulacion` (`id_estado_postulacion`, `nombre_estado`) VALUES
+(1, 'En proceso'),
+(2, 'Aprobada'),
+(3, 'Rechazada');
 
 -- --------------------------------------------------------
 
@@ -138,6 +167,20 @@ CREATE TABLE `pagos_residencia` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `postulaciones`
+--
+
+CREATE TABLE `postulaciones` (
+  `id_postulacion` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_proyecto` int(11) NOT NULL,
+  `id_estado_postulacion` int(11) NOT NULL,
+  `fecha_postulacion` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `proyectos_barrio`
 --
 
@@ -147,7 +190,7 @@ CREATE TABLE `proyectos_barrio` (
   `descripcion` text NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date DEFAULT NULL,
-  `id_estado_proyecto` int(11) NOT NULL,
+  `id_estado_proyecto` int(11) NOT NULL DEFAULT 1,
   `id_tipo_proyecto` int(11) NOT NULL,
   `responsable` varchar(150) NOT NULL,
   `presupuesto_estimado` decimal(12,2) NOT NULL DEFAULT 0.00,
@@ -157,6 +200,14 @@ CREATE TABLE `proyectos_barrio` (
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proyectos_barrio`
+--
+
+INSERT INTO `proyectos_barrio` (`id_proyecto`, `nombre_proyecto`, `descripcion`, `fecha_inicio`, `fecha_fin`, `id_estado_proyecto`, `id_tipo_proyecto`, `responsable`, `presupuesto_estimado`, `presupuesto_utilizado`, `direccion_proyecto`, `cupo_maximo`, `fecha_creacion`, `fecha_actualizacion`) VALUES
+(1, 'adsdw', 'adasdw', '2026-01-16', '2026-01-30', 1, 3, 'yo', 19996.00, 0.00, 'dader', 20, '2026-01-15 22:04:12', '2026-01-15 22:04:12'),
+(5, 'asdadwa', 'asdadwadw', '2026-01-23', '2026-01-31', 1, 1, 'Fabian mateo Villablanca Smit', 200000.00, 0.00, 'dader', 20, '2026-01-15 23:06:22', '2026-01-15 23:06:22');
 
 -- --------------------------------------------------------
 
@@ -347,6 +398,13 @@ CREATE TABLE `usuarios` (
   `id_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `p_nombre`, `s_nombre`, `ap_paterno`, `ap_materno`, `fecha_nac`, `rut`, `telefono`, `correo`, `email_verificado`, `email_token`, `email_token_expira`, `direccion`, `clave`, `id_rol`) VALUES
+(1, 'Fabian', 'mateo', 'Villablanca', 'Smit', '2000-11-11', '20.447.987-9', '933203191', 'fabianirribarracayul667@gmail.com', 1, NULL, NULL, 'lo blanco 0824', '$2y$10$BEhbpLHanlVcZpZ1wMOXK.Mpcc9Qmjc2nq.z6uTzU50N6lYG.ULT6', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -387,6 +445,12 @@ ALTER TABLE `estados_proyecto`
   ADD UNIQUE KEY `nombre_estado` (`nombre_estado`);
 
 --
+-- Indices de la tabla `estado_postulacion`
+--
+ALTER TABLE `estado_postulacion`
+  ADD PRIMARY KEY (`id_estado_postulacion`);
+
+--
 -- Indices de la tabla `estado_reserva`
 --
 ALTER TABLE `estado_reserva`
@@ -399,6 +463,15 @@ ALTER TABLE `pagos_residencia`
   ADD PRIMARY KEY (`id_pago`),
   ADD KEY `fk_pago_certificado` (`id_certificado`),
   ADD KEY `fk_pago_estado` (`id_estado`);
+
+--
+-- Indices de la tabla `postulaciones`
+--
+ALTER TABLE `postulaciones`
+  ADD PRIMARY KEY (`id_postulacion`),
+  ADD UNIQUE KEY `id_usuario` (`id_usuario`,`id_proyecto`),
+  ADD KEY `id_proyecto` (`id_proyecto`),
+  ADD KEY `id_estado_postulacion` (`id_estado_postulacion`);
 
 --
 -- Indices de la tabla `proyectos_barrio`
@@ -474,7 +547,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `codigos_mfa`
 --
 ALTER TABLE `codigos_mfa`
-  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -492,7 +565,13 @@ ALTER TABLE `estados_certificado`
 -- AUTO_INCREMENT de la tabla `estados_proyecto`
 --
 ALTER TABLE `estados_proyecto`
-  MODIFY `id_estado_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_estado_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `estado_postulacion`
+--
+ALTER TABLE `estado_postulacion`
+  MODIFY `id_estado_postulacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_reserva`
@@ -507,10 +586,16 @@ ALTER TABLE `pagos_residencia`
   MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `postulaciones`
+--
+ALTER TABLE `postulaciones`
+  MODIFY `id_postulacion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `proyectos_barrio`
 --
 ALTER TABLE `proyectos_barrio`
-  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
@@ -558,7 +643,7 @@ ALTER TABLE `transacciones_webpay`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -576,6 +661,14 @@ ALTER TABLE `codigos_mfa`
 ALTER TABLE `pagos_residencia`
   ADD CONSTRAINT `fk_pago_certificado` FOREIGN KEY (`id_certificado`) REFERENCES `solicitud_certificado` (`id_certificado`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_pago_estado` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`);
+
+--
+-- Filtros para la tabla `postulaciones`
+--
+ALTER TABLE `postulaciones`
+  ADD CONSTRAINT `postulaciones_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `postulaciones_ibfk_2` FOREIGN KEY (`id_proyecto`) REFERENCES `proyectos_barrio` (`id_proyecto`),
+  ADD CONSTRAINT `postulaciones_ibfk_3` FOREIGN KEY (`id_estado_postulacion`) REFERENCES `estado_postulacion` (`id_estado_postulacion`);
 
 --
 -- Filtros para la tabla `proyectos_barrio`
