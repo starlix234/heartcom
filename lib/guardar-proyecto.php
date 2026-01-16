@@ -74,3 +74,4 @@ $stmt->execute([
 
 header("Location: ../modulo-proyecto/mostrar-proyecto.php?mensaje=" . urlencode("Proyecto guardado exitosamente."));
 exit;
+
