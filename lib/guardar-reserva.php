@@ -1,37 +1,19 @@
 <?php
-// SIEMPRE lo primero
 session_start();
+require_once __DIR__ . '/conexion.php'; 
 
-// incluye la conexión (ajusta la ruta si está en otro lado)
-require_once __DIR__ . '/conexion.php';
-
-// =======================
-// 1. Verificar login
-// =======================
-
-// Si aún no tienes login hecho, para probar puedes DEJAR HARDCODEADO:
-/// $id_usuario = 8; // <-- SOLO PARA PRUEBA
-// pero lo ideal es usar la sesión:
+// 1. Verificar Login
 if (!isset($_SESSION['id_usuario'])) {
-    // Mientras tanto puedes hacer esto para ver el error más claro:
-    // die("No hay usuario en sesión. Inicia sesión primero.");
-    
-    // O redirigir al login:
-    // header("Location: ../login.php");
-    // exit;
-
-    // Para que no reviente ahora, voy a dejar un valor de prueba:
-    $id_usuario = 8; // <-- quita esto cuando tengas login
-} else {
-    $id_usuario = $_SESSION['id_usuario'];
+    header("Location: ../login.php?error=" . urlencode("Debes iniciar sesión."));
+    exit;
 }
 
-// =======================
-// 2. Recibir datos del formulario
-// =======================
+$id_usuario = $_SESSION['id_usuario'];
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die("Acceso inválido.");
+    // Si intentan entrar directo, los devolvemos al panel
+    header("Location: ../modulo-reservas/panel-reservas.php");
+    exit;
 }
 
 $id_tipo    = $_POST['id_tipo']   ?? null;
@@ -39,22 +21,36 @@ $fecha_ini  = $_POST['fecha_ini'] ?? null;
 $fecha_fin  = $_POST['fecha_fin'] ?? null;
 $asunto     = $_POST['asunto']    ?? null;
 $motivo     = $_POST['motivo']    ?? null;
+$id_estado_reserva = 1; // 1 = en proceso
 
-// estado 1 = "en proceso"
-$id_estado_reserva = 1;
+// ==========================================
+// VALIDACIONES (Redirigen con error si fallan)
+// ==========================================
 
-// Validaciones básicas
+// A) Campos vacíos
 if (empty($id_tipo) || empty($fecha_ini) || empty($fecha_fin) || empty($asunto)) {
-    die("Faltan datos obligatorios.");
+    header("Location: ../modulo-reservas/panel-reservas.php?error=" . urlencode("Faltan datos obligatorios."));
+    exit;
 }
 
+// B) Coherencia de fechas (Fin antes que Inicio)
 if ($fecha_fin < $fecha_ini) {
-    die("La fecha fin no puede ser menor que la fecha inicio.");
+    header("Location: ../modulo-reservas/panel-reservas.php?error=" . urlencode("La fecha de término no puede ser antes que la de inicio."));
+    exit;
 }
 
-// =======================
-// 3. Insert en la BD
-// =======================
+// C) FECHA PASADA (No permitir reservar ayer o días anteriores)
+$fecha_actual = date('Y-m-d'); // Fecha de hoy del servidor
+
+if ($fecha_ini < $fecha_actual) {
+    // AQUÍ ESTÁ EL CAMBIO: Redirige con mensaje de error
+    header("Location: ../modulo-reservas/panel-reservas.php?error=" . urlencode("Error: No puedes reservar en una fecha pasada (" . date("d/m/Y", strtotime($fecha_ini)) . ")."));
+    exit;
+}
+
+// ==========================================
+// INSERTAR EN BASE DE DATOS
+// ==========================================
 
 try {
     $sql = "INSERT INTO reservas
@@ -69,15 +65,16 @@ try {
         ':ff'      => $fecha_fin,
         ':asunto'  => $asunto,
         ':motivo'  => $motivo,
-        ':usuario' => $id_usuario,
+        ':usuario' => $id_usuario
     ]);
 
-    // Redirigir después de insertar
-    header("Location: ../modulo-reservas/panel-reservas.php");// ruta temporal
+    // ÉXITO: Redirigir con mensaje verde (msg)
+    header("Location: ../modulo-reservas/panel-reservas.php?msg=" . urlencode("¡Reserva enviada con éxito! Espera la aprobación."));
     exit;
 
 } catch (PDOException $e) {
-    // Para debug:
-    echo "Error al guardar la reserva: " . $e->getMessage();
+    // Error de base de datos
+    header("Location: ../modulo-reservas/panel-reservas.php?error=" . urlencode("Error en el sistema al guardar. Intente más tarde."));
+    exit;
 }
 ?>

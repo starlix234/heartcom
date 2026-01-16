@@ -1,46 +1,71 @@
 <?php
-// lib/guardar_nueva_clave.php
 session_start();
-require_once("conexion.php");
+require_once 'conexion.php';
 
-// Seguridad estricta
+// 1. Seguridad de sesión
 if (!isset($_SESSION['permiso_cambiar_clave']) || !isset($_SESSION['usuario_cambio_clave'])) {
-    die("Acceso denegado.");
-}
-
-$clave1 = $_POST['clave1'];
-$clave2 = $_POST['clave2'];
-$id_usuario = $_SESSION['usuario_cambio_clave'];
-
-if ($clave1 !== $clave2) {
-    echo "<script>alert('Las contraseñas no coinciden'); window.history.back();</script>";
+    header("Location: ../login.php");
     exit;
 }
 
-// Encriptar contraseña (IMPORTANTE: Usa el mismo método que en registro.php)
-// Si en registro usas password_hash, úsalo aquí. 
-// Si guardas texto plano (no recomendado pero visto en tu código), úsalo directo.
-// Asumiremos password_hash por seguridad estándar:
-$clave_hash = password_hash($clave1, PASSWORD_DEFAULT);
+$clave1 = $_POST['clave1'] ?? '';
+$clave2 = $_POST['clave2'] ?? '';
+$idUsuario = $_SESSION['usuario_cambio_clave'];
 
-// Si tu sistema usa texto plano (veo que login.php compara hash O texto plano), 
-// puedes guardar $clave1 directamente si prefieres mantener consistencia con tu sistema actual,
-// pero recomiendo hash.
-// $clave_final = $clave1; // Descomentar si NO usas hash
+// 2. Validar campos vacíos
+if (empty($clave1) || empty($clave2)) {
+    header("Location: ../nueva_clave.php?error=" . urlencode("Por favor completa ambos campos."));
+    exit;
+}
+
+// 3. Validar que sean IGUALES
+if ($clave1 !== $clave2) {
+    header("Location: ../nueva_clave.php?error=" . urlencode("Las contraseñas no coinciden."));
+    exit;
+}
+
+// 4. VALIDACIÓN DE REQUISITOS (Seguridad)
+
+// A) Longitud (Mínimo 8)
+if (strlen($clave1) < 8) {
+    header("Location: ../nueva_clave.php?error=" . urlencode("La contraseña es muy corta. Mínimo 8 caracteres."));
+    exit;
+}
+
+// B) Minúscula
+if (!preg_match('/[a-z]/', $clave1)) {
+    header("Location: ../nueva_clave.php?error=" . urlencode("Falta al menos una letra minúscula."));
+    exit;
+}
+
+// C) Mayúscula
+if (!preg_match('/[A-Z]/', $clave1)) {
+    header("Location: ../nueva_clave.php?error=" . urlencode("Falta al menos una letra MAYÚSCULA."));
+    exit;
+}
+
+// D) Número
+if (!preg_match('/[0-9]/', $clave1)) {
+    header("Location: ../nueva_clave.php?error=" . urlencode("Falta al menos un número."));
+    exit;
+}
 
 try {
-    $sql = "UPDATE usuarios SET clave = ? WHERE id_usuario = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$clave_hash, $id_usuario]); // Usa $clave1 si no usas hash
+    // 5. Todo correcto: Encriptar y Guardar
+    $claveHash = password_hash($clave1, PASSWORD_DEFAULT);
 
-    // Limpiar sesión completa para obligar a loguearse de nuevo
-    session_destroy();
+    $stmt = $pdo->prepare("UPDATE usuarios SET clave = ? WHERE id_usuario = ?");
+    $stmt->execute([$claveHash, $idUsuario]);
 
-    echo "<script>
-        alert('Contraseña cambiada con éxito. Por favor inicia sesión.');
-        window.location.href = '../login.php';
-    </script>";
+    // 6. Limpiar y salir
+    session_destroy(); // Cerramos sesión para obligar a entrar con la nueva clave
+    
+    // Enviamos mensaje de éxito al login
+    header("Location: ../login.php?msg=" . urlencode("¡Clave actualizada correctamente! Inicia sesión."));
+    exit;
 
-} catch (Exception $e) {
-    echo "Error al actualizar la clave.";
+} catch (PDOException $e) {
+    header("Location: ../nueva_clave.php?error=" . urlencode("Error del sistema. Intenta más tarde."));
+    exit;
 }
+?>
