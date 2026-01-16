@@ -53,11 +53,12 @@ $mensajeError = isset($_GET['error']) ? $_GET['error'] : '';
                                         <a href="registro.php" class="btn btn-outline-primary w-100">Registrarse</a>
                                     </div>
 
-                                    <div class="text-end mt-3 ">
-                                        <a href="recuperar.php" class="text-decoration-none small text-muted">
+                                    <div class="text-end mt-3">
+                                        <a href="recuperar.php" class="text-danger text-decoration-none fw-semibold">
                                             ¿Olvidaste tu contraseña?
                                         </a>
                                     </div>
+
                                 </form>
 
                             </div>

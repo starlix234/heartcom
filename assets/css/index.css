@@ -1,0 +1,35 @@
+/* HERO / BANNER */
+.hero {
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+                url("https://via.placeholder.com/1600x600") center/cover no-repeat;
+    height: 60vh;
+}
+
+/* TARJETAS DE PROYECTOS */
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* FOOTER */
+footer {
+    background-color: #212529;
+}
+
+footer a {
+    color: #f44336;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+
+

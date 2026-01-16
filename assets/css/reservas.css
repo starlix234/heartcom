@@ -1,0 +1,25 @@
+/* Estilo general del formulario */
+.reservation-form {
+    background-color: #f8f9fa; /* color de fondo suave */
+}
+
+
+.reservation-form .form-label {
+    font-weight: 500;
+}
+
+.reservation-form button {
+    font-weight: 600;
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+    border-radius: 0.35rem;
+}
+
+/* Mensaje de sesión */
+.reservation-form p {
+    font-size: 0.875rem;
+}
+
