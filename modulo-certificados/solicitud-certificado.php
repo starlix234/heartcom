@@ -1,6 +1,6 @@
 <?php
 require("../lib/leer-tipo-certificado.php");
-session_start(); // por si no estaba arriba en tu proyecto
+//session_start(); // por si no estaba arriba en tu proyecto
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,7 +30,7 @@ session_start(); // por si no estaba arriba en tu proyecto
         </div>
       </header>
 
-      <form action="lib/insertar-certificado.php" method="post" class="form">
+      <form action="../lib/insertar-certificado.php" method="post" class="form">
 
         <div class="field">
           <label class="label" for="asunto">Asunto</label>

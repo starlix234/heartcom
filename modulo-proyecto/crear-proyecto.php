@@ -3,55 +3,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Crear Proyecto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Proyecto</title>
+
+  <!-- (Opcional) Bootstrap si ya lo estás usando en el proyecto -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- ✅ CSS que pediste -->
+  <link rel="stylesheet" href="../assets/css/estilo-formulario-dashboard.css">
 </head>
-<body>
 
-<h1>Panel de Proyectos</h1>
+<body class="bg-light">
 
-<hr>
-<!-- 👇 FORMULARIO ABAJO 👇 -->
-<h2>Crear nuevo proyecto</h2>
+  <main class="container my-4">
 
-<form action="../lib/guardar-proyecto.php" method="POST">
+    <!-- Encabezado -->
+    <section class="mb-4">
+      <h1 class="mb-1">Panel de Proyectos</h1>
+      <p class="text-muted mb-0">Crea y gestiona proyectos del barrio.</p>
+    </section>
 
-    <label>Nombre del proyecto</label><br>
-    <input type="text" name="nombre_proyecto" required><br><br>
+    <!-- Card / Form -->
+    <section class="bg-white rounded-4 shadow-sm p-4">
 
-    <label>Descripción</label><br>
-    <textarea name="descripcion" required></textarea><br><br>
+      <h2 class="mb-3">Crear nuevo proyecto</h2>
 
-    <label>Fecha inicio</label><br>
-    <input type="date" name="fecha_inicio" required><br><br>
+      <form action="../lib/guardar-proyecto.php" method="POST" class="row g-3">
 
-    <label>Fecha fin</label><br>
-    <input type="date" name="fecha_fin"><br><br>
+        <div class="col-12">
+          <label class="form-label">Nombre del proyecto</label>
+          <input type="text" name="nombre_proyecto" class="form-control" required>
+        </div>
 
-    <label>Tipo de proyecto</label><br>
-    <select name="id_tipo_proyecto" required>
-        <option value="">Seleccione tipo</option>
-        <?php foreach ($tipos as $t): ?>
-            <option value="<?= $t['id_tipo_proyecto'] ?>">
-                <?= htmlspecialchars($t['nombre_tipo']) ?>
-            </option>
-        <?php endforeach; ?>
-    </select><br><br>
+        <div class="col-12">
+          <label class="form-label">Descripción</label>
+          <textarea name="descripcion" class="form-control" rows="4" required></textarea>
+        </div>
 
+        <div class="col-12 col-md-6">
+          <label class="form-label">Fecha inicio</label>
+          <input type="date" name="fecha_inicio" class="form-control" required>
+        </div>
 
-    <label>Presupuesto estimado</label><br>
-    <input type="number" name="presupuesto_estimado" value="0"><br><br>
+        <div class="col-12 col-md-6">
+          <label class="form-label">Fecha fin</label>
+          <input type="date" name="fecha_fin" class="form-control">
+        </div>
 
-    <label>Dirección del proyecto</label><br>
-    <input type="text" name="direccion_proyecto"><br><br>
+        <div class="col-12 col-md-6">
+          <label class="form-label">Tipo de proyecto</label>
+          <select name="id_tipo_proyecto" class="form-select" required>
+            <option value="">Seleccione tipo</option>
+            <?php if (!empty($tipos) && is_array($tipos)): ?>
+              <?php foreach ($tipos as $t): ?>
+                <option value="<?= (int)$t['id_tipo_proyecto'] ?>">
+                  <?= htmlspecialchars($t['nombre_tipo'] ?? '') ?>
+                </option>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </select>
+        </div>
 
-    <label>Cupo máximo</label><br>
-    <input type="number" name="cupo_maximo" value="0"><br><br>
+        <div class="col-12 col-md-6">
+          <label class="form-label">Presupuesto estimado</label>
+          <input type="number" name="presupuesto_estimado" class="form-control" value="0" min="0">
+        </div>
 
-    <button type="submit" name="guardar">Guardar proyecto</button>
+        <div class="col-12 col-md-8">
+          <label class="form-label">Dirección del proyecto</label>
+          <input type="text" name="direccion_proyecto" class="form-control">
+        </div>
 
-</form>
+        <div class="col-12 col-md-4">
+          <label class="form-label">Cupo máximo</label>
+          <input type="number" name="cupo_maximo" class="form-control" value="0" min="0">
+        </div>
 
+        <div class="col-12 d-flex gap-2 mt-2">
+          <button type="submit" name="guardar" class="btn btn-primary">
+            Guardar proyecto
+          </button>
+
+          <a href="mostrar-proyecto.php" class="btn btn-outline-secondary">
+            Volver
+          </a>
+        </div>
+
+      </form>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

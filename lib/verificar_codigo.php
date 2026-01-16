@@ -223,12 +223,7 @@ $error = $_GET['error'] ?? '';
       <button class="btn" type="submit">Confirmar</button>
     </form>
 
-    <div class="resend-wrap">
-      ¿No recibiste el código?<br>
-      <form action="reenviar_codigo.php" method="POST" style="margin:0;">
-        <button class="resend" type="submit">Reenviar código</button>
-      </form>
-    </div>
+    
 
   </div>
 </body>

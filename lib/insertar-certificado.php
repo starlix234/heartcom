@@ -19,8 +19,7 @@ try {
     $sql = "
         INSERT INTO solicitud_certificado 
         (id_certi, id_usuario, id_estado, asunto, mensaje)
-        VALUES (?, ?, 1, ?, ?)
-    ";
+        VALUES (?, ?, 1, ?, ?)";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -30,11 +29,7 @@ try {
         $mensaje
     ]);
 
-header("Location: ../panel.php");
-
-
-
-
+header("Location: ../solicitudes.php");
 
 
 

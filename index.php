@@ -173,7 +173,7 @@
                 <span class="arrow">➜</span>
             </a>
 
-            <a href="modulo-reservas/panel-reservas.php" class="action-card">
+            <a href="modulo-reservas/reservas.php" class="action-card">
                 <span><span class="icon">📅</span> Reservar Espacios</span>
                 <span class="arrow">➜</span>
             </a>
@@ -194,6 +194,6 @@
             </a>
         </div>
     </div>
-
+  <a href="modulo-proyecto/proyectos.php">Proyectos</a>
 </body>
 </html>
