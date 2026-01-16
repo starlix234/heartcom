@@ -1,6 +1,6 @@
 <?php 
 include 'conexion.php';
-session_start();
+//session_start();
 
 // Tu consulta
 $sql = "SELECT 

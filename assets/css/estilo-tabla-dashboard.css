@@ -1,0 +1,185 @@
+:root{
+      --text:#111827;
+      --muted:#6B7280;
+      --line:#E5E7EB;
+      --bg:#ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --radius:14px;
+    }
+
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#F8FAFC;
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    .card{
+      background:var(--bg);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .card-header{
+      padding:18px 20px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .card-header h2{
+      margin:0;
+      font-size:18px;
+      font-weight:700;
+      color:#374151;
+    }
+
+    .table-wrap{
+      width:100%;
+      overflow:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width: 920px; /* para que no se rompa feo en pantallas pequeñas */
+    }
+
+    thead th{
+      text-align:left;
+      font-size:12px;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color: var(--muted);
+      font-weight:700;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    tbody td{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      font-size:14px;
+      vertical-align:middle;
+    }
+
+    tbody tr:hover{
+      background:#FAFAFA;
+    }
+
+    .id-code{
+      font-weight:800;
+      letter-spacing:.02em;
+      color:#111827;
+      white-space:nowrap;
+    }
+
+    .name{
+      font-weight:600;
+      color:#111827;
+      white-space:nowrap;
+    }
+
+    .type{
+      color:#374151;
+      max-width: 360px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .date{
+      color:#374151;
+      white-space:nowrap;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius: 999px;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+      border:1px solid transparent;
+    }
+
+    /* Estados estilo “pill” como la imagen */
+    .badge-pendiente{
+      color:#374151;
+      background:#F3F4F6;
+      border-color:#E5E7EB;
+    }
+    .badge-revision{
+      color:#1D4ED8;
+      background:#DBEAFE;
+      border-color:#BFDBFE;
+    }
+    .badge-aprobado{
+      color:#065F46;
+      background:#D1FAE5;
+      border-color:#A7F3D0;
+    }
+    .badge-rechazado{
+      color:#991B1B;
+      background:#FEE2E2;
+      border-color:#FECACA;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:flex-start;
+      white-space:nowrap;
+    }
+
+    .icon-btn{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: .15s ease;
+      color:#111827;
+      text-decoration:none;
+    }
+    .icon-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    }
+
+    .icon-approve{ color:#16A34A; border-color:#BBF7D0; }
+    .icon-reject{ color:#DC2626; border-color:#FECACA; }
+    .icon-view{ color:#111827; }
+    .icon-download{ color:#111827; }
+
+    .muted{
+      color:var(--muted);
+      font-size:12px;
+      margin: 0;
+    }
+
+    /* Responsive “decente” */
+    @media (max-width: 720px){
+      .card-header{ flex-direction:column; align-items:flex-start; }
+    }

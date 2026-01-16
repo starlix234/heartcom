@@ -1,4 +1,5 @@
-<?php include("lib/roles.php"); ?>
+
+<?php include("../lib/roles.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,7 +34,7 @@
         </a>
       <?php endif; ?>
 
-      <a href="index.php" class="menu-item">
+      <a href="../index.php" class="menu-item">
         <i class="fa-solid fa-arrow-left"></i> Volver
       </a>
     </nav>
@@ -55,21 +56,21 @@
     <!-- ROL 3: Solicitar -->
     <?php if ($rol === 3): ?>
       <section class="section" id="solicitar">
-        <?php include("modulo-certificados/solicitud-certificado.php"); ?>
+        <?php include("solicitud-certificado.php"); ?>
       </section>
     <?php endif; ?>
 
     <!-- ROL 1 o 2: Administrar -->
     <?php if ($rol === 1 || $rol === 2): ?>
       <section class="section" id="gestionar">
-        <?php include("modulo-certificados/administrar-certificados.php"); ?>
+        <?php include("administrar-certificados.php"); ?>
       </section>
     <?php endif; ?>
 
     <!-- ROL 3: Mis solicitudes -->
     <?php if ($rol === 3): ?>
       <section class="section" id="mis-solicitudes">
-        <?php include("modulo-certificados/solicitud-cliente.php"); ?>
+        <?php include("solicitud-cliente.php"); ?>
       </section>
     <?php endif; ?>
 
@@ -95,13 +96,5 @@
     });
   </script>
 
-</body>
-</html>
-
-
-
-
-
-    
 </body>
 </html>

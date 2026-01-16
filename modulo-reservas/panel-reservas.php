@@ -1,37 +1,100 @@
+
+<?php include("../lib/roles.php"); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservas</title>
+
+  <link rel="stylesheet" href="../assets/css/estilos-dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-<div class="container mt-3">
-    
-    <?php if (isset($_GET['error'])): ?>
-        <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
-            <strong>⚠️ Atención:</strong> <?= htmlspecialchars($_GET['error']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+
+  <aside class="sidebar">
+    <h2>Reservaciones</h2>
+
+    <nav>
+      <?php if ($rol === 3): ?>
+        <a href="#solicitar" class="menu-item">
+          <i class="fa-solid fa-file-circle-plus"></i> Hacer reserva
+        </a>
+
+        <a href="#mis-solicitudes" class="menu-item">
+          <i class="fa-solid fa-user"></i> Mis Reservaciones
+        </a>
+      <?php endif; ?>
+
+      <?php if ($rol === 1 || $rol === 2): ?>
+        <a href="#gestionar" class="menu-item">
+          <i class="fa-solid fa-list-check"></i> Gestionar Solicitud de Reserva
+        </a>
+      <?php endif; ?>
+
+      <a href="../index.php" class="menu-item">
+        <i class="fa-solid fa-arrow-left"></i> Volver
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="page-header">
+      <h1>Solicitudes</h1>
+
+      <?php if ($rol === 1 || $rol === 2): ?>
+        <p>Panel de administración: aprueba o rechaza Reservaciones.</p>
+      <?php elseif ($rol === 3): ?>
+        <p>Como miembro puedes solicitar certificados y revisar su estado.</p>
+      <?php else: ?>
+        <p>Acceso restringido.</p>
+      <?php endif; ?>
+    </header>
+
+    <!-- ROL 3: Solicitar -->
+    <?php if ($rol === 3): ?>
+      <section class="section" id="solicitar">
+        <?php include("solicitud-certificado.php"); ?>
+      </section>
     <?php endif; ?>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
-            <strong>✅ ¡Listo!</strong> <?= htmlspecialchars($_GET['msg']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <!-- ROL 1 o 2: Administrar -->
+    <?php if ($rol === 1 || $rol === 2): ?>
+      <section class="section" id="gestionar">
+        <?php include("administrar-reservas.php"); ?>
+      </section>
     <?php endif; ?>
 
-</div>
-<?php include('crear-espacio-reserva.php')?>
-<?php include('mostrar-reserva.php')?>
+    <!-- ROL 3: Mis solicitudes -->
+    <?php if ($rol === 3): ?>
+      <section class="section" id="mis-solicitudes">
+        <?php include("solicitud-cliente.php"); ?>
+      </section>
+    <?php endif; ?>
 
-<?php include('administrar-reservas.php') ?>
+    <!-- Si no es 1/2/3 -->
+    <?php if ($rol !== 1 && $rol !== 2 && $rol !== 3): ?>
+      <section class="section">
+        <div class="alert-box">
+          No tienes permisos para ver este módulo.
+        </div>
+      </section>
+    <?php endif; ?>
+  </main>
 
-<div class="container mt-3">
-    <a href="../panel.php" class="btn btn-outline-secondary btn-sm">
-        &larr; Volver al Panel
-    </a>
-</div>
+  <script>
+    // scroll suave para el sidebar
+    document.querySelectorAll('.menu-item[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
 </body>
 </html>

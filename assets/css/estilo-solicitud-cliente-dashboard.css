@@ -1,0 +1,181 @@
+   :root{
+      --text:#111827;
+      --muted:#6B7280;
+      --line:#E5E7EB;
+      --bg:#F8FAFC;
+      --card:#ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --radius:14px;
+    }
+
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .card-header{
+      padding:18px 20px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .card-header h2{
+      margin:0;
+      font-size:18px;
+      font-weight:800;
+      color:#374151;
+    }
+
+    .card-header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .table-wrap{
+      width:100%;
+      overflow:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width: 980px;
+    }
+
+    thead th{
+      text-align:left;
+      font-size:12px;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color: var(--muted);
+      font-weight:800;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    tbody td{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      font-size:14px;
+      vertical-align:middle;
+    }
+
+    tbody tr:hover{
+      background:#FAFAFA;
+    }
+
+    .id-code{
+      font-weight:900;
+      letter-spacing:.02em;
+      white-space:nowrap;
+    }
+
+    .type{
+      color:#374151;
+      max-width: 320px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .asunto{
+      color:#374151;
+      max-width: 280px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .money{
+      white-space:nowrap;
+      font-weight:700;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius: 999px;
+      font-size:12px;
+      font-weight:800;
+      white-space:nowrap;
+      border:1px solid transparent;
+    }
+
+    /* Estado solicitud */
+    .b-pendiente{ color:#374151; background:#F3F4F6; border-color:#E5E7EB; }
+    .b-revision { color:#1D4ED8; background:#DBEAFE; border-color:#BFDBFE; }
+    .b-aprobado { color:#065F46; background:#D1FAE5; border-color:#A7F3D0; }
+    .b-rechazado{ color:#991B1B; background:#FEE2E2; border-color:#FECACA; }
+
+    /* Estado pago */
+    .b-pago-na   { color:#374151; background:#F3F4F6; border-color:#E5E7EB; }
+    .b-pago-pend { color:#92400E; background:#FEF3C7; border-color:#FDE68A; }
+    .b-pago-ok   { color:#065F46; background:#D1FAE5; border-color:#A7F3D0; }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+    }
+
+    .icon-btn{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: .15s ease;
+      text-decoration:none;
+      color:#111827;
+    }
+
+    .icon-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    }
+
+    .icon-pay{ color:#111827; border-color:#E5E7EB; }
+    .icon-download{ color:#111827; }
+    .icon-receipt{ color:#111827; }
+    .icon-disabled{
+      opacity:.45;
+      cursor:not-allowed;
+      pointer-events:none;
+    }
+
+    .empty{
+      padding:18px 20px;
+      color:var(--muted);
+      font-size:14px;
+    }
