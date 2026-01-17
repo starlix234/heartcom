@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-01-2026 a las 00:37:20
+-- Tiempo de generación: 17-01-2026 a las 20:27:02
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -62,7 +62,15 @@ INSERT INTO `codigos_mfa` (`id_codigo_mfa`, `id_usuario`, `codigo`, `tipo`, `exp
 (18, 1, '413047', 'LOGIN', '2026-01-16 23:19:10', 1, '2026-01-16 19:09:10'),
 (19, 3, '547973', 'LOGIN', '2026-01-16 23:51:13', 1, '2026-01-16 19:41:13'),
 (20, 3, '913648', 'LOGIN', '2026-01-16 23:56:04', 1, '2026-01-16 19:46:04'),
-(21, 3, '324167', 'LOGIN', '2026-01-17 00:43:07', 1, '2026-01-16 20:33:07');
+(21, 3, '324167', 'LOGIN', '2026-01-17 00:43:07', 1, '2026-01-16 20:33:07'),
+(22, 2, '192722', 'LOGIN', '2026-01-17 04:14:22', 1, '2026-01-17 00:04:22'),
+(23, 3, '684186', 'LOGIN', '2026-01-17 04:30:02', 1, '2026-01-17 00:20:02'),
+(24, 2, '745431', 'LOGIN', '2026-01-17 18:10:12', 1, '2026-01-17 14:00:12'),
+(25, 1, '611644', 'LOGIN', '2026-01-17 18:29:54', 1, '2026-01-17 14:19:54'),
+(26, 3, '601694', 'LOGIN', '2026-01-17 18:43:33', 1, '2026-01-17 14:33:33'),
+(27, 4, '267071', 'LOGIN', '2026-01-17 19:07:34', 1, '2026-01-17 14:57:34'),
+(28, 3, '209208', 'LOGIN', '2026-01-17 19:09:43', 1, '2026-01-17 14:59:43'),
+(29, 4, '669657', 'LOGIN', '2026-01-17 20:35:31', 1, '2026-01-17 16:25:31');
 
 -- --------------------------------------------------------
 
@@ -187,6 +195,30 @@ CREATE TABLE `pagos_residencia` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `postulaciones_proyecto`
+--
+
+CREATE TABLE `postulaciones_proyecto` (
+  `id_postulacion` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_proyecto` int(11) NOT NULL,
+  `fecha_postulacion` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_estado_postulacion` tinyint(4) NOT NULL DEFAULT 1,
+  `observacion_admin` varchar(500) DEFAULT NULL,
+  `fecha_respuesta` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `postulaciones_proyecto`
+--
+
+INSERT INTO `postulaciones_proyecto` (`id_postulacion`, `id_usuario`, `id_proyecto`, `fecha_postulacion`, `id_estado_postulacion`, `observacion_admin`, `fecha_respuesta`) VALUES
+(15, 3, 1, '2026-01-17 15:11:03', 1, NULL, NULL),
+(19, 4, 1, '2026-01-17 15:25:41', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `proyectos_barrio`
 --
 
@@ -212,7 +244,7 @@ CREATE TABLE `proyectos_barrio` (
 --
 
 INSERT INTO `proyectos_barrio` (`id_proyecto`, `nombre_proyecto`, `descripcion`, `fecha_inicio`, `fecha_fin`, `id_estado_proyecto`, `id_tipo_proyecto`, `responsable`, `presupuesto_estimado`, `presupuesto_utilizado`, `direccion_proyecto`, `cupo_maximo`, `fecha_creacion`, `fecha_actualizacion`) VALUES
-(1, 'Limpieza de áreas verdes  ', 'Ne necesitan voluntarios para la limpiesa de plazas ', '2026-01-23', '2026-01-31', 6, 4, 'Alejandra Mariela Cortes Soza', 200000.00, 0.00, 'avenida García 2058', 20, '2026-01-16 21:41:33', '2026-01-16 22:39:39');
+(1, 'Limpieza de áreas verdes  ', 'Ne necesitan voluntarios para la limpiesa de plazas ', '2026-01-23', '2026-01-31', 5, 4, 'Alejandra Mariela Cortes Soza', 200000.00, 0.00, 'avenida García 2058', 19, '2026-01-16 21:41:33', '2026-01-17 18:25:41');
 
 -- --------------------------------------------------------
 
@@ -230,6 +262,13 @@ CREATE TABLE `reservas` (
   `motivo` varchar(200) DEFAULT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`id_reserva`, `id_estado_reserva`, `id_tipo`, `Fecha_ini`, `Fecha_fin`, `asunto`, `motivo`, `id_usuario`) VALUES
+(4, 1, 2, '2026-01-18', '2026-01-25', 'necesito poder cambiar mi direccion por favor ', 'hbvbbjbhjgjhbhjghh', 3);
 
 -- --------------------------------------------------------
 
@@ -421,7 +460,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id_usuario`, `p_nombre`, `s_nombre`, `ap_paterno`, `ap_materno`, `fecha_nac`, `rut`, `telefono`, `correo`, `email_verificado`, `email_token`, `email_token_expira`, `direccion`, `clave`, `id_rol`) VALUES
 (1, 'constanza', 'valeria', 'leiva', 'vera', '1994-01-14', '18.608.676-7', '942971785', 'gerina.leiva@gmail.com', 1, NULL, NULL, 'pajaritos', '$2y$10$eOq.Aj4DL11QM0hATtgpyOLLJnPPwXbyqdSJwCpHkNyQHg/b6/uYu', 1),
 (2, 'Pedro', 'Carlos', 'Peres', 'Cortes', '1994-01-14', '11.635.036-K', '942971785', 'cleivavera94@gmail.com', 1, NULL, NULL, 'pajaritos 1123', '$2y$10$Y5UYwwGHNpQrY4n//8lJVeCDHxjEX/3HkO4aplbu8Kn3WjHGPjnbm', 2),
-(3, 'Alejandra', 'Mariela', 'Cortes', 'Soza', '2000-09-15', '5.342.034-6', '943456245', 'starlix234.leiva@gmail.com', 1, NULL, NULL, 'pajaritos 1124', '$2y$10$9K9xs132yCoskJCiwZIEr.50jZavZn/Qj5.Rd4U4FrGUD90t3Zd.2', 3);
+(3, 'Alejandra', 'Mariela', 'Cortes', 'Soza', '2000-09-15', '5.342.034-6', '943456245', 'starlix234.leiva@gmail.com', 1, NULL, NULL, 'pajaritos 1124', '$2y$10$9K9xs132yCoskJCiwZIEr.50jZavZn/Qj5.Rd4U4FrGUD90t3Zd.2', 3),
+(4, 'Fabian', 'mateo', 'Villablanca', 'Smit', '2000-11-11', '20.447.987-9', '933203191', 'fabianirribarra667@gmail.com', 1, NULL, NULL, 'lo blanco 0824', '$2y$10$gMOMoWyQOsCm42GF49hhU.yoll2ON50252RKrq1c5TA2J2MNnwFoW', 3);
 
 -- --------------------------------------------------------
 
@@ -482,6 +522,16 @@ ALTER TABLE `pagos_residencia`
   ADD PRIMARY KEY (`id_pago`),
   ADD KEY `fk_pago_certificado` (`id_certificado`),
   ADD KEY `fk_pago_estado` (`id_estado`);
+
+--
+-- Indices de la tabla `postulaciones_proyecto`
+--
+ALTER TABLE `postulaciones_proyecto`
+  ADD PRIMARY KEY (`id_postulacion`),
+  ADD UNIQUE KEY `uk_usuario_proyecto` (`id_usuario`,`id_proyecto`),
+  ADD KEY `idx_post_proyecto` (`id_proyecto`),
+  ADD KEY `idx_post_estado` (`id_estado_postulacion`),
+  ADD KEY `idx_post_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `proyectos_barrio`
@@ -557,7 +607,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `codigos_mfa`
 --
 ALTER TABLE `codigos_mfa`
-  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -596,6 +646,12 @@ ALTER TABLE `pagos_residencia`
   MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `postulaciones_proyecto`
+--
+ALTER TABLE `postulaciones_proyecto`
+  MODIFY `id_postulacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT de la tabla `proyectos_barrio`
 --
 ALTER TABLE `proyectos_barrio`
@@ -605,7 +661,7 @@ ALTER TABLE `proyectos_barrio`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -647,7 +703,7 @@ ALTER TABLE `transacciones_webpay`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -665,6 +721,14 @@ ALTER TABLE `codigos_mfa`
 ALTER TABLE `pagos_residencia`
   ADD CONSTRAINT `fk_pago_certificado` FOREIGN KEY (`id_certificado`) REFERENCES `solicitud_certificado` (`id_certificado`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_pago_estado` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`);
+
+--
+-- Filtros para la tabla `postulaciones_proyecto`
+--
+ALTER TABLE `postulaciones_proyecto`
+  ADD CONSTRAINT `fk_post_estado` FOREIGN KEY (`id_estado_postulacion`) REFERENCES `estados_postulacion` (`id_estado_postulacion`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_post_proyecto` FOREIGN KEY (`id_proyecto`) REFERENCES `proyectos_barrio` (`id_proyecto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_post_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `proyectos_barrio`

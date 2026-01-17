@@ -1,8 +1,10 @@
 <?php
+// ===============================
+// proyectos.php (LISTADO)
+// ===============================
 include("../lib/mostra-proyectos.php");
 $proyectos = (isset($proyectos) && is_array($proyectos)) ? $proyectos : [];
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,22 +12,21 @@ $proyectos = (isset($proyectos) && is_array($proyectos)) ? $proyectos : [];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proyectos</title>
 
-  <!-- Bootstrap para grid/cards -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Tus estilos existentes -->
   <link rel="stylesheet" href="../assets/css/estilos.css">
   <link rel="stylesheet" href="../assets/css/estilo-formulario.css">
 </head>
-
 <body class="bg-light">
-
 <main class="container my-4">
-
-  <!-- Header tipo “Mis solicitudes” -->
   <section class="bg-white rounded-4 shadow-sm p-4 mb-4">
     <h2 class="mb-1">Proyectos</h2>
     <p class="text-muted mb-0">Explora los proyectos disponibles y revisa sus detalles.</p>
+
+    <?php if (isset($_GET['msg'])): ?>
+      <div class="alert alert-info mt-3 mb-0">
+        <?= htmlspecialchars($_GET['msg']) ?>
+      </div>
+    <?php endif; ?>
   </section>
 
   <?php if (empty($proyectos)): ?>
@@ -37,6 +38,7 @@ $proyectos = (isset($proyectos) && is_array($proyectos)) ? $proyectos : [];
     <div class="row g-3">
       <?php foreach ($proyectos as $p): ?>
         <?php
+          $idProyecto = (int)($p['id_proyecto'] ?? 0);
           $nombre = htmlspecialchars($p['nombre_proyecto'] ?? '');
           $desc   = htmlspecialchars($p['descripcion'] ?? '');
           $ini    = htmlspecialchars($p['fecha_inicio'] ?? '');
@@ -44,17 +46,22 @@ $proyectos = (isset($proyectos) && is_array($proyectos)) ? $proyectos : [];
           $resp   = htmlspecialchars($p['responsable'] ?? '');
           $cupo   = htmlspecialchars($p['cupo_maximo'] ?? '');
           $tipo   = htmlspecialchars($p['nombre_tipo'] ?? '');
+          $estado = htmlspecialchars($p['nombre_estado'] ?? '');
         ?>
 
         <div class="col-12 col-md-6 col-lg-4">
           <article class="bg-white rounded-4 shadow-sm p-4 h-100">
 
             <div class="d-flex justify-content-between align-items-start gap-2">
-              <h5 class="mb-1"><?= $nombre ?></h5>
-              <span class="badge text-bg-secondary"><?= $tipo ?></span>
+              <div>
+                <h5 class="mb-1"><?= $nombre ?></h5>
+                <div class="small text-muted"><?= $estado ?: '—' ?></div>
+              </div>
+              <span class="badge text-bg-secondary"><?= $tipo ?: '—' ?></span>
             </div>
 
-            <p class="text-muted mb-3" style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">
+            <p class="text-muted mb-3 mt-2"
+               style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">
               <?= $desc ?>
             </p>
 
@@ -63,20 +70,16 @@ $proyectos = (isset($proyectos) && is_array($proyectos)) ? $proyectos : [];
               <div><strong>Fin:</strong> <?= $fin ?: '—' ?></div>
             </div>
 
-            <div class="small text-muted mb-3">
-              <div><strong>Responsable:</strong> <?= $resp ?: '—' ?></div>
-              <div><strong>Cupo:</strong> <?= $cupo ?: '—' ?></div>
-            </div>
-
-            <!-- (Opcional) Botón ver detalles / postular -->
-            <div class="d-grid">
-              <a href="#" class="btn btn-outline-dark btn-sm disabled" aria-disabled="true">
-                Ver detalles
-              </a>
-            </div>
 
           </article>
+
+          <div class="d-grid">
+  <a href="proyecto-detalle.php?id=<?= $idProyecto ?>" class="btn btn-dark btn-sm">
+    Ver detalles
+  </a>
+</div>
         </div>
+
 
       <?php endforeach; ?>
     </div>

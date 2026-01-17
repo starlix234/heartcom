@@ -1,15 +1,11 @@
 
 <?php include("../lib/roles.php");?> 
-
-<?php include("crear-proyecto.php")?>
-
-<?php include("mostrar-proyecto.php")?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reservas</title>
+  <title>Poryecto</title>
 
   <link rel="stylesheet" href="../assets/css/estilos-dashboard.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,72 +14,66 @@
 
 <body>
 
-  <aside class="sidebar">
-    <h2>Reservaciones
-    <nav>
-      <?php if ($rol === 3): ?>
-        <a href="#solicitar" class="menu-item">
-          <i class="fa-solid fa-file-circle-plus"></i>
-        </a>
-
-        <a href="#Proyectos" class="menu-item">
-          <i class="fa-solid fa-user"></i> Proyectos
-        </a>
-      <?php endif; ?>
-
-      <?php if ($rol === 1 || $rol === 2): ?>
-        <a href="#gestionar" class="menu-item">
-          <i class="fa-solid fa-list-check"></i> Gestionar Solicitud de Reserva
-        </a>
-      <?php endif; ?>
-
-      <a href="../index.php" class="menu-item">
-        <i class="fa-solid fa-arrow-left"></i> Volver
-      </a>
-    </nav>
-  </aside>
-
-  <main class="main-content">
-    <header class="page-header">
-      <h1>Solicitudes</h1>
-
-      <?php if ($rol === 1 || $rol === 2): ?>
+   <aside class="sidebar">
+        <h2>Gestion de Proyectos</h2>
         
-        <?php include("administrar-proyectos.php")?>
-      <?php elseif ($rol === 3): ?>
-      
-      <?php else: ?>
-        <p>Acceso restringido.</p>
-      <?php endif; ?>
-    </header>
+        <nav>
+          <?php if ($rol === 1 || $rol === 2): ?>
+            <a href="#crear" class="menu-item">
+                <i class="fa-solid fa-house"></i> Crear Proyectos 
+            </a>
+          <?php endif; ?>
+          <?php if ($rol === 1 || $rol === 2): ?>
 
-    <!-- ROL 3: Solicitar -->
-    <?php if ($rol === 3): ?>
-      <section class="section" id="Proyecto">
-      </section>
-    <?php endif; ?>
+            <a href="#admin" class="menu-item">
+                <i class="fa-solid fa-chart-simple"></i> Administrar Proyecto
+            </a>
+            <?php endif; ?>
 
-    <!-- ROL 1 o 2: Administrar -->
-    <?php if ($rol === 1 || $rol === 2): ?>
-      <section class="section" id="gestionar">
-      </section>
-    <?php endif; ?>
+            <a href="#mostrar" class="menu-item">
+                <i class="fa-solid fa-user-group"></i> Proyectos
+            </a>
+          <?php if ($rol === 3): ?>
 
-    <!-- ROL 3: Mis solicitudes -->
-    <?php if ($rol === 3): ?>
-      <section class="section" id="mis-solicitudes">
-      </section>
-    <?php endif; ?>
+           <a href="#post" class="menu-item">
+                <i class="fa-solid fa-file-lines"></i> Mis Postulaciones
+            </a>
+          <?php endif; ?>
+            <a href="../index.php" class="menu-item">
+                <i class="fa-solid fa-gear"></i> Volver
+            </a>
+        </nav>
+    </aside>
 
-    <!-- Si no es 1/2/3 -->
-    <?php if ($rol !== 1 && $rol !== 2 && $rol !== 3): ?>
-      <section class="section">
-        <div class="alert-box">
-          No tienes permisos para ver este módulo.
+    <main class="main-content">
+        <header>
+            <h1>Proyectos</h1>
+            <p>Bienvenido a tu panel de control</p>
+        </header>
+        <?php if ($rol === 1 || $rol === 2): ?>
+
+        <div class="chart-container" id="crear">
+          <?php include("crear-proyecto.php")?>
         </div>
-      </section>
-    <?php endif; ?>
-  </main>
+        <?php endif; ?>
+        <?php if ($rol === 1 || $rol === 2): ?>
+
+        <div class="chart-container" id="admin">
+          <?php include("administrar-proyectos.php")?>
+        </div>
+        <?php endif; ?>
+        <div class="chart-container" id="mostrar">
+          <?php include("mostrar-proyecto.php")?>
+        </div>
+        <?php if ($rol === 3): ?>
+
+        <div class="chart-container" id="post">
+          <?php include("mis-postulaciones.php")?>
+        </div>
+        <?php endif; ?>
+    </main>
+
+
 
   <script>
     // scroll suave para el sidebar
