@@ -1,4 +1,3 @@
-
 <?php include("../lib/roles.php");?> 
 <!DOCTYPE html>
 <html lang="es">
@@ -52,24 +51,24 @@
         </header>
         <?php if ($rol === 1 || $rol === 2): ?>
 
-        <div class="chart-container" id="crear">
-          <?php include("crear-proyecto.php")?>
-        </div>
+          <div class="chart-container" id="crear">
+            <?php include("crear-proyecto.php")?>
+          </div>
         <?php endif; ?>
         <?php if ($rol === 1 || $rol === 2): ?>
 
-        <div class="chart-container" id="admin">
-          <?php include("administrar-proyectos.php")?>
-        </div>
+          <div class="chart-container" id="admin">
+            <?php include("administrar-proyectos.php")?>
+          </div>
         <?php endif; ?>
-        <div class="chart-container" id="mostrar">
-          <?php include("mostrar-proyecto.php")?>
-        </div>
+          <div class="chart-container" id="mostrar">
+            <?php include("mostrar-proyecto.php")?>
+          </div>
         <?php if ($rol === 3): ?>
 
-        <div class="chart-container" id="post">
-          <?php include("mis-postulaciones.php")?>
-        </div>
+          <div class="chart-container" id="post">
+            <?php include("mis-postulaciones.php")?>
+          </div>
         <?php endif; ?>
     </main>
 
