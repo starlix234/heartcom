@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 require_once __DIR__ . '/conexion.php'; // ajusta la ruta si es otra
 
 // ⚠️ Asegúrate de que el usuario esté logueado

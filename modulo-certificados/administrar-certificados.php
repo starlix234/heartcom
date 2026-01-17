@@ -79,13 +79,7 @@
               <td>
                 <div class="actions">
 
-                  <!-- VER (detalle) -->
-                  <a class="icon-btn icon-view"
-                     href="ver-solicitud.php?id=<?= (int)$idNum ?>"
-                     title="Ver solicitud">
-                    <i class="fa-regular fa-eye"></i>
-                  </a>
-
+              
                   <!-- Si está pendiente o en revisión: mostrar aprobar/rechazar -->
                   <?php if ($badgeClass === 'badge-pendiente' || $badgeClass === 'badge-revision'): ?>
                     <form method="POST" action="lib/gestionar-solicitud.php" style="display:inline;">

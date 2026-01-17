@@ -8,93 +8,83 @@
   <title>Reservas</title>
 
   <link rel="stylesheet" href="../assets/css/estilos-dashboard.css">
+    <link rel="stylesheet" href="../assets/css/estilo-tabla-dashboard.css">
+    
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 
 <body>
+<body>
 
-  <aside class="sidebar">
-    <h2>Reservaciones</h2>
+    <aside class="sidebar">
+        <h2>Reservas</h2>
+        <nav>
+            <?php if ($rol === 3): ?>
 
-    <nav>
-      <?php if ($rol === 3): ?>
-        <a href="#solicitar" class="menu-item">
-          <i class="fa-solid fa-file-circle-plus"></i> Hacer reserva
-        </a>
+            <a href="#reservas" class="menu-item">
+                <i class="fa-solid fa-house"></i> Reserva
+            </a>
+            <?php endif; ?>
 
-        <a href="#mis-solicitudes" class="menu-item">
-          <i class="fa-solid fa-user"></i> Mis Reservaciones
-        </a>
-      <?php endif; ?>
+            <a href="#gestion" class="menu-item">
+                <i class="fa-solid fa-chart-simple"></i> Gestionar Solicitud Reserva
+            </a>
+            <?php if ($rol === 3): ?>
 
-      <?php if ($rol === 1 || $rol === 2): ?>
-        <a href="#gestionar" class="menu-item">
-          <i class="fa-solid fa-list-check"></i> Gestionar Solicitud de Reserva
-        </a>
-      <?php endif; ?>
+            <a href="#reservaciones" class="menu-item">
+                <i class="fa-solid fa-user-group"></i> Mis Reservaciones
+            </a>
+            <?php endif; ?>         
+            
+            <a href="../index.php" class="menu-item">
+                <i class="fa-solid fa-gear"></i> Volver Inicio
+            </a>
+          
+        </nav>
+    </aside>
 
-      <a href="../index.php" class="menu-item">
-        <i class="fa-solid fa-arrow-left"></i> Volver
-      </a>
-    </nav>
-  </aside>
+    <main class="main-content">
+        <header>
+            <h1>Reservas</h1>
+            <p>Bienvenido a su gestion de reservas </p>
+        </header>
 
-  <main class="main-content">
-    <header class="page-header">
-      <h1>Solicitudes</h1>
+        <?php if ($rol === 3): ?>
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3>Solicitar Reservas</h3>
+                 <?php include("crear-espacio-reserva.php")?>
+            </div>
 
-      <?php if ($rol === 1 || $rol === 2): ?>
-        <p>Panel de administración: aprueba o rechaza Reservaciones.</p>
-      <?php elseif ($rol === 3): ?>
-        <p>Como miembro puedes solicitar certificados y revisar su estado.</p>
-      <?php else: ?>
-        <p>Acceso restringido.</p>
-      <?php endif; ?>
-    </header>
-
-    <!-- ROL 3: Solicitar -->
-    <?php if ($rol === 3): ?>
-      <section class="section" id="solicitar">
-        <?php include("solicitud-certificado.php"); ?>
-      </section>
-    <?php endif; ?>
-
-    <!-- ROL 1 o 2: Administrar -->
-    <?php if ($rol === 1 || $rol === 2): ?>
-      <section class="section" id="gestionar">
-        <?php include("administrar-reservas.php"); ?>
-      </section>
-    <?php endif; ?>
-
-    <!-- ROL 3: Mis solicitudes -->
-    <?php if ($rol === 3): ?>
-      <section class="section" id="mis-solicitudes">
-        <?php include("solicitud-cliente.php"); ?>
-      </section>
-    <?php endif; ?>
-
-    <!-- Si no es 1/2/3 -->
-    <?php if ($rol !== 1 && $rol !== 2 && $rol !== 3): ?>
-      <section class="section">
-        <div class="alert-box">
-          No tienes permisos para ver este módulo.
         </div>
-      </section>
-    <?php endif; ?>
-  </main>
+        <?php endif; ?>
 
-  <script>
-    // scroll suave para el sidebar
-    document.querySelectorAll('.menu-item[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (!target) return;
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-  </script>
+        <?php if ($rol === 1 || $rol === 2): ?>
 
+        <div class="container" style="postion:relative;left:10px;">
+                <h3>Gestionar Solicitudes de Reservas</h3>
+                <?php include("administrar-reservas.php")?>
+            </div>
+        <?php endif; ?>
+
+            
+        </div>
+        <?php if ($rol === 3): ?>
+         <div class="chart-container">
+            <div class="chart-header">
+                <h3>Mostrar mis reservas</h3>
+                <?php include("mostrar-reserva.php")?>
+            </div>
+            
+        </div>
+      <?php endif; ?>
+
+    </main>
+
+    
 </body>
 </html>

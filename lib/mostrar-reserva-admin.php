@@ -11,7 +11,7 @@ $sql = "SELECT
             r.motivo, 
             t.tipo, 
             e.estado, 
-            CONCAT_WS(' ', u.p_nombre, u.s_nombre, u.ap_paterno, u.ap_materno) AS nombre_completo 
+            CONCAT_WS(' ', u.p_nombre,  u.ap_paterno) AS nombre_completo 
         FROM reservas r 
         JOIN tipo_reserva t 
             ON r.id_tipo = t.id_tipo 
