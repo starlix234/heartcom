@@ -70,10 +70,44 @@
 <section class="mb-5">
     <h2 class="mb-4 text-center">Noticias del Barrio</h2>
 
-    
+    <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            Módulo de Noticias
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">Gestión de Noticias</h5>
+
+            <p class="card-text">
+                Desde este módulo puedes crear nuevas noticias ,
+                visualizar las publicaciones existentes y administrarlas
+                de forma sencilla.
+            </p>
+
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item">✔ Crear noticias</li>
+                <li class="list-group-item">✔ Editar publicaciones</li>
+                <li class="list-group-item">✔ Eliminar noticias</li>
+                <li class="list-group-item">✔ Visualizar por categoría</li>
+            </ul>
+
+            <div class="d-grid gap-2">
+                <a href="noticias.php" class="btn btn-success">
+                    Crear Noticia
+                </a>
+            </div>
+        </div>
+
+        <div class="card-footer text-muted text-center">
+            Administración del Barrio
+        </div>
+    </div>
+</div>
+
 
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm text-center">
                 <div class="card-body">
-                    <p class="text-muted mb-0
+                    <p class="text-muted mb-0 
