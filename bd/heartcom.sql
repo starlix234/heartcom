@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-01-2026 a las 20:27:02
+-- Tiempo de generación: 18-01-2026 a las 02:31:42
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `heartcom`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id_cate` int(11) NOT NULL,
+  `categorias_noticias` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id_cate`, `categorias_noticias`) VALUES
+(1, 'Reuniones Vecinales'),
+(2, 'Eventos Comunitarios'),
+(3, 'Seguridad'),
+(4, 'Informes'),
+(5, 'Emergencias'),
+(6, 'Obras y Mejoras');
 
 -- --------------------------------------------------------
 
@@ -70,7 +93,9 @@ INSERT INTO `codigos_mfa` (`id_codigo_mfa`, `id_usuario`, `codigo`, `tipo`, `exp
 (26, 3, '601694', 'LOGIN', '2026-01-17 18:43:33', 1, '2026-01-17 14:33:33'),
 (27, 4, '267071', 'LOGIN', '2026-01-17 19:07:34', 1, '2026-01-17 14:57:34'),
 (28, 3, '209208', 'LOGIN', '2026-01-17 19:09:43', 1, '2026-01-17 14:59:43'),
-(29, 4, '669657', 'LOGIN', '2026-01-17 20:35:31', 1, '2026-01-17 16:25:31');
+(29, 4, '669657', 'LOGIN', '2026-01-17 20:35:31', 1, '2026-01-17 16:25:31'),
+(30, 5, '765546', 'LOGIN', '2026-01-18 00:21:24', 1, '2026-01-17 20:11:24'),
+(31, 1, '306612', 'LOGIN', '2026-01-18 01:28:05', 1, '2026-01-17 21:18:05');
 
 -- --------------------------------------------------------
 
@@ -113,6 +138,26 @@ INSERT INTO `estados_certificado` (`id_estados_certificado`, `nombre_estado`, `d
 (2, 'en_revision', 'El directivo está revisando la solicitud', 1),
 (3, 'aprobado', 'La solicitud fue aprobada y está pendiente de pago', 1),
 (4, 'rechazado', 'La solicitud fue rechazada por el directivo', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estados_noticia`
+--
+
+CREATE TABLE `estados_noticia` (
+  `id_estado_noticia` int(11) NOT NULL,
+  `estado_noticia` varchar(90) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `estados_noticia`
+--
+
+INSERT INTO `estados_noticia` (`id_estado_noticia`, `estado_noticia`) VALUES
+(1, 'Publicada'),
+(2, 'Archivada'),
+(3, 'inactiva');
 
 -- --------------------------------------------------------
 
@@ -177,6 +222,25 @@ INSERT INTO `estado_reserva` (`id_estado_reserva`, `estado`) VALUES
 (1, 'en proceso'),
 (2, 'aprobado'),
 (3, 'rechazado');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `noticias`
+--
+
+CREATE TABLE `noticias` (
+  `id_noticia` int(11) NOT NULL,
+  `titulo` varchar(200) NOT NULL,
+  `resumen` varchar(300) DEFAULT NULL,
+  `contenido` text NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_cate` int(11) NOT NULL,
+  `id_estado_noticia` int(11) NOT NULL,
+  `fecha_publicacion` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -461,7 +525,8 @@ INSERT INTO `usuarios` (`id_usuario`, `p_nombre`, `s_nombre`, `ap_paterno`, `ap_
 (1, 'constanza', 'valeria', 'leiva', 'vera', '1994-01-14', '18.608.676-7', '942971785', 'gerina.leiva@gmail.com', 1, NULL, NULL, 'pajaritos', '$2y$10$eOq.Aj4DL11QM0hATtgpyOLLJnPPwXbyqdSJwCpHkNyQHg/b6/uYu', 1),
 (2, 'Pedro', 'Carlos', 'Peres', 'Cortes', '1994-01-14', '11.635.036-K', '942971785', 'cleivavera94@gmail.com', 1, NULL, NULL, 'pajaritos 1123', '$2y$10$Y5UYwwGHNpQrY4n//8lJVeCDHxjEX/3HkO4aplbu8Kn3WjHGPjnbm', 2),
 (3, 'Alejandra', 'Mariela', 'Cortes', 'Soza', '2000-09-15', '5.342.034-6', '943456245', 'starlix234.leiva@gmail.com', 1, NULL, NULL, 'pajaritos 1124', '$2y$10$9K9xs132yCoskJCiwZIEr.50jZavZn/Qj5.Rd4U4FrGUD90t3Zd.2', 3),
-(4, 'Fabian', 'mateo', 'Villablanca', 'Smit', '2000-11-11', '20.447.987-9', '933203191', 'fabianirribarra667@gmail.com', 1, NULL, NULL, 'lo blanco 0824', '$2y$10$gMOMoWyQOsCm42GF49hhU.yoll2ON50252RKrq1c5TA2J2MNnwFoW', 3);
+(4, 'Fabian', 'mateo', 'Villablanca', 'Smit', '2000-11-11', '20.447.987-9', '933203191', 'fabianirribarra667@gmail.com', 1, NULL, NULL, 'lo blanco 0824', '$2y$10$gMOMoWyQOsCm42GF49hhU.yoll2ON50252RKrq1c5TA2J2MNnwFoW', 3),
+(5, 'jhon', 'seven', 'kai', 'efe', '2000-12-16', '21.198.764-2', '926825286', 'juancontreras.66666@gmail.com', 1, NULL, NULL, 'ema carind 263', '$2y$10$PaKLb6sXz6RtOkj209VBheXVA3dYIl/I2b9xgnLlKyxc1rqgRLQqW', 3);
 
 -- --------------------------------------------------------
 
@@ -475,6 +540,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id_cate`);
 
 --
 -- Indices de la tabla `codigos_mfa`
@@ -496,6 +567,12 @@ ALTER TABLE `estados_certificado`
   ADD PRIMARY KEY (`id_estados_certificado`);
 
 --
+-- Indices de la tabla `estados_noticia`
+--
+ALTER TABLE `estados_noticia`
+  ADD PRIMARY KEY (`id_estado_noticia`);
+
+--
 -- Indices de la tabla `estados_postulacion`
 --
 ALTER TABLE `estados_postulacion`
@@ -514,6 +591,16 @@ ALTER TABLE `estados_proyecto`
 --
 ALTER TABLE `estado_reserva`
   ADD PRIMARY KEY (`id_estado_reserva`);
+
+--
+-- Indices de la tabla `noticias`
+--
+ALTER TABLE `noticias`
+  ADD PRIMARY KEY (`id_noticia`),
+  ADD KEY `idx_noticias_usuario` (`id_usuario`),
+  ADD KEY `idx_noticias_cate` (`id_cate`),
+  ADD KEY `idx_noticias_estado` (`id_estado_noticia`),
+  ADD KEY `idx_noticias_fecha` (`fecha_publicacion`);
 
 --
 -- Indices de la tabla `pagos_residencia`
@@ -604,10 +691,16 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id_cate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `codigos_mfa`
 --
 ALTER TABLE `codigos_mfa`
-  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -620,6 +713,12 @@ ALTER TABLE `estados`
 --
 ALTER TABLE `estados_certificado`
   MODIFY `id_estados_certificado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `estados_noticia`
+--
+ALTER TABLE `estados_noticia`
+  MODIFY `id_estado_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estados_postulacion`
@@ -638,6 +737,12 @@ ALTER TABLE `estados_proyecto`
 --
 ALTER TABLE `estado_reserva`
   MODIFY `id_estado_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `noticias`
+--
+ALTER TABLE `noticias`
+  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos_residencia`
@@ -703,7 +808,7 @@ ALTER TABLE `transacciones_webpay`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
@@ -714,6 +819,14 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `codigos_mfa`
   ADD CONSTRAINT `codigos_mfa_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `noticias`
+--
+ALTER TABLE `noticias`
+  ADD CONSTRAINT `fk_noticias_categoria` FOREIGN KEY (`id_cate`) REFERENCES `categorias` (`id_cate`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_noticias_estado` FOREIGN KEY (`id_estado_noticia`) REFERENCES `estados_noticia` (`id_estado_noticia`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_noticias_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `pagos_residencia`
