@@ -1,61 +1,79 @@
-<?php include "lib/mostrar-proyecto-index.php"?>
-<?php include "lib/roles.php"?>
+<?php include "lib/mostrar-proyecto-index.php" ?>
+<?php include "lib/roles.php" ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tu CSS (opcional) -->
     <link rel="stylesheet" href="assets/css/estilos-2.css">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>heartcom</title>
+
+    <title>HeartCom</title>
 </head>
-<body>
-<header>
-<h1>Bienvenido a HeartCom</h1>
 
+<body class="bg-light">
+
+<!-- ================= HEADER ================= -->
+<header class="bg-dark text-white text-center py-4 mb-5 shadow">
+    <h1 class="mb-0">Bienvenido a HeartCom</h1>
 </header>
-<section>
-<div class="row">
-<h2>Ultimos Proyectos</h2>
-<?php foreach ($proyectos as $proyecto): ?>
-    <div class="col-md-3 mb-4">
-        <div class="card h-100" style="width: 18rem;">
-            
 
-            <div class="card-body">
-                <h5 class="card-title">
-                    <?= htmlspecialchars($proyecto['nombre_proyecto']) ?>
-                </h5>
+<div class="container">
 
-                <p class="card-text">
-                    <?= htmlspecialchars($proyecto['descripcion']) ?>
-                </p>
+<!-- ================= PROYECTOS ================= -->
+<section class="mb-5">
+    <h2 class="mb-4 text-center">Últimos Proyectos</h2>
 
-                <p class="card-text">
-                    <small class="text-muted">
-                        Inicio: <?= date('d-m-Y', strtotime($proyecto['fecha_inicio'])) ?><br>
-                        Fin: <?= date('d-m-Y', strtotime($proyecto['fecha_fin'])) ?>
-                    </small>
-                </p>
+    <div class="row justify-content-center">
 
-                <?php if ($rol === 1 || $rol === 2 || $rol==3): ?>
-                <a href="modulo-proyecto/proyecto-detalle.php?id=<?= (int)$proyecto['id_proyecto'] ?>" class="btn btn-dark btn-sm">
-                  Ver detalles
-                </a>
-                <?php endif; ?>
+    <?php foreach ($proyectos as $proyecto): ?>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center">
+                        <?= htmlspecialchars($proyecto['nombre_proyecto']) ?>
+                    </h5>
+
+                    <p class="card-text small text-muted">
+                        <?= htmlspecialchars($proyecto['descripcion']) ?>
+                    </p>
+
+                    <p class="card-text mt-auto">
+                        <small class="text-muted">
+                            Inicio: <?= date('d-m-Y', strtotime($proyecto['fecha_inicio'])) ?><br>
+                            Fin: <?= date('d-m-Y', strtotime($proyecto['fecha_fin'])) ?>
+                        </small>
+                    </p>
+
+                    <?php if ($rol === 1 || $rol === 2 || $rol === 3): ?>
+                        <a href="modulo-proyecto/proyecto-detalle.php?id=<?= (int)$proyecto['id_proyecto'] ?>"
+                           class="btn btn-dark btn-sm mt-2 w-100">
+                            Ver detalles
+                        </a>
+                    <?php endif; ?>
+                </div>
+
             </div>
         </div>
+    <?php endforeach; ?>
+
     </div>
-<?php endforeach; ?>
-</div>
 </section>
 
-<section>
-<h2>Noticias </h2>
+<!-- ================= NOTICIAS ================= -->
+<section class="mb-5">
+    <h2 class="mb-4 text-center">Noticias del Barrio</h2>
 
+    
 
-
-</section>
-
-</body>
-</html>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <p class="text-muted mb-0
