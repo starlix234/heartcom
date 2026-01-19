@@ -39,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
     }
 
-    header("Location: noticias-crud.php");
+    header("Location: noticias.php");
     exit;
 }
 
 /* ELIMINAR */
 if ($accion === 'eliminar' && $id_editar) {
     $pdo->prepare("DELETE FROM noticias WHERE id_noticia = ?")->execute([$id_editar]);
-    header("Location: noticias-crud.php");
+    header("Location: noticias.php");
     exit;
 }
 
@@ -117,9 +117,34 @@ $noticias = $pdo->query("
             <label>Contenido</label>
             <textarea name="contenido" rows="4" required><?= $noticia_editar['contenido'] ?? '' ?></textarea>
 
-            <button class="btn-guardar">💾 Guardar</button>
+            <div class="d-flex justify-content-between align-items-center">
+
+            <!-- Lado izquierdo -->
+            <button class="btn btn-secondary" type="button" onclick="history.back()">
+                ❮ Volver
+            </button>
+
+            <!-- Lado derecho -->
+                <div class="d-flex gap-2">
+
+                <button class="btn btn-primary" type="button"
+                onclick="document.getElementById('inputImagen').click()">
+                Insertar imagen
+                </button>
+
+                <button class="btn btn-success" type="submit">
+                💾 Guardar
+                </button>
+
+                </div>
+
+            </div>
+
+            <!-- Input oculto -->
+            <input type="file" id="inputImagen" accept="image/*" hidden>
+
             <?php if ($noticia_editar): ?>
-                <a href="noticias-crud.php" class="btn-cancelar">Cancelar</a>
+                <a href="noticias.php" class="btn-cancelar">Cancelar</a>
             <?php endif; ?>
         </form>
     </div>
