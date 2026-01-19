@@ -37,6 +37,9 @@
            <a href="#post" class="menu-item">
                 <i class="fa-solid fa-file-lines"></i> Mis Postulaciones
             </a>
+            <a href="#adminis" class="menu-item">
+                <i class="fa-solid fa-file-lines"></i> Administrar Postulaciones
+            </a>
           <?php endif; ?>
             <a href="../index.php" class="menu-item">
                 <i class="fa-solid fa-gear"></i> Volver
@@ -59,6 +62,9 @@
 
           <div class="chart-container" id="admin">
             <?php include("administrar-proyectos.php")?>
+          </div>
+           <div class="chart-container" id="admin">
+            <?php include("administrar-postulaciones.php")?>
           </div>
         <?php endif; ?>
           <div class="chart-container" id="mostrar">
