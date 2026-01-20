@@ -8,6 +8,8 @@
 
   <!-- Tu CSS -->
   <link rel="stylesheet" href="../assets/css/estilo-dashboard-formulario.css" />
+  <!-- Scripts de validación -->
+  <script src="../assets/js/validar-largo-texto.js"></script>
 </head>
 <body>
 
@@ -30,7 +32,7 @@
         </div>
       </header>
 
-      <form class="form" action="../lib/guardar-reserva.php" method="POST">
+      <form class="form" action="../lib/guardar-reserva.php" method="POST" onsubmit="return validarReserva();">
 
         <!-- Tipo -->
         <div class="field">
@@ -71,8 +73,10 @@
             name="asunto"
             id="asunto"
             placeholder="Ingrese el asunto de su reserva"
+            oninput="validarLargoTexto('asunto',12,50,'error_asunto')" 
             required
           />
+          <small id="error_asunto" style="color:red;"></small>
         </div>
 
         <!-- Motivo -->
@@ -82,8 +86,10 @@
             class="control control--textarea"
             name="motivo"
             id="motivo"
+            oninput="validarLargoTexto('motivo',20,200,'error_motivo')"
             placeholder="Ingrese el motivo de la reserva (opcional)"
           ></textarea>
+          <small id="error_motivo" style="color:red;"></small>
         </div>
 
         <button class="btn" type="submit">Enviar reserva</button>
@@ -91,6 +97,17 @@
 
     </section>
   </main>
+  <script>
+    function validarReserva(){
+      if(
+        !validarLargoTexto('asunto',12,50,'error_asunto')||
+        !validarLargoTexto('asunto',20,200,'error_asunto')
+      ){
+        return false;
+      }
+      return true;
+    }
+  </script>
 
 </body>
 </html>
