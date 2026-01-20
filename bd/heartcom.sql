@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2026 a las 02:31:42
+-- Tiempo de generación: 20-01-2026 a las 15:58:47
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -95,7 +95,9 @@ INSERT INTO `codigos_mfa` (`id_codigo_mfa`, `id_usuario`, `codigo`, `tipo`, `exp
 (28, 3, '209208', 'LOGIN', '2026-01-17 19:09:43', 1, '2026-01-17 14:59:43'),
 (29, 4, '669657', 'LOGIN', '2026-01-17 20:35:31', 1, '2026-01-17 16:25:31'),
 (30, 5, '765546', 'LOGIN', '2026-01-18 00:21:24', 1, '2026-01-17 20:11:24'),
-(31, 1, '306612', 'LOGIN', '2026-01-18 01:28:05', 1, '2026-01-17 21:18:05');
+(31, 1, '306612', 'LOGIN', '2026-01-18 01:28:05', 1, '2026-01-17 21:18:05'),
+(32, 1, '831891', 'LOGIN', '2026-01-20 15:04:44', 0, '2026-01-20 10:54:44'),
+(33, 1, '465123', 'LOGIN', '2026-01-20 15:06:59', 1, '2026-01-20 10:56:59');
 
 -- --------------------------------------------------------
 
@@ -232,15 +234,21 @@ INSERT INTO `estado_reserva` (`id_estado_reserva`, `estado`) VALUES
 CREATE TABLE `noticias` (
   `id_noticia` int(11) NOT NULL,
   `titulo` varchar(200) NOT NULL,
-  `resumen` varchar(300) DEFAULT NULL,
-  `contenido` text NOT NULL,
+  `bajada` varchar(255) DEFAULT NULL,
+  `cuerpo` text NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
+  `fecha_publicacion` datetime DEFAULT current_timestamp(),
   `id_usuario` int(11) NOT NULL,
-  `id_cate` int(11) NOT NULL,
-  `id_estado_noticia` int(11) NOT NULL,
-  `fecha_publicacion` datetime DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `id_cate` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `noticias`
+--
+
+INSERT INTO `noticias` (`id_noticia`, `titulo`, `bajada`, `cuerpo`, `imagen`, `fecha_publicacion`, `id_usuario`, `id_cate`) VALUES
+(1, 'Fabian quemo la ciudad y la base de datos junto con su compañero cristobal', 'mdasdñsdañ{dlasdñasdl{ñsad{ñldsad', 'adasdasdasdasdasdasdasdasdas', 'assets/img/noticias/1768917602_GLK77QHJ4JAY3KAFM5FV6YV5OM.avif', '2026-01-20 11:00:02', 1, 5),
+(2, 'Fabian quemo la ciudad y la base de datos junto con su compañero cristobal por segunda vez', 'mdasdñsdañ{dlasdñasdl{ñsad{ñldsad', 'asdasdasdddddddddddddddddd', 'assets/img/noticias/1768918080_GLK77QHJ4JAY3KAFM5FV6YV5OM.avif', '2026-01-20 11:08:00', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -597,10 +605,8 @@ ALTER TABLE `estado_reserva`
 --
 ALTER TABLE `noticias`
   ADD PRIMARY KEY (`id_noticia`),
-  ADD KEY `idx_noticias_usuario` (`id_usuario`),
-  ADD KEY `idx_noticias_cate` (`id_cate`),
-  ADD KEY `idx_noticias_estado` (`id_estado_noticia`),
-  ADD KEY `idx_noticias_fecha` (`fecha_publicacion`);
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_cate` (`id_cate`);
 
 --
 -- Indices de la tabla `pagos_residencia`
@@ -700,7 +706,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `codigos_mfa`
 --
 ALTER TABLE `codigos_mfa`
-  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -742,7 +748,7 @@ ALTER TABLE `estado_reserva`
 -- AUTO_INCREMENT de la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos_residencia`
@@ -824,9 +830,8 @@ ALTER TABLE `codigos_mfa`
 -- Filtros para la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  ADD CONSTRAINT `fk_noticias_categoria` FOREIGN KEY (`id_cate`) REFERENCES `categorias` (`id_cate`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_noticias_estado` FOREIGN KEY (`id_estado_noticia`) REFERENCES `estados_noticia` (`id_estado_noticia`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_noticias_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `noticias_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `noticias_ibfk_2` FOREIGN KEY (`id_cate`) REFERENCES `categorias` (`id_cate`);
 
 --
 -- Filtros para la tabla `pagos_residencia`
