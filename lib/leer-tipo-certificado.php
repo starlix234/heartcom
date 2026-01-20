@@ -6,4 +6,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
 $tiposCertificados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>

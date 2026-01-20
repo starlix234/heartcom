@@ -3,7 +3,7 @@ session_start();
 
 // Si ya está logueado, lo mandamos al panel
 if (isset($_SESSION['id_usuario'])) {
-    header("Location: panel.php");
+    header("Location: login.php");
     exit;
 }
 

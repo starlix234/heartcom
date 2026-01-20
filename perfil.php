@@ -1,30 +1,11 @@
-<?php
-session_start();
-require_once 'lib/conexion.php';
-
-if (!isset($_SESSION['id_usuario'])) {
-    header("Location: login.php");
-    exit;
-}
-
-$idUsuario = (int)$_SESSION['id_usuario'];
-
-$sql = "SELECT p_nombre, ap_paterno, telefono, correo FROM usuarios WHERE id_usuario = :id";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([':id' => $idUsuario]);
-$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if (!$usuario) {
-    die("Usuario no encontrado.");
-}
-?>
-
+<?php include("lib/cambiar-mi-perfil.php") ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil - HeartCom</title>
+    <link rel="stylesheet" href="assets/css/estilo-fromulario-mi-perfil.css">
     <link rel="stylesheet" href="assets/css/estilos.css"> <style>
         .btn-volver {
             display: block;
@@ -37,37 +18,79 @@ if (!$usuario) {
 </head>
 <body>
 
-<div class="login-card"> <h2>Editar Perfil</h2>
-    <p style="text-align:center; color:#666;">
-        Hola, <strong><?= htmlspecialchars($usuario['p_nombre'] . ' ' . $usuario['ap_paterno']) ?></strong>
-    </p>
+<div class="page">
 
-    <?php if (isset($_GET['error'])): ?>
-        <div class="error"><?= htmlspecialchars($_GET['error']) ?></div>
-    <?php endif; ?>
+    <div class="card">
 
-    <?php if (isset($_GET['success'])): ?>
-        <div style="color: green; text-align: center; margin-bottom: 10px;">
-            ¡Datos actualizados correctamente!
+        <div class="card__header">
+            <div>
+                <h2 class="card__title">Editar Perfil</h2>
+                <p class="card__subtitle">
+                    Hola,
+                    <strong><?= htmlspecialchars($usuario['p_nombre'].' '.$usuario['ap_paterno']) ?></strong>
+                </p>
+            </div>
         </div>
-    <?php endif; ?>
 
-    <form action="lib/actualizar-perfil.php" method="POST">
-        
-        <label>Teléfono:</label>
-        <input type="text" name="telefono" value="<?= htmlspecialchars($usuario['telefono']) ?>" required>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="alert-error">
+                <?= htmlspecialchars($_GET['error']) ?>
+            </div>
+        <?php endif; ?>
 
-        <label>Correo Electrónico:</label>
-        <input type="email" name="correo" value="<?= htmlspecialchars($usuario['correo']) ?>" required>
+        <?php if (isset($_GET['success'])): ?>
+            <div class="alert-success">
+                ¡Datos actualizados correctamente!
+            </div>
+        <?php endif; ?>
 
-        <label>Nueva Contraseña:</label>
-        <input type="password" name="clave" placeholder="Dejar en blanco si no desea cambiarla">
-        
-        <button type="submit">Guardar Cambios</button>
-    </form>
+        <form action="lib/actualizar-perfil.php" method="POST" class="form">
 
-    <a href="panel.php" class="btn-volver">← Volver al Panel</a>
+            <div class="field">
+                <label class="label">Teléfono</label>
+                <input
+                    type="text"
+                    name="telefono"
+                    class="control"
+                    value="<?= htmlspecialchars($usuario['telefono']) ?>"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label class="label">Correo Electrónico</label>
+                <input
+                    type="email"
+                    name="correo"
+                    class="control"
+                    value="<?= htmlspecialchars($usuario['correo']) ?>"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label class="label">Nueva Contraseña</label>
+                <input
+                    type="password"
+                    name="clave"
+                    class="control"
+                    placeholder="Dejar en blanco si no desea cambiarla"
+                >
+            </div>
+
+            <button type="submit" class="btn">
+                Guardar Cambios
+            </button>
+        </form>
+
+        <a href="index.php" class="btn-volver">
+            ← Volver Inicio
+        </a>
+
+    </div>
+
 </div>
 
 </body>
+
 </html>

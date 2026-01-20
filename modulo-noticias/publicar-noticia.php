@@ -1,17 +1,20 @@
-<?php include("../lib/crear-noticia.php")?>
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// SOLO LISTAR
+require_once '../lib/mostrar-noticia.php';
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Noticias del Barrio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>    
-
-<div class="container mt-4">
-    <h3>📝 Nueva Noticia</h3>
-
-    <form action="guardar.php" method="POST">
+<body>
+<form action="guardar.php" method="POST">
 
         <div class="mb-3">
             <label>Categoría</label>
@@ -48,7 +51,6 @@
         <button class="btn btn-success">Guardar</button>
         <a href="listar.php" class="btn btn-secondary">Cancelar</a>
     </form>
-</div>
 
 </body>
 </html>

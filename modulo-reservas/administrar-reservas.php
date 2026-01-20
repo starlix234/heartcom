@@ -1,6 +1,15 @@
 <?php include("../lib/mostrar-reserva-admin.php")?>
 
-<section class="card card--embed">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/estilo-tabla-dashboard.css">
+  <title>Administrar reservas</title>
+</head>
+<body>
+  <section class="card card--embed">
   <?php if (isset($_GET['msg'])): ?>
     <div class="msg"><?= htmlspecialchars($_GET['msg']) ?></div>
   <?php endif; ?>
@@ -89,4 +98,9 @@
     <?php endif; ?>
   </div>
 </section>
+
+
+</body>
+</html>
+
 
