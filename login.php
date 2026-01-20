@@ -18,6 +18,7 @@ $mensajeError = isset($_GET['error']) ? $_GET['error'] : '';
     <title>Iniciar Sesión - HeartCom</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/estilos.css">
+    <script src="assets/js/verificar-formato-rut.js"></script>
 </head>
 <body class="body bg-fondo">
 
@@ -40,7 +41,8 @@ $mensajeError = isset($_GET['error']) ? $_GET['error'] : '';
                                 <form action="lib/procesar_login.php" method="POST" novalidate>
                                     <div class="mb-3">
                                         <label for="rut" class="form-label">RUT</label>
-                                        <input type="text" class="form-control" id="rut" name="rut" placeholder="Ej: 12.345.678-9" required>
+                                        <input type="text" class="form-control" id="rut" name="rut" 
+                                        oninput="formatearRUT(this)" maxlength="12" placeholder="Ej: 12.345.678-9" required>
                                     </div>
 
                                     <div class="mb-4">
