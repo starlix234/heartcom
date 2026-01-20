@@ -197,12 +197,21 @@ function validarFormulario() {
     // RUT
     const rut = document.getElementById("rut").value;
     const errorRut = document.getElementById("errorRut");
+    const rutLimpio = limpiarRut(rut);
 
-    if (!validarRut(limpiarRut(rut))) {
+    // 1️⃣ Bloquear secuencias repetidas
+    if (tieneSecuenciaRepetida(rutLimpio)) {
+        errorRut.textContent = "RUT inválido: números repetidos";
+        return false;
+    }
+
+    // 2️⃣ Validar dígito verificador
+    if (!validarRut(rutLimpio)) {
         errorRut.textContent = "RUT chileno inválido";
         return false;
     }
-    errorRut.textContent = "";                
+
+    errorRut.textContent = "";              
 
     return true;
 }

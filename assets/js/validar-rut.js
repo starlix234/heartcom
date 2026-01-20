@@ -22,6 +22,14 @@ function validarRut(rut) {
     return dv === dvEsperado.toString();
 }
 
+function tieneSecuenciaRepetida(rut) {
+    // quitamos el dígito verificador
+    let cuerpo = rut.slice(0, -1);
+
+    // verificamos si todos los caracteres son iguales
+    return cuerpo.split('').every(digito => digito === cuerpo[0]);
+}
+
 const rutInput = document.getElementById('rut');
 const errorRut = document.getElementById('errorRut');
 
@@ -29,8 +37,19 @@ rutInput.addEventListener('input', () => {
     let limpio = limpiarRut(rutInput.value);
     rutInput.value = formatearRut(limpio);
 
-    if (limpio.length >= 8 && !validarRut(limpio)) {
-        errorRut.textContent = 'RUT chileno inválido';
+    if (limpio.length >= 8) {
+
+        if (tieneSecuenciaRepetida(limpio)) {
+            errorRut.textContent = 'RUT inválido: no puede ser una secuencia repetida';
+            return;
+        }
+
+        if (!validarRut(limpio)) {
+            errorRut.textContent = 'RUT chileno inválido';
+            return;
+        }
+
+        errorRut.textContent = '';
     } else {
         errorRut.textContent = '';
     }
