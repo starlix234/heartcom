@@ -146,7 +146,7 @@
             </ul>
 
             <div class="d-grid gap-2">
-                <a href="noticias.php" class="btn btn-success">
+                <a href="/heartcom/modulo-noticias/crear.php" class="btn btn-success">
                     Crear Noticia
                 </a>
             </div>
