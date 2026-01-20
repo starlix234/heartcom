@@ -57,7 +57,7 @@ try {
     ]);
 
     if ($ok) {
-        header("Location: ../ver-noticia.php?msg=Publicado_con_exito");
+        header("Location: ../modulo-noticias/noticias.php?msg=Publicado_con_exito");
         exit;
     }
 

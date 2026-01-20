@@ -15,7 +15,6 @@
 
    <aside class="sidebar">
         <h2>Gestion de Proyectos</h2>
-        
         <nav>
           <?php if ($rol === 1 || $rol === 2): ?>
             <a href="#crear" class="menu-item">

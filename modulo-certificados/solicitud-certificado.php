@@ -8,6 +8,8 @@ require("../lib/leer-tipo-certificado.php");
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../assets/css/estilo-dashboard-formulario.css" />
+  <!-- Scripts de validación -->
+  <script src="../assets/js/validar-largo-texto.js"></script>
   <title>Solicitar Certificado</title>
 </head>
 <body>
@@ -30,7 +32,7 @@ require("../lib/leer-tipo-certificado.php");
         </div>
       </header>
 
-      <form action="../lib/insertar-certificado.php" method="post" class="form">
+      <form action="../lib/insertar-certificado.php" method="post" onsubmit="return valiadarSolicitudCertificado();" class="form">
 
         <div class="field">
           <label class="label" for="asunto">Asunto</label>
@@ -40,8 +42,9 @@ require("../lib/leer-tipo-certificado.php");
             id="asunto"
             class="control"
             placeholder="Ingrese el asunto de su solicitud"
+            oninput="validarLargoTexto('asunto',15,40,'asunto-error')"
             required
-          />
+          /> <small id="asunto-error" style="color: red;"></small>
         </div>
 
         <div class="field">
@@ -67,8 +70,10 @@ require("../lib/leer-tipo-certificado.php");
             class="control control--textarea"
             rows="4"
             placeholder="Ingrese el motivo del porque desea solicitar este certificado o permiso"
+            oninput="validarLargoTexto('asunto',15,300,'asunto-error')"
             required
-          ></textarea>
+          ></textarea> 
+          <small id="mensaje-error" style="color: red;"></small>
         </div>
 
         <input
@@ -86,6 +91,19 @@ require("../lib/leer-tipo-certificado.php");
       </form>
     </section>
   </main>
+  <script>
+    function valiadarSolicitudCertificado() {
+      if (
+        !validarLargoTexto('asunto', 15, 40, 'asunto-error') ||
+        !validarLargoTexto('mensaje', 10, 300, 'mensaje-error')
+      ){
+        return false;
+      }
+
+      return true;
+    } 
+
+  </script>
 
 </body>
 </html>
