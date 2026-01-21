@@ -39,18 +39,31 @@ if (!isset($base)) { $base = './'; }
 
             <?php foreach ($listaNoticias as $noticia): ?>
                 <?php 
-                    /* --- CORRECCIÓN DE RUTAS DE IMAGEN --- */
-                    // 1. Obtenemos la ruta cruda de la BD (ej: ../assets/img/foto.jpg)
-                    $rutaDB = $noticia['imagen'];
-                    
-                    // 2. Quitamos los "../" iniciales para que funcione bien en el Index
-                    $rutaLimpia = str_replace('/', '', $rutaDB);
-                    
-                    // 3. Verificamos si el archivo realmente existe
-                    if (!empty($rutaDB) && file_exists($rutaLimpia)) {
-                        $imgSrc = $base . $rutaLimpia;
+                    /* --- ARREGLO REAL DE RUTA DE IMAGEN (assets/img/noticias) --- */
+
+                    // 1) Lo que venga desde BD
+                    $rutaDB = trim((string)($noticia['imagen'] ?? ''));
+
+                    // 2) Normalizar: quitar "../" al inicio si existe
+                    $rutaRel = preg_replace('#^(\.\./)+#', '', $rutaDB);
+
+                    // 3) Si BD guarda solo el nombre (ej: "foto.jpg"), lo metemos en la carpeta correcta
+                    if ($rutaRel !== '' && !str_contains($rutaRel, '/')) {
+                        $rutaRel = 'assets/img/noticias/' . $rutaRel;
+                    }
+
+                    // 4) Si no viene con la carpeta, también la forzamos
+                    if ($rutaRel !== '' && !str_contains($rutaRel, 'assets/img/noticias/')) {
+                        $rutaRel = 'assets/img/noticias/' . basename($rutaRel);
+                    }
+
+                    // 5) Validación física (en disco). Desde modulo-noticias subimos a la raíz: ../
+                    $rutaFisica = __DIR__ . '/../' . $rutaRel;
+
+                    // 6) URL final para <img>
+                    if ($rutaRel !== '' && file_exists($rutaFisica)) {
+                        $imgSrc = $base . $rutaRel;
                     } else {
-                        // Imagen por defecto si no existe o no tiene foto
                         $imgSrc = "https://via.placeholder.com/400x250?text=Sin+Imagen";
                     }
                 ?>
@@ -83,7 +96,7 @@ if (!isset($base)) { $base = './'; }
                             </p>
                             
                             <div class="mt-3">
-                                <a href="<?= $base ?>modulo-noticias/detalle-noticia.php?id=<?= $noticia['id_noticia'] ?>" 
+                                <a href="<?= $base ?>modulo-noticias/noticia-detalle-cliente.php?id=<?= (int)$noticia['id_noticia'] ?>" 
                                    class="btn btn-outline-primary w-100">
                                    Leer completa
                                 </a>

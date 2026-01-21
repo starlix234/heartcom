@@ -207,7 +207,6 @@
 
         <div class="footer-actions">
           <a class="btn" href="../index.php">Volver al inicio</a>
-          <a class="btn btn-dark" href="javascript:window.print()">Imprimir</a>
         </div>
       </div>
     </article>

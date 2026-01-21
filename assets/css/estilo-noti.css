@@ -52,7 +52,12 @@
       flex:1;
       padding:2rem 3rem;
     }
-
+    .centrar{
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
     header{ margin-bottom:1.5rem; display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; }
     header .title h1{ font-size:2rem; color:var(--text-dark); font-weight:700; }
     header .title p{ color:var(--text-gray); margin-top:.5rem; }
