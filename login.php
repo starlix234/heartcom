@@ -18,6 +18,7 @@ $mensajeError = isset($_GET['error']) ? $_GET['error'] : '';
     <title>Iniciar Sesión - HeartCom</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/estilos.css">
+    <link rel="icon" href="assets/img/logo/logo_heartcom.ico">
     <!-- Scripts de validación -->
     <script src="assets/js/verificar-formato-rut.js"></script>
 </head>

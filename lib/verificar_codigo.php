@@ -18,7 +18,7 @@ $error = $_GET['error'] ?? '';
   <title>Verificar código</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <link rel="icon" href="../assets/img/logo/logo_heartcom.ico">
   <style>
     :root{
       --blue:#3B5BFF;

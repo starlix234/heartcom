@@ -15,6 +15,7 @@
             text-decoration: none;
         }
     </style>
+    <link rel="icon" href="assets/img/logo/logo_heartcom.ico">
 </head>
 <body>
 

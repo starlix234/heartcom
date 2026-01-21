@@ -11,6 +11,7 @@ if (!isset($_SESSION['id_recuperacion'])) {
     <meta charset="UTF-8">
     <title>Verificar Código</title>
     <link rel="stylesheet" href="assets/css/estilos.css">
+    <link rel="icon" href="assets/img/logo/logo_heartcom.ico">
 </head>
 <body>
 

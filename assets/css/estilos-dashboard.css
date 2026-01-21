@@ -165,4 +165,12 @@
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
         }
-        
+        .acciones {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: stretch;
+        }
+
+
+

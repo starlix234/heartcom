@@ -15,6 +15,7 @@ if (!isset($_SESSION['permiso_cambiar_clave']) || !isset($_SESSION['usuario_camb
     <title>Nueva Contraseña - HeartCom</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/estilos.css">
+    <link rel="icon" href="assets/img/logo/logo_heartcom.ico">
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center vh-100">
 

@@ -17,6 +17,7 @@
     <script src="assets/js/verificar-formato-correo.js"></script>
     <script src="assets/js/validar-largo-texto.js"></script>
     <script src="assets/js/validar-rut.js"></script>
+    <link rel="icon" href="assets/img/logo/logo_heartcom.ico">
 </head>
 <body class="body bg-fondo">
 
