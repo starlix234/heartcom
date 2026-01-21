@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once "../lib/conexion.php";
-require_once "../lib/permisos-admin.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   header("Location: noticias.php");

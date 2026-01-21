@@ -118,12 +118,12 @@ $listaProyectos = (isset($proyecto) && is_array($proyecto)) ? $proyecto : [];
         </div>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <?php if (empty($listaProyectos)): ?>
+            <?php if (empty($proyectosRecientes)): ?>
                 <div class="col-12 text-center py-5">
                     <h5 class="text-muted">No hay proyectos disponibles por el momento.</h5>
                 </div>
             <?php else: ?>
-                <?php foreach ($listaProyectos as $p): ?>
+                <?php foreach ($proyectosRecientes as $p): ?>
                     <div class="col">
                         <div class="card h-100 card-proyecto p-3">
                             <div class="card-body">
@@ -147,7 +147,7 @@ $listaProyectos = (isset($proyecto) && is_array($proyecto)) ? $proyecto : [];
                                 <small class="text-muted d-block mb-2">
                                     <i class="bi bi-calendar3"></i> Inicio: <?= htmlspecialchars($p['fecha_inicio'] ?? '--') ?>
                                 </small>
-                                <a href="modulo-proyecto/detalle-proyecto.php?id_proyecto=<?= $p['id_proyecto'] ?>" 
+                                <a href="modulo-proyecto/proyecto-detalle.php??id_proyecto=<?= $p['id_proyecto'] ?>" 
                                    class="btn btn-outline-primary w-100 rounded-pill btn-sm">
                                    Ver Detalles
                                 </a>

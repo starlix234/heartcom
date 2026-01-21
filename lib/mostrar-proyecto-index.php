@@ -1,34 +1,16 @@
 <?php
-// lib/mostrar-proyecto-index.php
-include_once __DIR__ . '/conexion.php';
+require_once __DIR__ . "/../lib/conexion.php"; // ajusta si tu ruta cambia
 
-$proyecto = []; // Variable inicial vacía
+$sql = "
+ SELECT p.id_proyecto,p.nombre_proyecto,p.descripcion, p.fecha_inicio, 
+p.fecha_fin, p.responsable,p.cupo_maximo, t.nombre_tipo FROM proyectos_barrio p JOIN tipos_proyecto t on p.id_tipo_proyecto = t.id_tipo_proyecto WHERE p.id_estado_proyecto=5
+LIMIT :limite
+";
 
-// Verificamos conexión
-if (isset($conn)) {
-    // Consulta corregida para tu tabla 'proyectos_barrio'
-    $sql = "SELECT 
-                p.id_proyecto,
-                p.nombre_proyecto,
-                p.descripcion,
-                p.fecha_inicio,
-                p.fecha_fin,
-                p.cupo_maximo,
-                p.responsable,
-                e.nombre_estado,
-                t.nombre_tipo
-            FROM proyectos_barrio p
-            LEFT JOIN estados_proyecto e ON p.id_estado_proyecto = e.id_estado_proyecto
-            LEFT JOIN tipos_proyecto t ON p.id_tipo_proyecto = t.id_tipo_proyecto
-            WHERE e.nombre_estado NOT IN ('Cancelado', 'Rechazado')
-            ORDER BY p.fecha_inicio DESC"; // Ordenar por fecha más reciente
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':limite', 4, PDO::PARAM_INT);
+$stmt->execute();
 
-    $res = $conn->query($sql);
+$proyectosRecientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($res && $res->num_rows > 0) {
-        while ($row = $res->fetch_assoc()) {
-            $proyecto[] = $row;
-        }
-    }
-}
 ?>
