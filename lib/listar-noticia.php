@@ -1,32 +1,32 @@
 <?php
 // lib/listar-noticia.php
-include_once __DIR__ . '/conexion.php';
+require_once __DIR__ . '/conexion.php';
 
-$listaNoticias = []; // Variable inicial vacía
+$listaNoticias = [];
 
-if (isset($conn)) {
-    // Consulta corregida uniendo noticias, categorías y usuarios
-    $sql = "SELECT 
-                n.id_noticia,
-                n.titulo,
-                n.bajada,
-                n.cuerpo,
-                n.imagen,
-                n.fecha_publicacion,
-                c.categorias_noticias AS categoria,
-                u.p_nombre,
-                u.ap_paterno
-            FROM noticias n
-            LEFT JOIN categorias c ON n.id_cate = c.id_cate
-            LEFT JOIN usuarios u ON n.id_usuario = u.id_usuario
-            ORDER BY n.fecha_publicacion DESC";
+if (!isset($pdo)) {
+    die("Error: no existe la conexión PDO ($pdo).");
+}
 
-    $res = $conn->query($sql);
+$sql = "SELECT
+            n.id_noticia,
+            n.titulo,
+            n.bajada,
+            n.cuerpo,
+            n.imagen,
+            n.fecha_publicacion,
+            c.categorias_noticias AS categoria,
+            u.p_nombre,
+            u.ap_paterno
+        FROM noticias n
+        LEFT JOIN categorias c ON n.id_cate = c.id_cate
+        LEFT JOIN usuarios u ON n.id_usuario = u.id_usuario
+        ORDER BY n.fecha_publicacion DESC";
 
-    if ($res && $res->num_rows > 0) {
-        while ($row = $res->fetch_assoc()) {
-            $listaNoticias[] = $row;
-        }
-    }
+try {
+    $stmt = $pdo->query($sql);
+    $listaNoticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error SQL: " . $e->getMessage());
 }
 ?>
