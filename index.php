@@ -147,9 +147,9 @@ $listaProyectos = (isset($proyecto) && is_array($proyecto)) ? $proyecto : [];
                                 <small class="text-muted d-block mb-2">
                                     <i class="bi bi-calendar3"></i> Inicio: <?= htmlspecialchars($p['fecha_inicio'] ?? '--') ?>
                                 </small>
-                                <a href="modulo-proyecto/proyecto-detalle.php??id_proyecto=<?= $p['id_proyecto'] ?>" 
-                                   class="btn btn-outline-primary w-100 rounded-pill btn-sm">
-                                   Ver Detalles
+                               <a href="modulo-proyecto/proyecto-detalle.php?id=<?= $p['id_proyecto'] ?>" 
+                                    class="btn btn-primary w-100 rounded-pill btn-sm shadow-sm">
+                                    Ver Detalles <i class="bi bi-arrow-right-short"></i>
                                 </a>
                             </div>
                         </div>

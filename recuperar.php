@@ -1,10 +1,8 @@
 <?php
-// --- MODO DEBUG: ACTIVAR ERRORES ---
-// Esto hará que si hay un fallo, te diga en qué línea es en vez de salir blanco.
+// MODO DEBUG
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 session_start();
 ?>
 <!DOCTYPE html>
@@ -13,59 +11,75 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Contraseña - HeartCom</title>
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <link rel="stylesheet" href="assets/css/estilos.css">
     <link rel="icon" href="assets/img/logo/logo_heartcom.ico">
+    
+    <style>
+        body { background-color: #f0f2f5; font-family: 'Inter', sans-serif; }
+        .card-custom { border: none; border-radius: 20px; }
+        .icon-header { font-size: 3rem; color: #0d6efd; margin-bottom: 10px; }
+    </style>
 </head>
-<body class="body bg-fondo">
+<body class="d-flex align-items-center min-vh-100 py-4">
 
-    <main class="centrar">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-5">
-
-                    <div class="login-wrapper my-5">
-                        <div class="card login-card shadow-lg">
-                            <div class="card-body p-4">
-                                <h3 class="text-center mb-4">Recuperar Contraseña</h3>
-                                <p class="text-center text-muted mb-4">Ingresa tu RUT y te enviaremos un código.</p>
-
-                                <?php if (isset($_GET['error'])): ?>
-                                    <div class="alert alert-danger py-2">
-                                        <?= htmlspecialchars($_GET['error']); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <form action="lib/procesar_solicitud_recuperacion.php" method="POST">
-                                    <div class="mb-3">
-                                        <label for="rut" class="form-label">RUT</label>
-                                        <input 
-                                            type="text" 
-                                            name="rut" 
-                                            id="rut"
-                                            class="form-control"
-                                            oninput="formatearRUT(this)" 
-                                            placeholder="Ej: 12.345.678-9" 
-                                            required
-                                        >
-                                    </div>
-
-                                    <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-primary w-100">
-                                            Enviar Código
-                                        </button>
-                                        <a href="login.php" class="btn btn-outline-secondary w-100">
-                                            Volver al Login
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-5">
+                
+                <div class="card card-custom shadow-lg">
+                    <div class="card-body p-5 text-center">
+                        
+                        <div class="mb-4">
+                            <i class="bi bi-shield-lock icon-header"></i>
+                            <h2 class="fw-bold mt-2">¿Olvidaste tu clave?</h2>
+                            <p class="text-muted small">
+                                No te preocupes. Ingresa tu RUT y te enviaremos un código para recuperarla.
+                            </p>
                         </div>
-                    </div>
 
+                        <form action="lib/procesar_recuperacion.php" method="POST" class="text-start">
+                            
+                            <div class="mb-4">
+                                <label for="rut" class="form-label fw-semibold">RUT del Vecino</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="bi bi-person-vcard text-muted"></i>
+                                    </span>
+                                    <input 
+                                        type="text" 
+                                        name="rut" 
+                                        id="rut"
+                                        class="form-control border-start-0 ps-0"
+                                        oninput="formatearRUT(this)" 
+                                        placeholder="Ej: 12.345.678-9" 
+                                        required
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+                                    Enviar Código
+                                </button>
+                            </div>
+
+                            <div class="text-center">
+                                <a href="login.php" class="text-decoration-none text-secondary small">
+                                    <i class="bi bi-arrow-left"></i> Volver al inicio de sesión
+                                </a>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
+                
+                <div class="text-center mt-3 text-muted small">
+                    &copy; <?= date('Y') ?> Junta de Vecinos HeartCom
+                </div>
+
             </div>
         </div>
     </main>
