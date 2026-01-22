@@ -29,7 +29,7 @@ try {
         $mensaje
     ]);
 
-header("Location: ../modulo-reservas/solicitudes.php");
+header("Location: ../modulo-certificados/solicitudes.php");
 
 
 
