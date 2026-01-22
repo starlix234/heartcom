@@ -101,7 +101,7 @@
     function validarReserva(){
       if(
         !validarLargoTexto('asunto',12,50,'error_asunto')||
-        !validarLargoTexto('asunto',20,200,'error_asunto')
+        !validarLargoTexto('motivo',20,200,'error_asunto')
       ){
         return false;
       }

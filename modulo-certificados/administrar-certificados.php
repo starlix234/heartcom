@@ -47,11 +47,11 @@
               $fechaRaw = $s['fecha'] ?? $s['fecha_solicitud'] ?? '';
               $fechaFmt = $fechaRaw ? date('d/m/Y', strtotime($fechaRaw)) : '-';
 
-              $estado = strtolower(trim($s['estado'] ?? 'pendiente'));
+              $estado = strtolower(trim($s['estado'] ?? 'solicitado'));
 
               // Mapeo de badge por estado
-              $badgeClass = 'badge-pendiente';
-              $badgeText  = 'Pendiente';
+              $badgeClass = 'badge-solicitado';
+              $badgeText  = 'solicitado';
 
               if (str_contains($estado, 'revis')) { $badgeClass='badge-revision'; $badgeText='En Revisión'; }
               elseif (str_contains($estado, 'aprob')) { $badgeClass='badge-aprobado'; $badgeText='Aprobado'; }
@@ -81,8 +81,8 @@
 
               
                   <!-- Si está pendiente o en revisión: mostrar aprobar/rechazar -->
-                  <?php if ($badgeClass === 'badge-pendiente' || $badgeClass === 'badge-revision'): ?>
-                    <form method="POST" action="lib/gestionar-solicitud.php" style="display:inline;">
+                  <?php if ($badgeClass === 'badge-solicitado' || $badgeClass === 'badge-revision'): ?>
+                    <form method="POST" action="../lib/gestionar-solicitud.php" style="display:inline;">
                       <input type="hidden" name="id_certificado" value="<?= (int)$idNum ?>">
                       <input type="hidden" name="correo" value="<?= htmlspecialchars($correo) ?>">
                       <input type="hidden" name="nombre" value="<?= htmlspecialchars($nombre) ?>">

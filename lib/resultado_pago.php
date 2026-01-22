@@ -59,7 +59,7 @@ $motivo = isset($_GET['motivo']) ? $_GET['motivo'] : null;
         <?php endif; ?>
 
         <!-- Ajusta esta ruta según dónde tengas la vista de solicitudes del vecino -->
-        <a class="button" href="../modulo-certificados/solicitud-cliente.php">Volver a mis solicitudes</a>
+        <a class="button" href="../modulo-certificados/solicitudes.php">Volver a mis solicitudes</a>
     </div>
 
 <?php else: ?>
@@ -76,7 +76,7 @@ $motivo = isset($_GET['motivo']) ? $_GET['motivo'] : null;
             <p>Puedes intentarlo nuevamente desde tus solicitudes.</p>
         <?php endif; ?>
 
-        <a class="button" href="../modulo-certificados/solicitud-cliente.php">Volver a mis solicitudes</a>
+        <a class="button" href="../modulo-certificados/solicitudes.php">Volver a mis solicitudes</a>
     </div>
 <?php endif; ?>
 

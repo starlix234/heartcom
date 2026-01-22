@@ -1,8 +1,10 @@
 <?php 
-//session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once 'conexion.php';
 
-$usuario_id = $_SESSION['id_usuario'];
+$usuario_id = $_SESSION['id_usuario'] ?? null;;
 
 try {
     $stmt = $pdo->prepare('SELECT pb.nombre_proyecto, pb.descripcion, pb.fecha_inicio, 

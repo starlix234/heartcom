@@ -7,22 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mis reservas</title>
 
-  <link rel="stylesheet" href="../assets/css/estilo-tabla-dashboard.css">
+  <link rel="stylesheet" href="../assets/css/estilo-tabla-reservas.css">
 </head>
 <body>
 
-<div class="wrap">
-  <section class="card">
-    <header class="card-header">
+<div>
+  <section>
+    <header>
       <div>
-        <h2>Mis reservas</h2>
         <p>Revisa tus reservas y su estado actual.</p>
       </div>
     </header>
 
-    <div class="table-wrap ">
+    <div>
       <?php if (empty($reservas)): ?>
-        <div class="empty">No tienes reservas registradas.</div>
+        <div>No tienes reservas registradas.</div>
       <?php else: ?>
         <table>
           <thead>
@@ -40,26 +39,26 @@
           <?php foreach ($reservas as $r): ?>
             <?php
               $estado_raw = trim(mb_strtolower($r['estado'] ?? ''));
-              $badgeClass = 'badge-pendiente';
+              $badgeClass = '';
 
-              if (in_array($estado_raw, ['aprobado','aprobada'])) $badgeClass = 'badge-aprobado';
-              elseif (in_array($estado_raw, ['rechazado','rechazada'])) $badgeClass = 'badge-rechazado';
-              elseif (in_array($estado_raw, ['en revisión','en revision','revision','revisión'])) $badgeClass = 'badge-revision';
-              elseif ($estado_raw === 'pendiente') $badgeClass = 'badge-pendiente';
+              if (in_array($estado_raw, ['aprobado','aprobada'])) $badgeClass = '';
+              elseif (in_array($estado_raw, ['rechazado','rechazada'])) $badgeClass = '';
+              elseif (in_array($estado_raw, ['en revisión','en revision','revision','revisión'])) $badgeClass = '';
+              elseif ($estado_raw === 'pendiente') $badgeClass = '';
             ?>
 
             <tr>
-              <td class="type"><?= htmlspecialchars($r['tipo']) ?></td>
-              <td class="date"><?= htmlspecialchars($r['Fecha_ini']) ?></td>
-              <td class="date"><?= htmlspecialchars($r['Fecha_fin']) ?></td>
-              <td class="text-clip" title="<?= htmlspecialchars($r['asunto']) ?>">
+              <td><?= htmlspecialchars($r['tipo']) ?></td>
+              <td><?= htmlspecialchars($r['Fecha_ini']) ?></td>
+              <td><?= htmlspecialchars($r['Fecha_fin']) ?></td>
+              <td title="<?= htmlspecialchars($r['asunto']) ?>">
                 <?= htmlspecialchars($r['asunto']) ?>
               </td>
-              <td class="text-clip" title="<?= htmlspecialchars($r['motivo']) ?>">
+              <td title="<?= htmlspecialchars($r['motivo']) ?>">
                 <?= htmlspecialchars($r['motivo']) ?>
               </td>
               <td>
-                <span class="badge <?= $badgeClass ?>">
+                <span>
                   <?= htmlspecialchars($r['estado']) ?>
                 </span>
               </td>

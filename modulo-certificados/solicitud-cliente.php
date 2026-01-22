@@ -122,7 +122,7 @@
 
                       <?php elseif ($puedePagar && $estaAprobada): ?>
                         <!-- Botón pagar (form para POST) -->
-                        <form action="/lib/iniciar-pago.php" method="post" style="display:inline;">
+                        <form action="../lib/iniciar-pago.php" method="post" style="display:inline;">
                           <input type="hidden" name="id_certificado" value="<?= $id ?>">
                           <button class="icon-btn icon-pay"
                                   type="submit"
