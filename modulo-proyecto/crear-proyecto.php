@@ -103,7 +103,7 @@
       function validacion(){
         if(
           !validarLargoTexto('nombre_proyecto',10,120,'erro_nombre_proyecto')||
-          !alidarLargoTexto('descri',100,250,'error_des')
+          !validarLargoTexto('descri',100,250,'error_des')
         ){
           return false;
         }
