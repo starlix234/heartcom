@@ -93,7 +93,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Teléfono</label>
-                        <input type="text" id="telefono" name="telefono" class="form-control" oninput="validarNumeros(this)" required>
+                        <input type="tel" id="telefono" name="telefono" class="form-control" oninput="validarNumeros(this)" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Correo Electrónico</label>

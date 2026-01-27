@@ -31,6 +31,10 @@ if (strlen($clave1) < 8) {
     header("Location: ../nueva_clave.php?error=" . urlencode("La contraseña es muy corta. Mínimo 8 caracteres."));
     exit;
 }
+if (strlen($clave1) > 15){
+    header("Location: ../nueva_clave.php?error=" . urldecode("La contraseña es muy larga. Maximo 15 caracteres."));
+    exit;
+}
 
 // B) Minúscula
 if (!preg_match('/[a-z]/', $clave1)) {

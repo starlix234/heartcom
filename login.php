@@ -49,7 +49,7 @@ $mensajeError = isset($_GET['error']) ? $_GET['error'] : '';
 
                                     <div class="mb-4">
                                         <label for="clave" class="form-label">Contraseña</label>
-                                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Tu clave" required>
+                                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Tu clave" minlength="8" maxlength="15" required>
                                     </div>
                                     
                                     <div class="d-grid gap-2">

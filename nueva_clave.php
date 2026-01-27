@@ -51,7 +51,7 @@ if (!isset($_SESSION['permiso_cambiar_clave']) || !isset($_SESSION['usuario_camb
                                 <label class="form-label fw-semibold small">Nueva Contraseña</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
-                                    <input type="password" name="clave1" class="form-control" required placeholder="Mínimo 8 caracteres">
+                                    <input type="password" name="clave1" class="form-control" required placeholder="Mínimo 8 caracteres" >
                                 </div>
                             </div>
                             
@@ -59,7 +59,7 @@ if (!isset($_SESSION['permiso_cambiar_clave']) || !isset($_SESSION['usuario_camb
                                 <label class="form-label fw-semibold small">Repetir Contraseña</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-white"><i class="bi bi-lock-fill"></i></span>
-                                    <input type="password" name="clave2" class="form-control" required placeholder="Repítela igual">
+                                    <input type="password" name="clave2" class="form-control" required placeholder="Repítela igual" >
                                 </div>
                             </div>
 
@@ -67,6 +67,7 @@ if (!isset($_SESSION['permiso_cambiar_clave']) || !isset($_SESSION['usuario_camb
                                 <strong class="d-block mb-1 text-secondary">Requisitos:</strong>
                                 <ul class="mb-0 ps-3 text-muted" style="font-size: 0.85rem;">
                                     <li>Mínimo 8 caracteres</li>
+                                    <li>Maximo 15 caracteres</li>
                                     <li>Una Mayúscula y una Minúscula</li>
                                     <li>Al menos un número</li>
                                 </ul>
