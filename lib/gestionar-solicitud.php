@@ -37,13 +37,13 @@ $stmtCheck->execute([':id_certificado' => $id_certificado]);
 $solicitud = $stmtCheck->fetch(PDO::FETCH_ASSOC);
 
 if (!$solicitud) {
-    header("Location: ../modulo-certificados/administrar-certificados.php?resultado=no_existe");
+    header("Location: ../modulo-certificados/solicitudes.php?resultado=no_existe");
     exit;
 }
 
 if ((int)$solicitud['id_estado'] !== 1) {
     // No está en estado solicitado
-    header("Location: ../modulo-certificados/administrar-certificados.php?resultado=estado_invalido");
+    header("Location: ../modulo-certificados/solicitudes.php?resultado=estado_invalido");
     exit;
 }
 
@@ -86,8 +86,8 @@ $message = ($accion === 'aprobar')
 $headers = "From: no-reply@tusistema.cl\r\n";
 
 if (mail($email, $subject, $message, $headers)) {
-    header("Location: ../modulo-certificados/administrar-certificados.php?resultado=ok");
+    header("Location: ../modulo-certificados/solicitudes.php?resultado=ok");
 } else {
-    header("Location: ../modulo-certificados/administrar-certificados.php?resultado=error_correo");
+    header("Location: ../modulo-certificados/solicitudes.php?resultado=error_correo");
 }
 exit;

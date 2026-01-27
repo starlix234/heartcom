@@ -28,7 +28,7 @@ include("../lib/permisos-admin.php");
       <div style="height:18px;"></div>
 
       <a href="../index.php" class="menu-item">
-        <i class="fa-solid fa-right-from-bracket"></i> Volver
+        <i class="fa-solid fa-arrow-left"></i> Volver
       </a>
     </nav>
   </aside>

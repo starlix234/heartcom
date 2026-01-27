@@ -37,12 +37,14 @@
            <a href="#post" class="menu-item">
                 <i class="fa-solid fa-file-lines"></i> Mis Postulaciones
             </a>
+          <?php endif; ?>
+           <?php if ($rol === 1 || $rol === 2): ?>
             <a href="#adminis" class="menu-item">
                 <i class="fa-solid fa-file-lines"></i> Administrar Postulaciones
             </a>
           <?php endif; ?>
             <a href="../index.php" class="menu-item">
-                <i class="fa-solid fa-gear"></i> Volver
+                <i class="fa-solid fa-arrow-left"></i> Volver
             </a>
         </nav>
     </aside>

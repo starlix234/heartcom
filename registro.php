@@ -153,7 +153,7 @@ function validarFormulario() {
 
     if (!validarPassword(password)) {
         errorPassword.textContent =
-            "Debe tener 5–15 caracteres, mayúscula, minúscula y número.";
+            "Debe tener 8–15 caracteres, mayúscula, minúscula y número.";
         return false;
     }
     errorPassword.textContent = "";

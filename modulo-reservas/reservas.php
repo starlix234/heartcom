@@ -28,10 +28,11 @@
                 <i class="fa-solid fa-house"></i> Reserva
             </a>
             <?php endif; ?>
-
+            <?php if ($rol === 1 || $rol === 2): ?>    
             <a href="#gestion" class="menu-item">
                 <i class="fa-solid fa-chart-simple"></i> Gestionar Solicitud Reserva
             </a>
+            <?php endif; ?>    
             <?php if ($rol === 3): ?>
 
             <a href="#reservaciones" class="menu-item">
@@ -40,7 +41,7 @@
             <?php endif; ?>         
             
             <a href="../index.php" class="menu-item">
-                <i class="fa-solid fa-gear"></i> Volver Inicio
+                <i class="fa-solid fa-arrow-left"></i> Volver Inicio
             </a>
           
         </nav>

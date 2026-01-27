@@ -116,10 +116,10 @@ try {
     @mail($correoVecino, $asuntoCorreo, $mensajeCorreo, $headers);
 
     // 4️⃣ Volver al listado con mensaje
-    header("Location: ../modulo-reservas/administrar-reservas.php?msg=" . urlencode("Reserva $mensajeAccion y correo de notificación enviado (si el servidor de correo está bien configurado)."));
+    header("Location: ../modulo-reservas/reservas.php?msg=" . urlencode("Reserva $mensajeAccion y correo de notificación enviado (si el servidor de correo está bien configurado)."));
     exit;
 
 } catch (Exception $e) {
-    header("Location: ../modulo-reservas/administrar-reservas.php?msg=" . urlencode("Error al procesar la reserva: " . $e->getMessage()));
+    header("Location: ../modulo-reservas/reservas.php?msg=" . urlencode("Error al procesar la reserva: " . $e->getMessage()));
     exit;
 }
