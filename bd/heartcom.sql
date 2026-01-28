@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-01-2026 a las 15:58:47
+-- Tiempo de generación: 28-01-2026 a las 05:18:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -65,39 +65,7 @@ CREATE TABLE `codigos_mfa` (
 --
 
 INSERT INTO `codigos_mfa` (`id_codigo_mfa`, `id_usuario`, `codigo`, `tipo`, `expira_at`, `usado`, `created_at`) VALUES
-(1, 2, '565192', 'LOGIN', '2026-01-15 23:13:58', 1, '2026-01-15 19:03:58'),
-(2, 2, '634108', 'LOGIN', '2026-01-15 23:15:15', 1, '2026-01-15 19:05:15'),
-(3, 1, '236927', 'LOGIN', '2026-01-15 23:23:43', 1, '2026-01-15 19:13:43'),
-(4, 2, '288027', 'LOGIN', '2026-01-15 23:29:20', 0, '2026-01-15 19:19:20'),
-(5, 1, '190713', 'LOGIN', '2026-01-15 23:29:51', 1, '2026-01-15 19:19:51'),
-(6, 2, '613864', 'LOGIN', '2026-01-15 23:39:54', 1, '2026-01-15 19:29:54'),
-(7, 1, '345319', 'LOGIN', '2026-01-15 23:43:22', 1, '2026-01-15 19:33:22'),
-(8, 1, '180283', 'LOGIN', '2026-01-15 23:56:22', 1, '2026-01-15 19:46:22'),
-(9, 1, '138053', 'LOGIN', '2026-01-16 15:59:02', 1, '2026-01-16 11:49:02'),
-(10, 2, '164191', 'LOGIN', '2026-01-16 19:54:31', 0, '2026-01-16 15:44:31'),
-(11, 2, '836098', 'LOGIN', '2026-01-16 20:02:15', 1, '2026-01-16 15:52:15'),
-(12, 1, '794925', 'LOGIN', '2026-01-16 20:50:54', 1, '2026-01-16 16:40:54'),
-(13, 3, '334265', 'LOGIN', '2026-01-16 21:20:50', 1, '2026-01-16 17:10:50'),
-(14, 3, '906384', 'LOGIN', '2026-01-16 22:31:07', 1, '2026-01-16 18:21:07'),
-(15, 2, '884293', 'LOGIN', '2026-01-16 22:33:43', 1, '2026-01-16 18:23:43'),
-(16, 3, '183669', 'LOGIN', '2026-01-16 22:37:47', 1, '2026-01-16 18:27:47'),
-(17, 1, '864168', 'LOGIN', '2026-01-16 23:18:41', 1, '2026-01-16 19:08:41'),
-(18, 1, '413047', 'LOGIN', '2026-01-16 23:19:10', 1, '2026-01-16 19:09:10'),
-(19, 3, '547973', 'LOGIN', '2026-01-16 23:51:13', 1, '2026-01-16 19:41:13'),
-(20, 3, '913648', 'LOGIN', '2026-01-16 23:56:04', 1, '2026-01-16 19:46:04'),
-(21, 3, '324167', 'LOGIN', '2026-01-17 00:43:07', 1, '2026-01-16 20:33:07'),
-(22, 2, '192722', 'LOGIN', '2026-01-17 04:14:22', 1, '2026-01-17 00:04:22'),
-(23, 3, '684186', 'LOGIN', '2026-01-17 04:30:02', 1, '2026-01-17 00:20:02'),
-(24, 2, '745431', 'LOGIN', '2026-01-17 18:10:12', 1, '2026-01-17 14:00:12'),
-(25, 1, '611644', 'LOGIN', '2026-01-17 18:29:54', 1, '2026-01-17 14:19:54'),
-(26, 3, '601694', 'LOGIN', '2026-01-17 18:43:33', 1, '2026-01-17 14:33:33'),
-(27, 4, '267071', 'LOGIN', '2026-01-17 19:07:34', 1, '2026-01-17 14:57:34'),
-(28, 3, '209208', 'LOGIN', '2026-01-17 19:09:43', 1, '2026-01-17 14:59:43'),
-(29, 4, '669657', 'LOGIN', '2026-01-17 20:35:31', 1, '2026-01-17 16:25:31'),
-(30, 5, '765546', 'LOGIN', '2026-01-18 00:21:24', 1, '2026-01-17 20:11:24'),
-(31, 1, '306612', 'LOGIN', '2026-01-18 01:28:05', 1, '2026-01-17 21:18:05'),
-(32, 1, '831891', 'LOGIN', '2026-01-20 15:04:44', 0, '2026-01-20 10:54:44'),
-(33, 1, '465123', 'LOGIN', '2026-01-20 15:06:59', 1, '2026-01-20 10:56:59');
+(1, 1, '360627', 'LOGIN', '2026-01-28 05:17:57', 1, '2026-01-28 01:07:57');
 
 -- --------------------------------------------------------
 
@@ -140,26 +108,6 @@ INSERT INTO `estados_certificado` (`id_estados_certificado`, `nombre_estado`, `d
 (2, 'en_revision', 'El directivo está revisando la solicitud', 1),
 (3, 'aprobado', 'La solicitud fue aprobada y está pendiente de pago', 1),
 (4, 'rechazado', 'La solicitud fue rechazada por el directivo', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `estados_noticia`
---
-
-CREATE TABLE `estados_noticia` (
-  `id_estado_noticia` int(11) NOT NULL,
-  `estado_noticia` varchar(90) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `estados_noticia`
---
-
-INSERT INTO `estados_noticia` (`id_estado_noticia`, `estado_noticia`) VALUES
-(1, 'Publicada'),
-(2, 'Archivada'),
-(3, 'inactiva');
 
 -- --------------------------------------------------------
 
@@ -247,8 +195,7 @@ CREATE TABLE `noticias` (
 --
 
 INSERT INTO `noticias` (`id_noticia`, `titulo`, `bajada`, `cuerpo`, `imagen`, `fecha_publicacion`, `id_usuario`, `id_cate`) VALUES
-(1, 'Fabian quemo la ciudad y la base de datos junto con su compañero cristobal', 'mdasdñsdañ{dlasdñasdl{ñsad{ñldsad', 'adasdasdasdasdasdasdasdasdas', 'assets/img/noticias/1768917602_GLK77QHJ4JAY3KAFM5FV6YV5OM.avif', '2026-01-20 11:00:02', 1, 5),
-(2, 'Fabian quemo la ciudad y la base de datos junto con su compañero cristobal por segunda vez', 'mdasdñsdañ{dlasdñasdl{ñsad{ñldsad', 'asdasdasdddddddddddddddddd', 'assets/img/noticias/1768918080_GLK77QHJ4JAY3KAFM5FV6YV5OM.avif', '2026-01-20 11:08:00', 1, 6);
+(1, 'Lanzamiento de la Plataforma Digital HeartCom', 'La Junta de Vecinos avanza en la modernización de la gestión comunitaria.', 'La Junta de Vecinos informa a la comunidad el lanzamiento oficial de HeartCom, una nueva plataforma digital orientada a centralizar y optimizar los procesos comunitarios.\r\n\r\nA través de este sistema, los vecinos podrán acceder a noticias oficiales, solicitar certificados, postular a proyectos comunitarios, realizar reservas de espacios comunes y mantenerse informados de manera clara y oportuna.\r\n\r\nHeartCom busca mejorar la transparencia, fortalecer la comunicación entre vecinos y directiva, y facilitar una gestión más eficiente y ordenada.\r\n\r\nInvitamos a todos los vecinos mayores de 18 años a registrarse y ser parte activa de esta nueva etapa de modernización comunitaria.', 'assets/img/noticias/1769573682_efcda3d57ea40c7e113d.png', '2026-01-28 00:00:00', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -280,14 +227,6 @@ CREATE TABLE `postulaciones_proyecto` (
   `fecha_respuesta` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `postulaciones_proyecto`
---
-
-INSERT INTO `postulaciones_proyecto` (`id_postulacion`, `id_usuario`, `id_proyecto`, `fecha_postulacion`, `id_estado_postulacion`, `observacion_admin`, `fecha_respuesta`) VALUES
-(15, 3, 1, '2026-01-17 15:11:03', 1, NULL, NULL),
-(19, 4, 1, '2026-01-17 15:25:41', 1, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -316,7 +255,7 @@ CREATE TABLE `proyectos_barrio` (
 --
 
 INSERT INTO `proyectos_barrio` (`id_proyecto`, `nombre_proyecto`, `descripcion`, `fecha_inicio`, `fecha_fin`, `id_estado_proyecto`, `id_tipo_proyecto`, `responsable`, `presupuesto_estimado`, `presupuesto_utilizado`, `direccion_proyecto`, `cupo_maximo`, `fecha_creacion`, `fecha_actualizacion`) VALUES
-(1, 'Limpieza de áreas verdes  ', 'Ne necesitan voluntarios para la limpiesa de plazas ', '2026-01-23', '2026-01-31', 5, 4, 'Alejandra Mariela Cortes Soza', 200000.00, 0.00, 'avenida García 2058', 19, '2026-01-16 21:41:33', '2026-01-17 18:25:41');
+(1, 'Mejoramiento de Áreas Verdes del Barrio', 'Proyecto orientado a la recuperación, mantención y mejoramiento de las áreas verdes comunitarias, fomentando la participación vecinal y el cuidado del medio ambiente. Incluye limpieza, plantación de árboles y mejoras en espacios comunes.', '2026-02-01', '2026-04-30', 5, 4, 'Junta de Vecinos – Comité de Medio Ambiente', 1500000.00, 350000.00, 'Plaza Central del Barrio', 30, '2026-01-28 04:15:29', '2026-01-28 04:17:45');
 
 -- --------------------------------------------------------
 
@@ -334,13 +273,6 @@ CREATE TABLE `reservas` (
   `motivo` varchar(200) DEFAULT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`id_reserva`, `id_estado_reserva`, `id_tipo`, `Fecha_ini`, `Fecha_fin`, `asunto`, `motivo`, `id_usuario`) VALUES
-(4, 1, 2, '2026-01-18', '2026-01-25', 'necesito poder cambiar mi direccion por favor ', 'hbvbbjbhjgjhbhjghh', 3);
 
 -- --------------------------------------------------------
 
@@ -396,17 +328,6 @@ CREATE TABLE `solicitud_certificado` (
   `mensaje` varchar(2000) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `solicitud_certificado`
---
-
-INSERT INTO `solicitud_certificado` (`id_certificado`, `id_certi`, `id_usuario`, `id_estado`, `asunto`, `mensaje`, `created_at`) VALUES
-(1, 1, 3, 1, 'Reunion', '<zx<xa<xczcszc dwae aw', '2026-01-16 18:28:17'),
-(2, 1, 3, 1, 'Reunion', 'adadawdaw', '2026-01-16 18:29:02'),
-(3, 1, 3, 1, 'Cambio de casa ', '1234567asdasdasdsadasdasd', '2026-01-16 18:29:28'),
-(4, 1, 3, 1, 'deja de ponerte triste', 'sadasdasdasdasdasdasdas', '2026-01-16 18:32:03'),
-(5, 3, 3, 1, 'Reunion', 'dwadawdawdaw', '2026-01-16 18:32:15');
 
 -- --------------------------------------------------------
 
@@ -530,11 +451,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `p_nombre`, `s_nombre`, `ap_paterno`, `ap_materno`, `fecha_nac`, `rut`, `telefono`, `correo`, `email_verificado`, `email_token`, `email_token_expira`, `direccion`, `clave`, `id_rol`) VALUES
-(1, 'constanza', 'valeria', 'leiva', 'vera', '1994-01-14', '18.608.676-7', '942971785', 'gerina.leiva@gmail.com', 1, NULL, NULL, 'pajaritos', '$2y$10$eOq.Aj4DL11QM0hATtgpyOLLJnPPwXbyqdSJwCpHkNyQHg/b6/uYu', 1),
-(2, 'Pedro', 'Carlos', 'Peres', 'Cortes', '1994-01-14', '11.635.036-K', '942971785', 'cleivavera94@gmail.com', 1, NULL, NULL, 'pajaritos 1123', '$2y$10$Y5UYwwGHNpQrY4n//8lJVeCDHxjEX/3HkO4aplbu8Kn3WjHGPjnbm', 2),
-(3, 'Alejandra', 'Mariela', 'Cortes', 'Soza', '2000-09-15', '5.342.034-6', '943456245', 'starlix234.leiva@gmail.com', 1, NULL, NULL, 'pajaritos 1124', '$2y$10$9K9xs132yCoskJCiwZIEr.50jZavZn/Qj5.Rd4U4FrGUD90t3Zd.2', 3),
-(4, 'Fabian', 'mateo', 'Villablanca', 'Smit', '2000-11-11', '20.447.987-9', '933203191', 'fabianirribarra667@gmail.com', 1, NULL, NULL, 'lo blanco 0824', '$2y$10$gMOMoWyQOsCm42GF49hhU.yoll2ON50252RKrq1c5TA2J2MNnwFoW', 3),
-(5, 'jhon', 'seven', 'kai', 'efe', '2000-12-16', '21.198.764-2', '926825286', 'juancontreras.66666@gmail.com', 1, NULL, NULL, 'ema carind 263', '$2y$10$PaKLb6sXz6RtOkj209VBheXVA3dYIl/I2b9xgnLlKyxc1rqgRLQqW', 3);
+(1, 'carlos', 'raul', 'villablanca', 'vera', '2000-01-16', '58.131.122-2', '942971785', 'gerina.leiva@gmail.com', 1, NULL, NULL, 'Av. Federico Sta. María 6090, Viña del Mar, Valparaíso', '$2y$10$cBv2OA.krF0B8oSD7GNAOeKi5v6uudckh2zy3aEHA3JOEGoCU/IMO', 1);
 
 -- --------------------------------------------------------
 
@@ -573,12 +490,6 @@ ALTER TABLE `estados`
 --
 ALTER TABLE `estados_certificado`
   ADD PRIMARY KEY (`id_estados_certificado`);
-
---
--- Indices de la tabla `estados_noticia`
---
-ALTER TABLE `estados_noticia`
-  ADD PRIMARY KEY (`id_estado_noticia`);
 
 --
 -- Indices de la tabla `estados_postulacion`
@@ -706,7 +617,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `codigos_mfa`
 --
 ALTER TABLE `codigos_mfa`
-  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_codigo_mfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -719,12 +630,6 @@ ALTER TABLE `estados`
 --
 ALTER TABLE `estados_certificado`
   MODIFY `id_estados_certificado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de la tabla `estados_noticia`
---
-ALTER TABLE `estados_noticia`
-  MODIFY `id_estado_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estados_postulacion`
@@ -748,7 +653,7 @@ ALTER TABLE `estado_reserva`
 -- AUTO_INCREMENT de la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos_residencia`
@@ -760,7 +665,7 @@ ALTER TABLE `pagos_residencia`
 -- AUTO_INCREMENT de la tabla `postulaciones_proyecto`
 --
 ALTER TABLE `postulaciones_proyecto`
-  MODIFY `id_postulacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_postulacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos_barrio`
@@ -772,7 +677,7 @@ ALTER TABLE `proyectos_barrio`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -784,7 +689,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `solicitud_certificado`
 --
 ALTER TABLE `solicitud_certificado`
-  MODIFY `id_certificado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_certificado` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_certificados`
@@ -814,7 +719,7 @@ ALTER TABLE `transacciones_webpay`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
